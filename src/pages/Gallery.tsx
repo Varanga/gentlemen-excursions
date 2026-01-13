@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import Layout from '@/components/Layout';
+import { useLocation } from 'react-router-dom';
 
 // Import images
 import heroImage from '@/assets/hero-madagascar.jpg';
@@ -27,9 +28,21 @@ const images = [
   { src: routeCacaoImg, alt: 'Route du Cacao', category: 'Circuits' },
 ];
 
+// Define masonry pattern - varying heights
+const getImageHeight = (index: number) => {
+  const pattern = [420, 320, 380, 280, 360, 300, 400, 340, 350];
+  return pattern[index % pattern.length];
+};
+
 export default function Gallery() {
   const { t } = useLanguage();
+  const location = useLocation();
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
   const openLightbox = (index: number) => setSelectedIndex(index);
   const closeLightbox = () => setSelectedIndex(null);
@@ -46,84 +59,107 @@ export default function Gallery() {
     }
   };
 
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (selectedIndex === null) return;
+      if (e.key === 'ArrowRight') goNext();
+      if (e.key === 'ArrowLeft') goPrev();
+      if (e.key === 'Escape') closeLightbox();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedIndex]);
+
   return (
     <Layout>
-      {/* Hero */}
-      <section className="relative h-[40vh] min-h-[300px] flex items-center justify-center bg-navy">
+      {/* Hero - Style 66°Nord */}
+      <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center bg-navy">
         <div className="absolute inset-0 z-0">
-          <img src={heroImage} alt="Gallery" className="w-full h-full object-cover opacity-40" />
-          <div className="absolute inset-0 bg-gradient-to-b from-navy/60 to-navy/90" />
+          <img 
+            src={heroImage} 
+            alt="Gallery" 
+            className="w-full h-full object-cover opacity-50"
+            style={{ animation: 'kenburns 20s ease-in-out infinite alternate' }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-navy/40 via-navy/20 to-navy/80" />
         </div>
-        <div className="relative z-10 text-center text-white px-6">
+        <div className="relative z-10 text-center text-white px-6 max-w-4xl mx-auto">
+          <motion.span
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="inline-block text-azure text-sm font-medium tracking-[0.3em] uppercase mb-6"
+          >
+            Inspiration
+          </motion.span>
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="hero-title mb-4"
+            transition={{ delay: 0.1 }}
+            className="font-serif text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight mb-6"
           >
             {t.gallery.title}
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-xl text-white/80 max-w-2xl mx-auto"
+            transition={{ delay: 0.2 }}
+            className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed"
           >
             {t.gallery.subtitle}
           </motion.p>
         </div>
       </section>
 
-      {/* Masonry Gallery */}
-      <section className="py-16 lg:py-24 bg-background">
-        <div className="container mx-auto px-6 lg:px-12">
-          <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4">
-            {images.map((image, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.05 }}
-                className="break-inside-avoid"
+      {/* Masonry Gallery - Gap-0 Modern Style */}
+      <section className="bg-white">
+        <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-1">
+          {images.map((image, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ delay: index * 0.05, duration: 0.5 }}
+              className="break-inside-avoid mb-1"
+            >
+              <button
+                onClick={() => openLightbox(index)}
+                className="relative group w-full overflow-hidden block"
               >
-                <button
-                  onClick={() => openLightbox(index)}
-                  className="relative group w-full overflow-hidden rounded-lg block"
-                >
-                  <img 
-                    src={image.src}
-                    alt={image.alt}
-                    className={`w-full object-cover group-hover:scale-105 transition-transform duration-500 ${
-                      index % 3 === 0 ? 'h-64' : index % 3 === 1 ? 'h-80' : 'h-72'
-                    }`}
-                  />
-                  <div className="absolute inset-0 bg-navy/0 group-hover:bg-navy/40 transition-colors flex items-end">
-                    <div className="p-4 translate-y-full group-hover:translate-y-0 transition-transform">
-                      <p className="text-white font-serif text-lg">{image.alt}</p>
-                      <p className="text-azure text-sm">{image.category}</p>
-                    </div>
+                <img 
+                  src={image.src}
+                  alt={image.alt}
+                  style={{ height: getImageHeight(index) }}
+                  className="w-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                />
+                {/* Minimal hover overlay */}
+                <div className="absolute inset-0 bg-navy/0 group-hover:bg-navy/40 transition-colors duration-500 flex items-end justify-start">
+                  <div className="p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                    <p className="text-white font-serif text-xl">{image.alt}</p>
+                    <p className="text-azure text-sm tracking-wider uppercase mt-1">{image.category}</p>
                   </div>
-                </button>
-              </motion.div>
-            ))}
-          </div>
+                </div>
+              </button>
+            </motion.div>
+          ))}
         </div>
       </section>
 
-      {/* Lightbox */}
+      {/* Lightbox - Minimal Style */}
       <AnimatePresence>
         {selectedIndex !== null && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-navy/95 flex items-center justify-center"
+            className="fixed inset-0 z-50 bg-navy/98 flex items-center justify-center"
             onClick={closeLightbox}
           >
             {/* Close Button */}
             <button 
               onClick={closeLightbox}
-              className="absolute top-6 right-6 text-white hover:text-azure transition-colors z-10"
+              className="absolute top-8 right-8 text-white/70 hover:text-white transition-colors z-10"
             >
               <X className="w-8 h-8" />
             </button>
@@ -131,37 +167,48 @@ export default function Gallery() {
             {/* Navigation */}
             <button 
               onClick={(e) => { e.stopPropagation(); goPrev(); }}
-              className="absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+              className="absolute left-8 top-1/2 -translate-y-1/2 w-14 h-14 flex items-center justify-center text-white/50 hover:text-white transition-colors"
             >
-              <ChevronLeft className="w-6 h-6 text-white" />
+              <ChevronLeft className="w-8 h-8" />
             </button>
             <button 
               onClick={(e) => { e.stopPropagation(); goNext(); }}
-              className="absolute right-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+              className="absolute right-8 top-1/2 -translate-y-1/2 w-14 h-14 flex items-center justify-center text-white/50 hover:text-white transition-colors"
             >
-              <ChevronRight className="w-6 h-6 text-white" />
+              <ChevronRight className="w-8 h-8" />
             </button>
             
             {/* Image */}
             <motion.img
               key={selectedIndex}
-              initial={{ opacity: 0, scale: 0.9 }}
+              initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.3 }}
               src={images[selectedIndex].src}
               alt={images[selectedIndex].alt}
-              className="max-w-[90vw] max-h-[85vh] object-contain rounded-lg"
+              className="max-w-[85vw] max-h-[80vh] object-contain"
               onClick={(e) => e.stopPropagation()}
             />
             
-            {/* Caption */}
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-center text-white">
-              <p className="font-serif text-xl">{images[selectedIndex].alt}</p>
-              <p className="text-azure text-sm mt-1">{selectedIndex + 1} / {images.length}</p>
+            {/* Caption - Minimal */}
+            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-center text-white">
+              <p className="font-serif text-2xl mb-2">{images[selectedIndex].alt}</p>
+              <p className="text-white/50 text-sm tracking-widest uppercase">
+                {selectedIndex + 1} / {images.length}
+              </p>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Ken Burns animation */}
+      <style>{`
+        @keyframes kenburns {
+          0% { transform: scale(1); }
+          100% { transform: scale(1.1); }
+        }
+      `}</style>
     </Layout>
   );
 }
