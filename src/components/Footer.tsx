@@ -43,8 +43,8 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="/#experiences" className="text-white/70 hover:text-azure transition-colors text-sm">
-                  {t.nav.experiences}
+                <a href="/expeditions" className="text-white/70 hover:text-azure transition-colors text-sm">
+                  {t.nav.expeditions}
                 </a>
               </li>
               <li>

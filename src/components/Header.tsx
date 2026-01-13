@@ -33,7 +33,8 @@ export default function Header() {
 
   const navLinks = [
     { href: '/#destinations', label: t.nav.destinations },
-    { href: '/#experiences', label: t.nav.experiences },
+    { href: '/expeditions', label: t.nav.expeditions },
+    { href: '/services', label: t.nav.services },
     { href: '/about', label: t.nav.about },
     { href: '/contact', label: t.nav.contact },
   ];
