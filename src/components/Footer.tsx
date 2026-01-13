@@ -1,117 +1,186 @@
 import { Link } from 'react-router-dom';
-import { Facebook, Instagram, Mail, Phone, MapPin } from 'lucide-react';
+import { Facebook, Instagram, Youtube, Mail, Phone, MapPin } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 
 export default function Footer() {
   const { t } = useLanguage();
 
   return (
-    <footer className="bg-navy text-white">
-      <div className="container mx-auto px-6 lg:px-12 py-16 lg:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          {/* Brand */}
-          <div className="lg:col-span-1">
-            <h2 className="font-serif text-2xl font-medium mb-4">
-              GENTLEMEN EXCURSIONS
-            </h2>
-            <p className="text-white/70 text-sm leading-relaxed mb-6">
-              {t.footer.tagline}
+    <footer className="bg-white">
+      {/* Main Footer */}
+      <div className="border-t border-border">
+        <div className="container mx-auto px-6 lg:px-12 py-16 lg:py-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+            {/* Agency Column */}
+            <div>
+              <h3 className="font-serif text-xl font-medium text-navy mb-6">
+                {t.footer.agency}
+              </h3>
+              <ul className="space-y-3">
+                <li>
+                  <Link to="/about" className="text-muted-foreground hover:text-azure-dark transition-colors text-sm">
+                    {t.footer.ourCommitments}
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/about" className="text-muted-foreground hover:text-azure-dark transition-colors text-sm">
+                    {t.footer.loyaltyProgram}
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Travel Ideas Column */}
+            <div>
+              <h3 className="font-serif text-xl font-medium text-navy mb-6">
+                {t.footer.travelIdeas}
+              </h3>
+              <ul className="space-y-3">
+                <li>
+                  <Link to="/expeditions" className="text-muted-foreground hover:text-azure-dark transition-colors text-sm">
+                    Diego-Suarez
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/expeditions" className="text-muted-foreground hover:text-azure-dark transition-colors text-sm">
+                    Nosy Be
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/expeditions" className="text-muted-foreground hover:text-azure-dark transition-colors text-sm">
+                    {t.excursions.merEmeraude.title}
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/expeditions" className="text-muted-foreground hover:text-azure-dark transition-colors text-sm">
+                    {t.excursions.nosyIranja.title}
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/expeditions" className="text-muted-foreground hover:text-azure-dark transition-colors text-sm">
+                    {t.excursions.ankarana.title}
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Contact Column */}
+            <div>
+              <h3 className="font-serif text-xl font-medium text-navy mb-6">
+                {t.footer.contact}
+              </h3>
+              <ul className="space-y-4">
+                <li>
+                  <Link to="/contact" className="text-azure-dark hover:text-navy transition-colors text-sm font-medium">
+                    {t.contact.requestQuote}
+                  </Link>
+                </li>
+                <li className="flex items-center gap-2 text-muted-foreground text-sm">
+                  <Phone className="w-4 h-4 text-azure-dark" />
+                  {t.contact.info.phone}
+                </li>
+                <li className="flex items-center gap-2 text-muted-foreground text-sm">
+                  <Mail className="w-4 h-4 text-azure-dark" />
+                  {t.contact.info.email}
+                </li>
+              </ul>
+            </div>
+
+            {/* Company Info */}
+            <div>
+              <div className="bg-sand rounded-lg p-6">
+                <h2 className="font-serif text-xl font-medium text-navy mb-2">
+                  GENTLEMEN EXCURSIONS
+                </h2>
+                <div className="flex items-start gap-2 text-muted-foreground text-sm mb-4">
+                  <MapPin className="w-4 h-4 text-azure-dark shrink-0 mt-0.5" />
+                  <span>{t.contact.info.address}</span>
+                </div>
+                <p className="text-sm text-muted-foreground mb-4">
+                  {t.footer.tagline}
+                </p>
+                
+                {/* Social Links */}
+                <div className="pt-4 border-t border-border">
+                  <p className="text-sm font-medium text-navy mb-3">{t.footer.followUs}</p>
+                  <div className="flex gap-3">
+                    <a
+                      href="#"
+                      className="w-9 h-9 rounded-full bg-navy flex items-center justify-center hover:bg-azure-dark transition-colors"
+                    >
+                      <Facebook className="w-4 h-4 text-white" />
+                    </a>
+                    <a
+                      href="#"
+                      className="w-9 h-9 rounded-full bg-navy flex items-center justify-center hover:bg-azure-dark transition-colors"
+                    >
+                      <Instagram className="w-4 h-4 text-white" />
+                    </a>
+                    <a
+                      href="#"
+                      className="w-9 h-9 rounded-full bg-navy flex items-center justify-center hover:bg-azure-dark transition-colors"
+                    >
+                      <Youtube className="w-4 h-4 text-white" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Newsletter Section */}
+      <div className="border-t border-border py-12">
+        <div className="container mx-auto px-6 lg:px-12">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
+            <div>
+              <span className="text-azure-dark text-sm font-medium tracking-[0.2em] uppercase block mb-1">
+                {t.footer.newsletter.subscribe}
+              </span>
+              <h3 className="font-serif text-3xl font-medium text-navy">
+                {t.footer.newsletter.title}
+              </h3>
+            </div>
+            <form className="flex w-full lg:w-auto">
+              <div className="relative flex-1 lg:w-80">
+                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                <input 
+                  type="email"
+                  placeholder={t.footer.newsletter.placeholder}
+                  className="w-full pl-12 pr-4 py-4 border border-border focus:outline-none focus:border-azure-dark"
+                />
+              </div>
+              <button 
+                type="submit"
+                className="bg-navy text-white px-8 py-4 font-medium hover:bg-navy-light transition-colors whitespace-nowrap"
+              >
+                {t.footer.newsletter.button}
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Bar */}
+      <div className="bg-navy text-white">
+        <div className="container mx-auto px-6 lg:px-12 py-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-white/60 text-sm">
+              © {new Date().getFullYear()} Gentlemen Excursions. {t.footer.rights}.
             </p>
-            <div className="flex space-x-4">
-              <a
-                href="#"
-                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-azure transition-colors"
-              >
-                <Facebook className="w-5 h-5" />
+            <div className="flex items-center gap-6 text-sm">
+              <a href="#" className="text-white/60 hover:text-azure transition-colors">
+                {t.footer.legal}
               </a>
-              <a
-                href="#"
-                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-azure transition-colors"
-              >
-                <Instagram className="w-5 h-5" />
+              <a href="#" className="text-white/60 hover:text-azure transition-colors">
+                {t.footer.privacy}
+              </a>
+              <a href="#" className="text-white/60 hover:text-azure transition-colors">
+                {t.footer.cookies}
               </a>
             </div>
           </div>
-
-          {/* Quick Links */}
-          <div>
-            <h3 className="font-medium text-lg mb-6">{t.footer.quickLinks}</h3>
-            <ul className="space-y-3">
-              <li>
-                <a href="/#destinations" className="text-white/70 hover:text-azure transition-colors text-sm">
-                  {t.nav.destinations}
-                </a>
-              </li>
-              <li>
-                <a href="/expeditions" className="text-white/70 hover:text-azure transition-colors text-sm">
-                  {t.nav.expeditions}
-                </a>
-              </li>
-              <li>
-                <Link to="/about" className="text-white/70 hover:text-azure transition-colors text-sm">
-                  {t.nav.about}
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" className="text-white/70 hover:text-azure transition-colors text-sm">
-                  {t.nav.contact}
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Destinations */}
-          <div>
-            <h3 className="font-medium text-lg mb-6">{t.nav.destinations}</h3>
-            <ul className="space-y-3">
-              <li>
-                <a href="#" className="text-white/70 hover:text-azure transition-colors text-sm">
-                  Diego-Suarez
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-white/70 hover:text-azure transition-colors text-sm">
-                  Nosy Be
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-white/70 hover:text-azure transition-colors text-sm">
-                  {t.excursions.merEmeraude.title}
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-white/70 hover:text-azure transition-colors text-sm">
-                  {t.excursions.nosyIranja.title}
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <h3 className="font-medium text-lg mb-6">{t.footer.contact}</h3>
-            <ul className="space-y-4">
-              <li className="flex items-start space-x-3">
-                <MapPin className="w-5 h-5 text-azure shrink-0 mt-0.5" />
-                <span className="text-white/70 text-sm">{t.contact.info.address}</span>
-              </li>
-              <li className="flex items-center space-x-3">
-                <Phone className="w-5 h-5 text-azure shrink-0" />
-                <span className="text-white/70 text-sm">{t.contact.info.phone}</span>
-              </li>
-              <li className="flex items-center space-x-3">
-                <Mail className="w-5 h-5 text-azure shrink-0" />
-                <span className="text-white/70 text-sm">{t.contact.info.email}</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        {/* Bottom */}
-        <div className="border-t border-white/10 mt-12 pt-8 text-center">
-          <p className="text-white/50 text-sm">
-            © {new Date().getFullYear()} Gentlemen Excursions. {t.footer.rights}.
-          </p>
         </div>
       </div>
     </footer>
