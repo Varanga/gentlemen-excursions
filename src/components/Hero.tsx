@@ -70,21 +70,21 @@ export default function Hero() {
             </div>
             <div className="space-y-1">
               <label className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                {t.search.date}
+                {t.search.theme}
               </label>
               <input
                 type="text"
-                placeholder={t.search.datePlaceholder}
+                placeholder={t.search.themePlaceholder}
                 className="w-full text-navy bg-transparent border-b border-border focus:border-azure-dark focus:outline-none py-2 text-sm"
               />
             </div>
             <div className="space-y-1">
               <label className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                {t.search.travelers}
+                {t.search.activities}
               </label>
               <input
                 type="text"
-                placeholder={t.search.travelersPlaceholder}
+                placeholder={t.search.activitiesPlaceholder}
                 className="w-full text-navy bg-transparent border-b border-border focus:border-azure-dark focus:outline-none py-2 text-sm"
               />
             </div>
