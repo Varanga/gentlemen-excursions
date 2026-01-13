@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
+import WhatsAppButton from './WhatsAppButton';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -22,6 +23,10 @@ export default function Layout({ children }: LayoutProps) {
         {children}
       </main>
       <Footer />
+      <WhatsAppButton 
+        phoneNumber="+261320000000"
+        message="Bonjour, je souhaite avoir des informations sur vos excursions à Madagascar."
+      />
     </div>
   );
 }
