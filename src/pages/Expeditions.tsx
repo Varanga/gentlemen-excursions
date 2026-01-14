@@ -25,15 +25,24 @@ interface Excursion {
   location: string;
 }
 
+// Full catalog of excursions
 const excursions: Excursion[] = [
-  { id: '1', image: merEmeraudeImg, titleKey: 'merEmeraude', region: 'diego', location: 'Diego-Suarez' },
-  { id: '2', image: troisBaiesImg, titleKey: 'troisBaies', region: 'diego', location: 'Diego-Suarez' },
-  { id: '3', image: montagneAmbreImg, titleKey: 'montagneAmbre', region: 'diego', location: 'Diego-Suarez' },
-  { id: '4', image: tsingyRougesImg, titleKey: 'tsingyRouges', region: 'diego', location: 'Diego-Suarez' },
-  { id: '5', image: ankarana, titleKey: 'ankarana', region: 'diego', location: 'Diego-Suarez' },
-  { id: '6', image: nosyIranjaImg, titleKey: 'nosyIranja', region: 'nosybe', location: 'Nosy Be' },
-  { id: '7', image: lokobeImg, titleKey: 'lokobe', region: 'nosybe', location: 'Nosy Be' },
-  { id: '8', image: routeCacaoImg, titleKey: 'routeCacao', region: 'circuits', location: 'Nord Madagascar' },
+  // Diego-Suarez Region
+  { id: 'mer-emeraude', image: merEmeraudeImg, titleKey: 'merEmeraude', region: 'diego', location: 'Diego-Suarez' },
+  { id: 'trois-baies', image: troisBaiesImg, titleKey: 'troisBaies', region: 'diego', location: 'Diego-Suarez' },
+  { id: 'montagne-ambre', image: montagneAmbreImg, titleKey: 'montagneAmbre', region: 'diego', location: 'Diego-Suarez' },
+  { id: 'tsingy-rouges', image: tsingyRougesImg, titleKey: 'tsingyRouges', region: 'diego', location: 'Diego-Suarez' },
+  { id: 'ankarana', image: ankarana, titleKey: 'ankarana', region: 'diego', location: 'Diego-Suarez' },
+  { id: 'nosy-hara', image: merEmeraudeImg, titleKey: 'nosyHara', region: 'diego', location: 'Diego-Suarez' },
+  { id: 'lac-sacre', image: lokobeImg, titleKey: 'lacSacre', region: 'diego', location: 'Anivorano' },
+  { id: 'montagne-francais', image: troisBaiesImg, titleKey: 'montagneFrancais', region: 'diego', location: 'Diego-Suarez' },
+  // Nosy Be Region
+  { id: 'nosy-iranja', image: nosyIranjaImg, titleKey: 'nosyIranja', region: 'nosybe', location: 'Nosy Be' },
+  { id: 'nosy-tanikely', image: merEmeraudeImg, titleKey: 'nosyTanikely', region: 'nosybe', location: 'Nosy Be' },
+  { id: 'lokobe', image: lokobeImg, titleKey: 'lokobe', region: 'nosybe', location: 'Nosy Be' },
+  // Circuits
+  { id: 'route-cacao', image: routeCacaoImg, titleKey: 'routeCacao', region: 'circuits', location: 'Ambanja' },
+  { id: 'grand-nord', image: montagneAmbreImg, titleKey: 'grandNord', region: 'circuits', location: 'Nord Madagascar' },
 ];
 
 export default function Expeditions() {
