@@ -4,58 +4,24 @@ import { MapPin, ArrowRight } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import Layout from '@/components/Layout';
 import { Link, useLocation } from 'react-router-dom';
+import { tours, getToursByRegion, Region } from '@/lib/data';
 
-// Import images
+// Use first tour image for hero
 import merEmeraudeImg from '@/assets/excursions/mer-emeraude.jpg';
-import troisBaiesImg from '@/assets/excursions/trois-baies.jpg';
-import montagneAmbreImg from '@/assets/excursions/montagne-ambre.jpg';
-import tsingyRougesImg from '@/assets/excursions/tsingy-rouges.jpg';
-import ankarana from '@/assets/excursions/ankarana.jpg';
-import nosyIranjaImg from '@/assets/excursions/nosy-iranja.jpg';
-import lokobeImg from '@/assets/excursions/lokobe.jpg';
-import routeCacaoImg from '@/assets/excursions/route-cacao.jpg';
 
-type Region = 'all' | 'diego' | 'nosybe' | 'circuits';
-
-interface Excursion {
-  id: string;
-  image: string;
-  titleKey: keyof typeof import('@/i18n/translations').translations.fr.excursions;
-  region: Region;
-  location: string;
-}
-
-// Full catalog of excursions
-const excursions: Excursion[] = [
-  // Diego-Suarez Region
-  { id: 'mer-emeraude', image: merEmeraudeImg, titleKey: 'merEmeraude', region: 'diego', location: 'Diego-Suarez' },
-  { id: 'trois-baies', image: troisBaiesImg, titleKey: 'troisBaies', region: 'diego', location: 'Diego-Suarez' },
-  { id: 'montagne-ambre', image: montagneAmbreImg, titleKey: 'montagneAmbre', region: 'diego', location: 'Diego-Suarez' },
-  { id: 'tsingy-rouges', image: tsingyRougesImg, titleKey: 'tsingyRouges', region: 'diego', location: 'Diego-Suarez' },
-  { id: 'ankarana', image: ankarana, titleKey: 'ankarana', region: 'diego', location: 'Diego-Suarez' },
-  { id: 'nosy-hara', image: merEmeraudeImg, titleKey: 'nosyHara', region: 'diego', location: 'Diego-Suarez' },
-  { id: 'lac-sacre', image: lokobeImg, titleKey: 'lacSacre', region: 'diego', location: 'Anivorano' },
-  { id: 'montagne-francais', image: troisBaiesImg, titleKey: 'montagneFrancais', region: 'diego', location: 'Diego-Suarez' },
-  // Nosy Be Region
-  { id: 'nosy-iranja', image: nosyIranjaImg, titleKey: 'nosyIranja', region: 'nosybe', location: 'Nosy Be' },
-  { id: 'nosy-tanikely', image: merEmeraudeImg, titleKey: 'nosyTanikely', region: 'nosybe', location: 'Nosy Be' },
-  { id: 'lokobe', image: lokobeImg, titleKey: 'lokobe', region: 'nosybe', location: 'Nosy Be' },
-  // Circuits
-  { id: 'route-cacao', image: routeCacaoImg, titleKey: 'routeCacao', region: 'circuits', location: 'Ambanja' },
-  { id: 'grand-nord', image: montagneAmbreImg, titleKey: 'grandNord', region: 'circuits', location: 'Nord Madagascar' },
-];
+type FilterKey = 'all' | Region;
 
 export default function Expeditions() {
   const { t } = useLanguage();
   const location = useLocation();
-  const [activeFilter, setActiveFilter] = useState<Region>('all');
+  const [activeFilter, setActiveFilter] = useState<FilterKey>('all');
 
   // Scroll to top on route change
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
 
-  const filters: { key: Region; label: string }[] = [
+  const filters: { key: FilterKey; label: string }[] = [
     { key: 'all', label: 'Toutes les expéditions' },
     { key: 'diego', label: 'Diego-Suarez' },
     { key: 'nosybe', label: 'Nosy Be' },
@@ -63,8 +29,8 @@ export default function Expeditions() {
   ];
 
   const filteredExcursions = activeFilter === 'all' 
-    ? excursions 
-    : excursions.filter(e => e.region === activeFilter);
+    ? tours 
+    : getToursByRegion(activeFilter as Region);
 
   return (
     <Layout>
@@ -154,7 +120,7 @@ export default function Expeditions() {
                     transition={{ duration: 0.4, delay: index * 0.08 }}
                   >
                     <Link 
-                      to={`/expeditions/${excursion.id}`}
+                      to={`/expeditions/${excursion.slug}`}
                       className="block group"
                     >
                       {/* Portrait Image Container */}
