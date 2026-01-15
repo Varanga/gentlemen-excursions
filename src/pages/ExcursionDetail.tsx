@@ -3,10 +3,11 @@ import { useParams, Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Calendar, CircleDot, MapPin, Clock, Users, ChevronLeft, ChevronRight, 
-  X, Check, Star, MessageCircle, ArrowLeft
+  X, Check, XCircle, Star, MessageCircle, ArrowLeft
 } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import Layout from '@/components/Layout';
+import { tours, getTourBySlug } from '@/lib/data';
 
 // Import images
 import merEmeraudeImg from '@/assets/excursions/mer-emeraude.jpg';
@@ -16,10 +17,9 @@ import tsingyRougesImg from '@/assets/excursions/tsingy-rouges.jpg';
 import ankarana from '@/assets/excursions/ankarana.jpg';
 import nosyIranjaImg from '@/assets/excursions/nosy-iranja.jpg';
 import lokobeImg from '@/assets/excursions/lokobe.jpg';
-import routeCacaoImg from '@/assets/excursions/route-cacao.jpg';
 import heroImage from '@/assets/hero-madagascar.jpg';
 
-type ExcursionKey = 'merEmeraude' | 'troisBaies' | 'montagneAmbre' | 'tsingyRouges' | 'ankarana' | 'nosyHara' | 'lacSacre' | 'montagneFrancais' | 'nosyIranja' | 'nosyTanikely' | 'lokobe' | 'routeCacao' | 'grandNord';
+type ExcursionKey = 'merEmeraude' | 'troisBaies' | 'montagneAmbre' | 'tsingyRouges' | 'ankarana' | 'nosyHara' | 'lacSacre' | 'montagneFrancais' | 'nosyIranja' | 'nosyTanikely' | 'lokobe';
 
 interface ExcursionData {
   id: string;
@@ -30,6 +30,9 @@ interface ExcursionData {
   includedFr: string[];
   includedEn: string[];
   includedMg: string[];
+  notIncludedFr: string[];
+  notIncludedEn: string[];
+  notIncludedMg: string[];
   programFr: { time: string; activity: string }[];
   programEn: { time: string; activity: string }[];
   programMg: { time: string; activity: string }[];
@@ -43,25 +46,28 @@ const excursionsData: ExcursionData[] = [
     images: [merEmeraudeImg, heroImage, troisBaiesImg],
     location: 'Diego-Suarez',
     region: 'Nord Madagascar',
-    includedFr: ['Transport en 4x4', 'Guide francophone', 'Déjeuner sur la plage', 'Équipement snorkeling', 'Boissons fraîches'],
-    includedEn: ['4x4 transport', 'French-speaking guide', 'Beach lunch', 'Snorkeling equipment', 'Refreshments'],
-    includedMg: ['Fitaterana 4x4', 'Mpitarika miteny frantsay', 'Sakafo atoandro eny amoron-dranomasina', 'Fitaovana snorkeling', 'Zava-pisotro mangatsiaka'],
+    includedFr: ['Transport en 4x4 climatisé', 'Guide francophone certifié', 'Déjeuner gastronomique sur la plage', 'Équipement snorkeling premium', 'Boissons fraîches illimitées', 'Assurance voyage'],
+    includedEn: ['Air-conditioned 4x4 transport', 'Certified French-speaking guide', 'Gourmet beach lunch', 'Premium snorkeling equipment', 'Unlimited refreshments', 'Travel insurance'],
+    includedMg: ['Fitaterana 4x4 misy climatisation', 'Mpitarika miteny frantsay voamarina', 'Sakafo atoandro matsiro eny amoron-dranomasina', 'Fitaovana snorkeling ambony', 'Zava-pisotro mangatsiaka tsy voafetra', 'Fiantohana dia'],
+    notIncludedFr: ['Pourboires', 'Dépenses personnelles', 'Boissons alcoolisées'],
+    notIncludedEn: ['Tips', 'Personal expenses', 'Alcoholic beverages'],
+    notIncludedMg: ['Pourboires', 'Fandaniana manokana', 'Zava-pisotro misy alikaola'],
     programFr: [
-      { time: '07:00', activity: 'Départ de Diego-Suarez' },
-      { time: '08:30', activity: 'Arrivée à Ramena, embarquement en boutre' },
-      { time: '10:00', activity: 'Découverte de la Mer d\'Émeraude' },
+      { time: '07:00', activity: 'Départ de Diego-Suarez en 4x4 climatisé' },
+      { time: '08:30', activity: 'Arrivée à Ramena, embarquement en boutre traditionnel' },
+      { time: '10:00', activity: 'Découverte de la Mer d\'Émeraude, baignade' },
       { time: '12:30', activity: 'Déjeuner de fruits de mer sur un banc de sable' },
-      { time: '14:00', activity: 'Baignade et snorkeling' },
-      { time: '16:00', activity: 'Retour vers Ramena' },
+      { time: '14:00', activity: 'Session snorkeling dans les eaux cristallines' },
+      { time: '16:00', activity: 'Retour vers Ramena au coucher du soleil' },
       { time: '17:30', activity: 'Arrivée à Diego-Suarez' },
     ],
     programEn: [
-      { time: '07:00', activity: 'Departure from Diego-Suarez' },
-      { time: '08:30', activity: 'Arrival in Ramena, boarding the dhow' },
-      { time: '10:00', activity: 'Discovery of the Emerald Sea' },
+      { time: '07:00', activity: 'Departure from Diego-Suarez in air-conditioned 4x4' },
+      { time: '08:30', activity: 'Arrival in Ramena, boarding traditional dhow' },
+      { time: '10:00', activity: 'Discovery of the Emerald Sea, swimming' },
       { time: '12:30', activity: 'Seafood lunch on a sandbank' },
-      { time: '14:00', activity: 'Swimming and snorkeling' },
-      { time: '16:00', activity: 'Return to Ramena' },
+      { time: '14:00', activity: 'Snorkeling session in crystal-clear waters' },
+      { time: '16:00', activity: 'Return to Ramena at sunset' },
       { time: '17:30', activity: 'Arrival in Diego-Suarez' },
     ],
     programMg: [
@@ -81,9 +87,12 @@ const excursionsData: ExcursionData[] = [
     images: [troisBaiesImg, merEmeraudeImg, heroImage],
     location: 'Diego-Suarez',
     region: 'Nord Madagascar',
-    includedFr: ['Transport en 4x4', 'Guide local', 'Déjeuner traditionnel', 'Entrées aux sites'],
-    includedEn: ['4x4 transport', 'Local guide', 'Traditional lunch', 'Site entrance fees'],
-    includedMg: ['Fitaterana 4x4', 'Mpitarika eo an-toerana', 'Sakafo atoandro nentim-paharazana', 'Saran-dalana'],
+    includedFr: ['Transport en 4x4', 'Guide local expert', 'Déjeuner traditionnel', 'Entrées aux sites', 'Eau minérale'],
+    includedEn: ['4x4 transport', 'Expert local guide', 'Traditional lunch', 'Site entrance fees', 'Mineral water'],
+    includedMg: ['Fitaterana 4x4', 'Mpitarika eo an-toerana', 'Sakafo atoandro nentim-paharazana', 'Saran-dalana', 'Rano mineraly'],
+    notIncludedFr: ['Pourboires', 'Boissons supplémentaires'],
+    notIncludedEn: ['Tips', 'Additional beverages'],
+    notIncludedMg: ['Pourboires', 'Zava-pisotro fanampiny'],
     programFr: [
       { time: '08:00', activity: 'Départ de Diego-Suarez' },
       { time: '09:00', activity: 'Visite de la Baie des Dunes' },
@@ -116,9 +125,12 @@ const excursionsData: ExcursionData[] = [
     images: [montagneAmbreImg, lokobeImg, heroImage],
     location: 'Diego-Suarez',
     region: 'Nord Madagascar',
-    includedFr: ['Transport en 4x4', 'Guide naturaliste', 'Droits d\'entrée au parc', 'Pique-nique', 'Eau minérale'],
-    includedEn: ['4x4 transport', 'Naturalist guide', 'Park entrance fees', 'Picnic', 'Mineral water'],
-    includedMg: ['Fitaterana 4x4', 'Mpitarika naturalista', 'Saran-dalana parc', 'Pique-nique', 'Rano mineraly'],
+    includedFr: ['Transport en 4x4', 'Guide naturaliste certifié', 'Droits d\'entrée au parc', 'Pique-nique gourmet', 'Eau minérale'],
+    includedEn: ['4x4 transport', 'Certified naturalist guide', 'Park entrance fees', 'Gourmet picnic', 'Mineral water'],
+    includedMg: ['Fitaterana 4x4', 'Mpitarika naturalista', 'Saran-dalana parc', 'Pique-nique matsiro', 'Rano mineraly'],
+    notIncludedFr: ['Pourboires', 'Équipement photo'],
+    notIncludedEn: ['Tips', 'Photography equipment'],
+    notIncludedMg: ['Pourboires', 'Fitaovana sary'],
     programFr: [
       { time: '06:30', activity: 'Départ de Diego-Suarez' },
       { time: '08:00', activity: 'Arrivée au Parc National de la Montagne d\'Ambre' },
@@ -157,12 +169,15 @@ const excursionsData: ExcursionData[] = [
     includedFr: ['Transport en 4x4', 'Guide local', 'Droits d\'entrée', 'Eau minérale'],
     includedEn: ['4x4 transport', 'Local guide', 'Entrance fees', 'Mineral water'],
     includedMg: ['Fitaterana 4x4', 'Mpitarika eo an-toerana', 'Saran-dalana', 'Rano mineraly'],
+    notIncludedFr: ['Déjeuner', 'Pourboires'],
+    notIncludedEn: ['Lunch', 'Tips'],
+    notIncludedMg: ['Sakafo atoandro', 'Pourboires'],
     programFr: [
       { time: '07:00', activity: 'Départ de Diego-Suarez' },
       { time: '09:30', activity: 'Arrivée aux Tsingy Rouges' },
       { time: '10:00', activity: 'Visite guidée des formations géologiques' },
       { time: '12:00', activity: 'Temps libre pour photos' },
-      { time: '13:00', activity: 'Déjeuner (non inclus)' },
+      { time: '13:00', activity: 'Pause déjeuner (non inclus)' },
       { time: '15:00', activity: 'Retour à Diego-Suarez' },
     ],
     programEn: [
@@ -170,7 +185,7 @@ const excursionsData: ExcursionData[] = [
       { time: '09:30', activity: 'Arrival at the Red Tsingy' },
       { time: '10:00', activity: 'Guided tour of the geological formations' },
       { time: '12:00', activity: 'Free time for photos' },
-      { time: '13:00', activity: 'Lunch (not included)' },
+      { time: '13:00', activity: 'Lunch break (not included)' },
       { time: '15:00', activity: 'Return to Diego-Suarez' },
     ],
     programMg: [
@@ -192,6 +207,9 @@ const excursionsData: ExcursionData[] = [
     includedFr: ['Transport en 4x4', 'Guide naturaliste', 'Droits d\'entrée', 'Hébergement en lodge', 'Repas complets', 'Équipement spéléo'],
     includedEn: ['4x4 transport', 'Naturalist guide', 'Entrance fees', 'Lodge accommodation', 'Full board meals', 'Caving equipment'],
     includedMg: ['Fitaterana 4x4', 'Mpitarika naturalista', 'Saran-dalana', 'Trano fandraisam-bahiny', 'Sakafo feno', 'Fitaovana spéléo'],
+    notIncludedFr: ['Boissons alcoolisées', 'Pourboires'],
+    notIncludedEn: ['Alcoholic beverages', 'Tips'],
+    notIncludedMg: ['Zava-pisotro misy alikaola', 'Pourboires'],
     programFr: [
       { time: 'Jour 1 - 07:00', activity: 'Départ de Diego vers Ankarana' },
       { time: 'Jour 1 - 12:00', activity: 'Installation au lodge' },
@@ -227,6 +245,9 @@ const excursionsData: ExcursionData[] = [
     includedFr: ['Transport en bateau rapide', 'Guide expérimenté', 'Bivouac de luxe', 'Repas gastronomiques', 'Équipement snorkeling', 'Kayaks'],
     includedEn: ['Speed boat transport', 'Experienced guide', 'Luxury bivouac', 'Gourmet meals', 'Snorkeling equipment', 'Kayaks'],
     includedMg: ['Fitaterana sambo haingana', 'Mpitarika manan-traikefa', 'Bivouac de luxe', 'Sakafo matsiro', 'Fitaovana snorkeling', 'Kayak'],
+    notIncludedFr: ['Boissons alcoolisées', 'Assurance voyage', 'Pourboires'],
+    notIncludedEn: ['Alcoholic beverages', 'Travel insurance', 'Tips'],
+    notIncludedMg: ['Zava-pisotro misy alikaola', 'Fiantohana dia', 'Pourboires'],
     programFr: [
       { time: 'Jour 1 - 06:00', activity: 'Départ en bateau rapide' },
       { time: 'Jour 1 - 09:00', activity: 'Arrivée à Nosy Hara, installation du camp' },
@@ -265,6 +286,9 @@ const excursionsData: ExcursionData[] = [
     includedFr: ['Transport en 4x4', 'Guide local', 'Offrandes traditionnelles', 'Eau minérale'],
     includedEn: ['4x4 transport', 'Local guide', 'Traditional offerings', 'Mineral water'],
     includedMg: ['Fitaterana 4x4', 'Mpitarika eo an-toerana', 'Fanatitra nentim-paharazana', 'Rano mineraly'],
+    notIncludedFr: ['Pourboires', 'Dépenses personnelles'],
+    notIncludedEn: ['Tips', 'Personal expenses'],
+    notIncludedMg: ['Pourboires', 'Fandaniana manokana'],
     programFr: [
       { time: '08:00', activity: 'Départ de Diego-Suarez' },
       { time: '09:00', activity: 'Arrivée à Anivorano' },
@@ -303,6 +327,9 @@ const excursionsData: ExcursionData[] = [
     includedFr: ['Transport en 4x4', 'Guide local', 'Eau minérale', 'En-cas énergétique'],
     includedEn: ['4x4 transport', 'Local guide', 'Mineral water', 'Energy snacks'],
     includedMg: ['Fitaterana 4x4', 'Mpitarika eo an-toerana', 'Rano mineraly', 'Sakafo maivana'],
+    notIncludedFr: ['Pourboires', 'Équipement de randonnée'],
+    notIncludedEn: ['Tips', 'Hiking equipment'],
+    notIncludedMg: ['Pourboires', 'Fitaovana fitsangatsanganana'],
     programFr: [
       { time: '06:00', activity: 'Départ de Diego-Suarez' },
       { time: '06:30', activity: 'Arrivée au pied de la montagne' },
@@ -341,51 +368,57 @@ const excursionsData: ExcursionData[] = [
     includedFr: ['Transport bateau rapide', 'Guide', 'Déjeuner de fruits de mer', 'Équipement snorkeling'],
     includedEn: ['Speed boat transport', 'Guide', 'Seafood lunch', 'Snorkeling equipment'],
     includedMg: ['Fitaterana sambo haingana', 'Mpitarika', 'Sakafo atoandro hazan-dranomasina', 'Fitaovana snorkeling'],
+    notIncludedFr: ['Pourboires', 'Boissons alcoolisées'],
+    notIncludedEn: ['Tips', 'Alcoholic beverages'],
+    notIncludedMg: ['Pourboires', 'Zava-pisotro misy alikaola'],
     programFr: [
-      { time: '08:00', activity: 'Départ de Nosy Be en bateau' },
-      { time: '09:30', activity: 'Arrivée à Nosy Iranja' },
-      { time: '10:00', activity: 'Découverte de l\'île aux tortues' },
-      { time: '11:30', activity: 'Traversée de la langue de sable (marée basse)' },
-      { time: '12:30', activity: 'Déjeuner sur la plage' },
-      { time: '14:00', activity: 'Snorkeling et baignade' },
-      { time: '16:00', activity: 'Retour à Nosy Be' },
+      { time: '08:00', activity: 'Départ de Nosy Be en bateau rapide' },
+      { time: '09:30', activity: 'Arrivée à Nosy Iranja Be' },
+      { time: '10:00', activity: 'Traversée du banc de sable vers Nosy Iranja Kely' },
+      { time: '11:00', activity: 'Snorkeling et baignade' },
+      { time: '12:30', activity: 'Déjeuner de fruits de mer sur la plage' },
+      { time: '14:30', activity: 'Exploration de l\'île aux tortues' },
+      { time: '16:00', activity: 'Retour vers Nosy Be' },
     ],
     programEn: [
-      { time: '08:00', activity: 'Departure from Nosy Be by boat' },
-      { time: '09:30', activity: 'Arrival at Nosy Iranja' },
-      { time: '10:00', activity: 'Discovery of turtle island' },
-      { time: '11:30', activity: 'Crossing the sandbank (low tide)' },
-      { time: '12:30', activity: 'Beach lunch' },
-      { time: '14:00', activity: 'Snorkeling and swimming' },
+      { time: '08:00', activity: 'Departure from Nosy Be by speed boat' },
+      { time: '09:30', activity: 'Arrival at Nosy Iranja Be' },
+      { time: '10:00', activity: 'Walking across the sandbank to Nosy Iranja Kely' },
+      { time: '11:00', activity: 'Snorkeling and swimming' },
+      { time: '12:30', activity: 'Seafood lunch on the beach' },
+      { time: '14:30', activity: 'Exploration of the turtle island' },
       { time: '16:00', activity: 'Return to Nosy Be' },
     ],
     programMg: [
-      { time: '08:00', activity: 'Fiaingana avy Nosy Be amin\'ny sambo' },
-      { time: '09:30', activity: 'Fahatongavana ao Nosy Iranja' },
-      { time: '10:00', activity: 'Fahitana ny nosy sokatra' },
-      { time: '11:30', activity: 'Fiampitana ny fasika (iva ny ranomasina)' },
-      { time: '12:30', activity: 'Sakafo atoandro eny amoron-dranomasina' },
-      { time: '14:00', activity: 'Snorkeling sy filomanosana' },
+      { time: '08:00', activity: 'Fiaingana avy Nosy Be amin\'ny sambo haingana' },
+      { time: '09:30', activity: 'Fahatongavana ao Nosy Iranja Be' },
+      { time: '10:00', activity: 'Fiampitana ny fasika mankany Nosy Iranja Kely' },
+      { time: '11:00', activity: 'Snorkeling sy filomanosana' },
+      { time: '12:30', activity: 'Sakafo atoandro hazan-dranomasina' },
+      { time: '14:30', activity: 'Fikarohana ny nosin\'ny sokatra' },
       { time: '16:00', activity: 'Fiverenana any Nosy Be' },
     ],
-    maxParticipants: 10,
+    maxParticipants: 12,
   },
   {
     id: 'nosy-tanikely',
     key: 'nosyTanikely',
-    images: [merEmeraudeImg, nosyIranjaImg, lokobeImg],
+    images: [merEmeraudeImg, nosyIranjaImg, heroImage],
     location: 'Nosy Be',
     region: 'Nord-Ouest Madagascar',
     includedFr: ['Transport bateau', 'Guide', 'Droits d\'entrée réserve', 'Équipement snorkeling', 'Déjeuner'],
     includedEn: ['Boat transport', 'Guide', 'Reserve entrance fees', 'Snorkeling equipment', 'Lunch'],
     includedMg: ['Fitaterana sambo', 'Mpitarika', 'Saran-dalana tahiry', 'Fitaovana snorkeling', 'Sakafo atoandro'],
+    notIncludedFr: ['Pourboires', 'Photos sous-marines'],
+    notIncludedEn: ['Tips', 'Underwater photos'],
+    notIncludedMg: ['Pourboires', 'Sary ambany rano'],
     programFr: [
       { time: '08:30', activity: 'Départ de Nosy Be' },
       { time: '09:00', activity: 'Arrivée à Nosy Tanikely' },
       { time: '09:30', activity: 'Snorkeling dans la réserve marine' },
-      { time: '11:30', activity: 'Visite du phare et observation des tortues' },
+      { time: '11:30', activity: 'Visite du phare et vue panoramique' },
       { time: '12:30', activity: 'Déjeuner sur la plage' },
-      { time: '14:00', activity: 'Navigation vers Nosy Komba' },
+      { time: '14:00', activity: 'Départ vers Nosy Komba' },
       { time: '14:30', activity: 'Rencontre avec les lémuriens Macaco' },
       { time: '16:30', activity: 'Retour à Nosy Be' },
     ],
@@ -393,9 +426,9 @@ const excursionsData: ExcursionData[] = [
       { time: '08:30', activity: 'Departure from Nosy Be' },
       { time: '09:00', activity: 'Arrival at Nosy Tanikely' },
       { time: '09:30', activity: 'Snorkeling in the marine reserve' },
-      { time: '11:30', activity: 'Lighthouse visit and turtle observation' },
+      { time: '11:30', activity: 'Lighthouse visit and panoramic view' },
       { time: '12:30', activity: 'Beach lunch' },
-      { time: '14:00', activity: 'Sailing to Nosy Komba' },
+      { time: '14:00', activity: 'Departure to Nosy Komba' },
       { time: '14:30', activity: 'Meeting with Macaco lemurs' },
       { time: '16:30', activity: 'Return to Nosy Be' },
     ],
@@ -403,127 +436,54 @@ const excursionsData: ExcursionData[] = [
       { time: '08:30', activity: 'Fiaingana avy Nosy Be' },
       { time: '09:00', activity: 'Fahatongavana ao Nosy Tanikely' },
       { time: '09:30', activity: 'Snorkeling ao amin\'ny tahiry an-dranomasina' },
-      { time: '11:30', activity: 'Fitsidihana ny fanazavana sy fijerena sokatra' },
+      { time: '11:30', activity: 'Fitsidihana ny fanilo sy fahitana panorama' },
       { time: '12:30', activity: 'Sakafo atoandro eny amoron-dranomasina' },
-      { time: '14:00', activity: 'Fandehanan-tsambo mankany Nosy Komba' },
+      { time: '14:00', activity: 'Fiaingana mankany Nosy Komba' },
       { time: '14:30', activity: 'Fihaonana amin\'ny gidro Macaco' },
       { time: '16:30', activity: 'Fiverenana any Nosy Be' },
     ],
-    maxParticipants: 12,
+    maxParticipants: 15,
   },
   {
     id: 'lokobe',
     key: 'lokobe',
-    images: [lokobeImg, nosyIranjaImg, heroImage],
+    images: [lokobeImg, montagneAmbreImg, heroImage],
     location: 'Nosy Be',
     region: 'Nord-Ouest Madagascar',
-    includedFr: ['Transport en pirogue traditionnelle', 'Guide naturaliste', 'Droits d\'entrée', 'Déjeuner traditionnel'],
-    includedEn: ['Traditional canoe transport', 'Naturalist guide', 'Entrance fees', 'Traditional lunch'],
-    includedMg: ['Fitaterana lakana nentim-paharazana', 'Mpitarika naturalista', 'Saran-dalana', 'Sakafo atoandro nentim-paharazana'],
+    includedFr: ['Transport pirogue traditionnelle', 'Guide naturaliste', 'Droits d\'entrée', 'Déjeuner local'],
+    includedEn: ['Traditional canoe transport', 'Naturalist guide', 'Entrance fees', 'Local lunch'],
+    includedMg: ['Fitaterana lakana nentim-paharazana', 'Mpitarika naturalista', 'Saran-dalana', 'Sakafo atoandro eo an-toerana'],
+    notIncludedFr: ['Pourboires', 'Jumelles'],
+    notIncludedEn: ['Tips', 'Binoculars'],
+    notIncludedMg: ['Pourboires', 'Jumelles'],
     programFr: [
-      { time: '07:30', activity: 'Départ en pirogue traditionnelle' },
-      { time: '08:30', activity: 'Arrivée à l\'entrée de la réserve de Lokobe' },
-      { time: '09:00', activity: 'Randonnée dans la forêt primaire' },
-      { time: '11:00', activity: 'Observation des lémuriens noirs et caméléons' },
-      { time: '12:30', activity: 'Déjeuner traditionnel dans un village' },
-      { time: '14:00', activity: 'Visite des plantes médicinales et ylang-ylang' },
-      { time: '15:30', activity: 'Retour en pirogue à Nosy Be' },
+      { time: '08:00', activity: 'Départ en pirogue traditionnelle' },
+      { time: '09:00', activity: 'Entrée dans la réserve de Lokobe' },
+      { time: '09:30', activity: 'Randonnée dans la forêt primaire' },
+      { time: '11:00', activity: 'Observation des lémuriens et caméléons' },
+      { time: '12:30', activity: 'Déjeuner traditionnel au village' },
+      { time: '14:30', activity: 'Visite d\'une distillerie d\'ylang-ylang' },
+      { time: '16:00', activity: 'Retour en pirogue' },
     ],
     programEn: [
-      { time: '07:30', activity: 'Departure by traditional canoe' },
-      { time: '08:30', activity: 'Arrival at Lokobe reserve entrance' },
-      { time: '09:00', activity: 'Hike in the primary forest' },
-      { time: '11:00', activity: 'Observation of black lemurs and chameleons' },
-      { time: '12:30', activity: 'Traditional lunch in a village' },
-      { time: '14:00', activity: 'Visit to medicinal plants and ylang-ylang' },
-      { time: '15:30', activity: 'Return by canoe to Nosy Be' },
+      { time: '08:00', activity: 'Departure by traditional canoe' },
+      { time: '09:00', activity: 'Entry into Lokobe Reserve' },
+      { time: '09:30', activity: 'Hike through the primary forest' },
+      { time: '11:00', activity: 'Observation of lemurs and chameleons' },
+      { time: '12:30', activity: 'Traditional lunch in the village' },
+      { time: '14:30', activity: 'Visit to a ylang-ylang distillery' },
+      { time: '16:00', activity: 'Return by canoe' },
     ],
     programMg: [
-      { time: '07:30', activity: 'Fiaingana amin\'ny lakana nentim-paharazana' },
-      { time: '08:30', activity: 'Fahatongavana eo amin\'ny fidirana ao Lokobe' },
-      { time: '09:00', activity: 'Fitsangatsanganana ao anaty ala voalohany' },
-      { time: '11:00', activity: 'Fijerena gidro mainty sy tana' },
+      { time: '08:00', activity: 'Fiaingana amin\'ny lakana nentim-paharazana' },
+      { time: '09:00', activity: 'Fidirana ao amin\'ny Tahirin\'i Lokobe' },
+      { time: '09:30', activity: 'Fitsangatsanganana ao anaty ala voalohany' },
+      { time: '11:00', activity: 'Fijerena gidro sy tana' },
       { time: '12:30', activity: 'Sakafo atoandro nentim-paharazana ao amin\'ny tanàna' },
-      { time: '14:00', activity: 'Fitsidihana ny zavamaniry fanafody sy ylang-ylang' },
-      { time: '15:30', activity: 'Fiverenana amin\'ny lakana any Nosy Be' },
+      { time: '14:30', activity: 'Fitsidihana orinasa ylang-ylang' },
+      { time: '16:00', activity: 'Fiverenana amin\'ny lakana' },
     ],
-    maxParticipants: 8,
-  },
-  {
-    id: 'route-cacao',
-    key: 'routeCacao',
-    images: [routeCacaoImg, montagneAmbreImg, heroImage],
-    location: 'Ambanja',
-    region: 'Nord Madagascar',
-    includedFr: ['Transport en 4x4', 'Guide francophone', 'Visite plantation', 'Dégustation cacao et chocolat', 'Déjeuner'],
-    includedEn: ['4x4 transport', 'French-speaking guide', 'Plantation visit', 'Cocoa and chocolate tasting', 'Lunch'],
-    includedMg: ['Fitaterana 4x4', 'Mpitarika miteny frantsay', 'Fitsidihana plantation', 'Fanandramana kakao sy chocolat', 'Sakafo atoandro'],
-    programFr: [
-      { time: '06:00', activity: 'Départ vers Ambanja' },
-      { time: '09:00', activity: 'Arrivée à la plantation de cacao Millot' },
-      { time: '09:30', activity: 'Découverte du processus de fabrication du chocolat' },
-      { time: '11:30', activity: 'Dégustation de chocolat artisanal' },
-      { time: '12:30', activity: 'Déjeuner dans la plantation' },
-      { time: '14:00', activity: 'Visite des cultures d\'ylang-ylang et poivre' },
-      { time: '16:00', activity: 'Retour' },
-    ],
-    programEn: [
-      { time: '06:00', activity: 'Departure to Ambanja' },
-      { time: '09:00', activity: 'Arrival at Millot cocoa plantation' },
-      { time: '09:30', activity: 'Discovery of the chocolate manufacturing process' },
-      { time: '11:30', activity: 'Artisanal chocolate tasting' },
-      { time: '12:30', activity: 'Lunch at the plantation' },
-      { time: '14:00', activity: 'Visit to ylang-ylang and pepper crops' },
-      { time: '16:00', activity: 'Return' },
-    ],
-    programMg: [
-      { time: '06:00', activity: 'Fiaingana mankany Ambanja' },
-      { time: '09:00', activity: 'Fahatongavana ao amin\'ny plantation kakao Millot' },
-      { time: '09:30', activity: 'Fahitana ny fomba fanamboarana chocolat' },
-      { time: '11:30', activity: 'Fanandramana chocolat artisanaly' },
-      { time: '12:30', activity: 'Sakafo atoandro ao amin\'ny plantation' },
-      { time: '14:00', activity: 'Fitsidihana ny fambolena ylang-ylang sy dipoavatra' },
-      { time: '16:00', activity: 'Fiverenana' },
-    ],
-    maxParticipants: 12,
-  },
-  {
-    id: 'grand-nord',
-    key: 'grandNord',
-    images: [montagneAmbreImg, ankarana, merEmeraudeImg, tsingyRougesImg],
-    location: 'Nord Madagascar',
-    region: 'Nord Madagascar',
-    includedFr: ['Transport en 4x4 climatisé', 'Guide francophone expert', 'Hébergements en lodges', 'Pension complète', 'Toutes les entrées', 'Équipements'],
-    includedEn: ['Air-conditioned 4x4 transport', 'Expert French-speaking guide', 'Lodge accommodations', 'Full board', 'All entrance fees', 'Equipment'],
-    includedMg: ['Fitaterana 4x4 misy climatisation', 'Mpitarika frantsay manan-traikefa', 'Toeram-ponenana lodges', 'Sakafo feno', 'Saran-dalana rehetra', 'Fitaovana'],
-    programFr: [
-      { time: 'Jour 1', activity: 'Diego-Suarez - Mer d\'Émeraude' },
-      { time: 'Jour 2', activity: 'Montagne d\'Ambre - Forêt tropicale' },
-      { time: 'Jour 3', activity: 'Tsingy Rouges - Lac Sacré' },
-      { time: 'Jour 4', activity: 'Ankarana - Tsingy et grottes' },
-      { time: 'Jour 5', activity: 'Route du Cacao - Ambanja' },
-      { time: 'Jour 6', activity: 'Nosy Be - Lokobe' },
-      { time: 'Jour 7', activity: 'Nosy Iranja - Retour' },
-    ],
-    programEn: [
-      { time: 'Day 1', activity: 'Diego-Suarez - Emerald Sea' },
-      { time: 'Day 2', activity: 'Amber Mountain - Tropical forest' },
-      { time: 'Day 3', activity: 'Red Tsingy - Sacred Lake' },
-      { time: 'Day 4', activity: 'Ankarana - Tsingy and caves' },
-      { time: 'Day 5', activity: 'Cocoa Route - Ambanja' },
-      { time: 'Day 6', activity: 'Nosy Be - Lokobe' },
-      { time: 'Day 7', activity: 'Nosy Iranja - Return' },
-    ],
-    programMg: [
-      { time: 'Andro 1', activity: 'Diego-Suarez - Ranomasina Safira' },
-      { time: 'Andro 2', activity: 'Ambohitra - Ala tropikaly' },
-      { time: 'Andro 3', activity: 'Tsingy Mena - Farihy Masina' },
-      { time: 'Andro 4', activity: 'Ankarana - Tsingy sy zohy' },
-      { time: 'Andro 5', activity: 'Lalana Kakao - Ambanja' },
-      { time: 'Andro 6', activity: 'Nosy Be - Lokobe' },
-      { time: 'Andro 7', activity: 'Nosy Iranja - Fiverenana' },
-    ],
-    maxParticipants: 6,
+    maxParticipants: 10,
   },
 ];
 
@@ -542,7 +502,6 @@ export default function ExcursionDetail() {
     message: '',
   });
 
-  // Scroll to top on route change
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
@@ -552,10 +511,10 @@ export default function ExcursionDetail() {
   if (!excursion) {
     return (
       <Layout>
-        <div className="min-h-screen flex items-center justify-center">
+        <div className="min-h-screen flex items-center justify-center bg-[#050505]">
           <div className="text-center">
-            <h1 className="text-4xl font-serif text-navy mb-4">Excursion non trouvée</h1>
-            <Link to="/expeditions" className="text-azure hover:underline">
+            <h1 className="text-4xl font-serif text-white mb-4">Excursion non trouvée</h1>
+            <Link to="/expeditions" className="text-gold hover:text-gold/80 transition-colors">
               Retour aux expéditions
             </Link>
           </div>
@@ -566,6 +525,7 @@ export default function ExcursionDetail() {
 
   const data = t.excursions[excursion.key];
   const included = language === 'en' ? excursion.includedEn : language === 'mg' ? excursion.includedMg : excursion.includedFr;
+  const notIncluded = language === 'en' ? excursion.notIncludedEn : language === 'mg' ? excursion.notIncludedMg : excursion.notIncludedFr;
   const program = language === 'en' ? excursion.programEn : language === 'mg' ? excursion.programMg : excursion.programFr;
 
   const nextImage = () => setCurrentImageIndex((prev) => (prev + 1) % excursion.images.length);
@@ -588,12 +548,12 @@ Message: ${formData.message}`;
 
   return (
     <Layout>
-      {/* Back Button */}
-      <div className="bg-white border-b border-border/50">
+      {/* Back Button Bar */}
+      <div className="bg-[#050505] border-b border-gold/20">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-4">
           <Link 
             to="/expeditions" 
-            className="inline-flex items-center gap-2 text-muted-foreground hover:text-navy transition-colors"
+            className="inline-flex items-center gap-2 text-zinc-400 hover:text-gold transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             <span className="text-sm font-medium">Retour aux expéditions</span>
@@ -601,8 +561,8 @@ Message: ${formData.message}`;
         </div>
       </div>
 
-      {/* Hero Gallery */}
-      <section className="relative h-[60vh] min-h-[500px] bg-navy overflow-hidden">
+      {/* Hero Gallery - Magazine Style */}
+      <section className="relative h-[70vh] min-h-[600px] bg-[#050505] overflow-hidden">
         <AnimatePresence mode="wait">
           <motion.img
             key={currentImageIndex}
@@ -616,210 +576,282 @@ Message: ${formData.message}`;
             onClick={() => setShowLightbox(true)}
           />
         </AnimatePresence>
-        <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-transparent to-navy/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-black/30 to-black/20" />
         
         {/* Navigation Arrows */}
         <button
           onClick={prevImage}
-          className="absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors"
+          className="absolute left-6 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-black/40 backdrop-blur-sm border border-gold/30 flex items-center justify-center hover:bg-gold hover:border-gold group transition-all"
         >
-          <ChevronLeft className="w-6 h-6 text-white" />
+          <ChevronLeft className="w-6 h-6 text-white group-hover:text-black" />
         </button>
         <button
           onClick={nextImage}
-          className="absolute right-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors"
+          className="absolute right-6 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-black/40 backdrop-blur-sm border border-gold/30 flex items-center justify-center hover:bg-gold hover:border-gold group transition-all"
         >
-          <ChevronRight className="w-6 h-6 text-white" />
+          <ChevronRight className="w-6 h-6 text-white group-hover:text-black" />
         </button>
 
+        {/* Image Counter */}
+        <div className="absolute top-6 right-6 bg-black/40 backdrop-blur-sm px-4 py-2 rounded-full border border-gold/30">
+          <span className="text-gold font-medium">{String(currentImageIndex + 1).padStart(2, '0')}</span>
+          <span className="text-zinc-400"> / {String(excursion.images.length).padStart(2, '0')}</span>
+        </div>
+
         {/* Thumbnails */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3">
           {excursion.images.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentImageIndex(index)}
-              className={`w-2 h-2 rounded-full transition-all ${
-                index === currentImageIndex ? 'bg-white w-8' : 'bg-white/50 hover:bg-white/70'
+              className={`h-1 rounded-full transition-all ${
+                index === currentImageIndex ? 'bg-gold w-12' : 'bg-white/30 w-8 hover:bg-white/50'
               }`}
             />
           ))}
         </div>
 
         {/* Title Overlay */}
-        <div className="absolute bottom-0 left-0 right-0 p-8 lg:p-12">
+        <div className="absolute bottom-0 left-0 right-0 p-8 lg:p-16">
           <div className="max-w-7xl mx-auto">
-            <div className="flex items-center gap-2 text-azure text-sm font-medium tracking-widest uppercase mb-4">
-              <MapPin className="w-4 h-4" />
-              {excursion.location}
-            </div>
-            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-white font-medium mb-2">
-              {data.title}
-            </h1>
-            {'titleMg' in data && data.titleMg && (
-              <p className="text-white/60 text-lg italic">{data.titleMg}</p>
-            )}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="flex items-center gap-2 text-gold text-sm font-medium tracking-[0.2em] uppercase mb-4">
+                <MapPin className="w-4 h-4" />
+                {excursion.location} — {excursion.region}
+              </div>
+              <h1 className="font-serif text-4xl md:text-5xl lg:text-7xl text-white font-bold mb-3">
+                {data.title}
+              </h1>
+              {'titleMg' in data && data.titleMg && (
+                <p className="text-white/50 text-xl italic font-serif">{data.titleMg}</p>
+              )}
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Content */}
-      <section className="py-16 lg:py-24 bg-white">
+      {/* Content Section */}
+      <section className="py-20 lg:py-28 bg-[#050505]">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="grid lg:grid-cols-3 gap-12 lg:gap-16">
+          <div className="grid lg:grid-cols-3 gap-12 lg:gap-20">
+            
             {/* Main Content */}
-            <div className="lg:col-span-2 space-y-12">
+            <div className="lg:col-span-2 space-y-16">
+              
               {/* Description */}
-              <div>
-                <h2 className="font-serif text-2xl text-navy mb-4">Description</h2>
-                <p className="text-muted-foreground leading-relaxed text-lg">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+              >
+                <h2 className="font-serif text-3xl text-white mb-6">L'Expérience</h2>
+                <p className="text-zinc-400 leading-relaxed text-lg">
                   {data.description}
                 </p>
-              </div>
+              </motion.div>
 
-              {/* Quick Info */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div className="text-center p-6 bg-muted/30 rounded-lg">
-                  <Clock className="w-6 h-6 text-azure mx-auto mb-2" />
-                  <p className="text-sm text-muted-foreground uppercase tracking-wider mb-1">Durée</p>
-                  <p className="font-medium text-navy">{data.duration}</p>
+              {/* Quick Info Cards */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="grid grid-cols-2 md:grid-cols-4 gap-4"
+              >
+                <div className="bg-[#0A0A0A] border border-gold/20 rounded-xl p-6 text-center">
+                  <Clock className="w-6 h-6 text-gold mx-auto mb-3" />
+                  <p className="text-xs text-zinc-500 uppercase tracking-wider mb-1">Durée</p>
+                  <p className="font-medium text-white">{data.duration}</p>
                 </div>
-                <div className="text-center p-6 bg-muted/30 rounded-lg">
-                  <CircleDot className="w-6 h-6 text-azure mx-auto mb-2" />
-                  <p className="text-sm text-muted-foreground uppercase tracking-wider mb-1">Niveau</p>
-                  <p className="font-medium text-navy">{data.difficulty}</p>
+                <div className="bg-[#0A0A0A] border border-gold/20 rounded-xl p-6 text-center">
+                  <CircleDot className="w-6 h-6 text-gold mx-auto mb-3" />
+                  <p className="text-xs text-zinc-500 uppercase tracking-wider mb-1">Niveau</p>
+                  <p className="font-medium text-white">{data.difficulty}</p>
                 </div>
-                <div className="text-center p-6 bg-muted/30 rounded-lg">
-                  <Users className="w-6 h-6 text-azure mx-auto mb-2" />
-                  <p className="text-sm text-muted-foreground uppercase tracking-wider mb-1">Groupe</p>
-                  <p className="font-medium text-navy">Max {excursion.maxParticipants}</p>
+                <div className="bg-[#0A0A0A] border border-gold/20 rounded-xl p-6 text-center">
+                  <Users className="w-6 h-6 text-gold mx-auto mb-3" />
+                  <p className="text-xs text-zinc-500 uppercase tracking-wider mb-1">Groupe</p>
+                  <p className="font-medium text-white">Max {excursion.maxParticipants}</p>
                 </div>
-                <div className="text-center p-6 bg-muted/30 rounded-lg">
-                  <Star className="w-6 h-6 text-azure mx-auto mb-2" />
-                  <p className="text-sm text-muted-foreground uppercase tracking-wider mb-1">Prix</p>
-                  <p className="font-medium text-navy">{data.price}€</p>
+                <div className="bg-[#0A0A0A] border border-gold/20 rounded-xl p-6 text-center">
+                  <Star className="w-6 h-6 text-gold mx-auto mb-3" />
+                  <p className="text-xs text-zinc-500 uppercase tracking-wider mb-1">Prix</p>
+                  <p className="font-medium text-white">{data.price}€</p>
                 </div>
-              </div>
+              </motion.div>
 
-              {/* Program */}
-              <div>
-                <h2 className="font-serif text-2xl text-navy mb-6">Programme</h2>
-                <div className="space-y-4">
+              {/* Program Timeline */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+              >
+                <h2 className="font-serif text-3xl text-white mb-8">Programme</h2>
+                <div className="space-y-0">
                   {program.map((item, index) => (
                     <motion.div
                       key={index}
                       initial={{ opacity: 0, x: -20 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 }}
-                      className="flex gap-4 items-start"
+                      transition={{ delay: index * 0.05 }}
+                      className="flex gap-6 group"
                     >
-                      <div className="flex-shrink-0 w-20 text-azure font-medium text-sm">
-                        {item.time}
+                      <div className="flex flex-col items-center">
+                        <div className="w-3 h-3 rounded-full bg-gold" />
+                        {index < program.length - 1 && (
+                          <div className="w-px h-full bg-gold/20 group-hover:bg-gold/40 transition-colors" />
+                        )}
                       </div>
-                      <div className="flex-1 pb-4 border-b border-border/50 last:border-0">
-                        <p className="text-navy">{item.activity}</p>
+                      <div className="pb-8 flex-1">
+                        <span className="text-gold font-medium text-sm">{item.time}</span>
+                        <p className="text-white mt-1">{item.activity}</p>
                       </div>
                     </motion.div>
                   ))}
                 </div>
-              </div>
+              </motion.div>
 
-              {/* Included */}
-              <div>
-                <h2 className="font-serif text-2xl text-navy mb-6">Inclus dans le prix</h2>
-                <div className="grid md:grid-cols-2 gap-3">
-                  {included.map((item, index) => (
-                    <div key={index} className="flex items-center gap-3">
-                      <Check className="w-5 h-5 text-azure flex-shrink-0" />
-                      <span className="text-muted-foreground">{item}</span>
-                    </div>
-                  ))}
+              {/* Included / Not Included Section */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+              >
+                <h2 className="font-serif text-3xl text-white mb-8">Détails du Prix</h2>
+                <div className="grid md:grid-cols-2 gap-8">
+                  {/* Included */}
+                  <div className="bg-[#0A0A0A] border border-gold/20 rounded-xl p-8">
+                    <h3 className="text-gold font-medium uppercase tracking-wider text-sm mb-6 flex items-center gap-2">
+                      <Check className="w-5 h-5" />
+                      Inclus dans le prix
+                    </h3>
+                    <ul className="space-y-4">
+                      {included.map((item, index) => (
+                        <li key={index} className="flex items-start gap-3">
+                          <div className="w-6 h-6 rounded-full bg-gold/10 flex items-center justify-center shrink-0 mt-0.5">
+                            <Check className="w-3.5 h-3.5 text-gold" />
+                          </div>
+                          <span className="text-zinc-300">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Not Included */}
+                  <div className="bg-[#0A0A0A] border border-zinc-800 rounded-xl p-8">
+                    <h3 className="text-zinc-400 font-medium uppercase tracking-wider text-sm mb-6 flex items-center gap-2">
+                      <XCircle className="w-5 h-5" />
+                      Non inclus
+                    </h3>
+                    <ul className="space-y-4">
+                      {notIncluded.map((item, index) => (
+                        <li key={index} className="flex items-start gap-3">
+                          <div className="w-6 h-6 rounded-full bg-zinc-800 flex items-center justify-center shrink-0 mt-0.5">
+                            <X className="w-3.5 h-3.5 text-zinc-500" />
+                          </div>
+                          <span className="text-zinc-500">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-              </div>
+              </motion.div>
             </div>
 
             {/* Sidebar - Booking Form */}
             <div className="lg:col-span-1">
-              <div className="sticky top-24 bg-muted/30 rounded-xl p-8">
-                <div className="text-center mb-6">
-                  <p className="text-sm text-muted-foreground uppercase tracking-wider mb-1">{t.common.from}</p>
-                  <p className="font-serif text-4xl text-navy">{data.price}€</p>
-                  <p className="text-sm text-muted-foreground">{t.common.perPerson}</p>
-                </div>
+              <div className="sticky top-24">
+                <motion.div
+                  initial={{ opacity: 0, x: 30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  className="bg-[#0A0A0A] border border-gold/30 rounded-2xl p-8"
+                >
+                  {/* Price Display */}
+                  <div className="text-center mb-8 pb-8 border-b border-gold/20">
+                    <p className="text-xs text-zinc-500 uppercase tracking-wider mb-2">{t.common.from}</p>
+                    <p className="font-serif text-5xl text-white">{data.price}<span className="text-2xl">€</span></p>
+                    <p className="text-zinc-400 text-sm mt-1">{t.common.perPerson}</p>
+                  </div>
 
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
-                    <input
-                      type="text"
-                      placeholder={t.contact.form.name}
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      required
-                      className="w-full px-4 py-3 bg-white border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-azure/50"
-                    />
-                  </div>
-                  <div>
-                    <input
-                      type="email"
-                      placeholder={t.contact.form.email}
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      required
-                      className="w-full px-4 py-3 bg-white border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-azure/50"
-                    />
-                  </div>
-                  <div>
-                    <input
-                      type="tel"
-                      placeholder={t.contact.form.phone}
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full px-4 py-3 bg-white border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-azure/50"
-                    />
-                  </div>
-                  <div>
-                    <input
-                      type="date"
-                      value={formData.date}
-                      onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                      required
-                      className="w-full px-4 py-3 bg-white border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-azure/50"
-                    />
-                  </div>
-                  <div>
-                    <select
-                      value={formData.participants}
-                      onChange={(e) => setFormData({ ...formData, participants: e.target.value })}
-                      className="w-full px-4 py-3 bg-white border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-azure/50"
+                  <form onSubmit={handleSubmit} className="space-y-5">
+                    <div>
+                      <input
+                        type="text"
+                        placeholder={t.contact.form.name}
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        required
+                        className="w-full px-4 py-4 bg-transparent border border-zinc-700 rounded-lg focus:outline-none focus:border-gold text-white placeholder:text-zinc-500 transition-colors"
+                      />
+                    </div>
+                    <div>
+                      <input
+                        type="email"
+                        placeholder={t.contact.form.email}
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        required
+                        className="w-full px-4 py-4 bg-transparent border border-zinc-700 rounded-lg focus:outline-none focus:border-gold text-white placeholder:text-zinc-500 transition-colors"
+                      />
+                    </div>
+                    <div>
+                      <input
+                        type="tel"
+                        placeholder={t.contact.form.phone}
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        className="w-full px-4 py-4 bg-transparent border border-zinc-700 rounded-lg focus:outline-none focus:border-gold text-white placeholder:text-zinc-500 transition-colors"
+                      />
+                    </div>
+                    <div>
+                      <input
+                        type="date"
+                        value={formData.date}
+                        onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+                        required
+                        className="w-full px-4 py-4 bg-transparent border border-zinc-700 rounded-lg focus:outline-none focus:border-gold text-white transition-colors"
+                      />
+                    </div>
+                    <div>
+                      <select
+                        value={formData.participants}
+                        onChange={(e) => setFormData({ ...formData, participants: e.target.value })}
+                        className="w-full px-4 py-4 bg-[#0A0A0A] border border-zinc-700 rounded-lg focus:outline-none focus:border-gold text-white transition-colors"
+                      >
+                        {[...Array(excursion.maxParticipants)].map((_, i) => (
+                          <option key={i + 1} value={i + 1}>
+                            {i + 1} {i === 0 ? 'participant' : 'participants'}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      <textarea
+                        placeholder={t.contact.form.message}
+                        value={formData.message}
+                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                        rows={3}
+                        className="w-full px-4 py-4 bg-transparent border border-zinc-700 rounded-lg focus:outline-none focus:border-gold text-white placeholder:text-zinc-500 resize-none transition-colors"
+                      />
+                    </div>
+                    <button
+                      type="submit"
+                      className="w-full bg-gold text-black font-semibold py-4 rounded-lg hover:bg-gold/90 transition-colors flex items-center justify-center gap-2"
                     >
-                      {[...Array(excursion.maxParticipants)].map((_, i) => (
-                        <option key={i + 1} value={i + 1}>
-                          {i + 1} {i === 0 ? 'participant' : 'participants'}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div>
-                    <textarea
-                      placeholder={t.contact.form.message}
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      rows={3}
-                      className="w-full px-4 py-3 bg-white border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-azure/50 resize-none"
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    className="w-full bg-azure text-navy font-medium py-4 rounded-lg hover:bg-azure/90 transition-colors flex items-center justify-center gap-2"
-                  >
-                    <MessageCircle className="w-5 h-5" />
-                    Réserver via WhatsApp
-                  </button>
-                </form>
+                      <MessageCircle className="w-5 h-5" />
+                      Réserver via WhatsApp
+                    </button>
+                  </form>
 
-                <p className="text-xs text-muted-foreground text-center mt-4">
-                  Réponse garantie sous 24h
-                </p>
+                  <p className="text-xs text-zinc-500 text-center mt-6">
+                    ✨ Réponse garantie sous 24h
+                  </p>
+                </motion.div>
               </div>
             </div>
           </div>
@@ -838,21 +870,21 @@ Message: ${formData.message}`;
           >
             <button
               onClick={() => setShowLightbox(false)}
-              className="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
+              className="absolute top-6 right-6 w-14 h-14 rounded-full bg-white/10 border border-gold/30 flex items-center justify-center hover:bg-gold hover:border-gold group transition-all"
             >
-              <X className="w-6 h-6 text-white" />
+              <X className="w-6 h-6 text-white group-hover:text-black" />
             </button>
             <button
               onClick={(e) => { e.stopPropagation(); prevImage(); }}
-              className="absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
+              className="absolute left-6 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-white/10 border border-gold/30 flex items-center justify-center hover:bg-gold hover:border-gold group transition-all"
             >
-              <ChevronLeft className="w-6 h-6 text-white" />
+              <ChevronLeft className="w-6 h-6 text-white group-hover:text-black" />
             </button>
             <button
               onClick={(e) => { e.stopPropagation(); nextImage(); }}
-              className="absolute right-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
+              className="absolute right-6 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-white/10 border border-gold/30 flex items-center justify-center hover:bg-gold hover:border-gold group transition-all"
             >
-              <ChevronRight className="w-6 h-6 text-white" />
+              <ChevronRight className="w-6 h-6 text-white group-hover:text-black" />
             </button>
             <img
               src={excursion.images[currentImageIndex]}
