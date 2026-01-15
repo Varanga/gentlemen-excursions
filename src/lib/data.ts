@@ -6,7 +6,6 @@ import tsingyRougesImg from '@/assets/excursions/tsingy-rouges.jpg';
 import ankarana from '@/assets/excursions/ankarana.jpg';
 import nosyIranjaImg from '@/assets/excursions/nosy-iranja.jpg';
 import lokobeImg from '@/assets/excursions/lokobe.jpg';
-import routeCacaoImg from '@/assets/excursions/route-cacao.jpg';
 import heroImage from '@/assets/hero-madagascar.jpg';
 
 export type Region = 'diego' | 'nosybe' | 'circuits';
@@ -22,9 +21,7 @@ export type ExcursionKey =
   | 'montagneFrancais' 
   | 'nosyIranja' 
   | 'nosyTanikely' 
-  | 'lokobe' 
-  | 'routeCacao' 
-  | 'grandNord';
+  | 'lokobe';
 
 export interface Tour {
   id: string;
@@ -131,23 +128,6 @@ export const tours: Tour[] = [
     titleKey: 'lokobe', 
     region: 'nosybe', 
     location: 'Nosy Be',
-  },
-  // Circuits
-  { 
-    id: 'route-cacao', 
-    slug: 'route-cacao',
-    image: routeCacaoImg, 
-    titleKey: 'routeCacao', 
-    region: 'circuits', 
-    location: 'Ambanja',
-  },
-  { 
-    id: 'grand-nord', 
-    slug: 'grand-nord',
-    image: montagneAmbreImg, // TODO: Replace with specific image
-    titleKey: 'grandNord', 
-    region: 'circuits', 
-    location: 'Nord Madagascar',
   },
 ];
 

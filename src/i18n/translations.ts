@@ -136,21 +136,6 @@ export const translations = {
         difficulty: 'Modéré',
         price: '95',
       },
-      routeCacao: {
-        title: 'Route du Cacao',
-        titleMg: 'Lalana Kakao',
-        description: 'Sur les traces de l\'or brun malgache : visite de plantations, processus de fabrication et dégustation.',
-        duration: '1 jour',
-        difficulty: 'Facile',
-        price: '85',
-      },
-      grandNord: {
-        title: 'Expédition Grand Nord',
-        description: 'L\'aventure ultime : circuit complet à travers tous les trésors du Nord de Madagascar.',
-        duration: '7 jours',
-        difficulty: 'Avancé',
-        price: '1200',
-      },
     },
     // Services
     services: {
@@ -403,21 +388,6 @@ export const translations = {
         difficulty: 'Moderate',
         price: '95',
       },
-      routeCacao: {
-        title: 'Cocoa Route',
-        titleMg: 'Lalana Kakao',
-        description: 'Following the trail of Malagasy brown gold: plantation visits, manufacturing process and tasting.',
-        duration: '1 day',
-        difficulty: 'Easy',
-        price: '85',
-      },
-      grandNord: {
-        title: 'Grand North Expedition',
-        description: 'The ultimate adventure: complete circuit through all the treasures of Northern Madagascar.',
-        duration: '7 days',
-        difficulty: 'Advanced',
-        price: '1200',
-      },
     },
     services: {
       title: 'Our Services',
@@ -662,21 +632,6 @@ export const translations = {
         duration: '1 andro',
         difficulty: 'Antonony',
         price: '95',
-      },
-      routeCacao: {
-        title: 'Lalana Kakao',
-        titleMg: 'Lalana Kakao',
-        description: 'Manaraka ny dian\'ny volamena mena malagasy: fitsidihana plantation, fomba fanamboarana ary fanandramana.',
-        duration: '1 andro',
-        difficulty: 'Mora',
-        price: '85',
-      },
-      grandNord: {
-        title: 'Dia Avaratra Lehibe',
-        description: 'Ny fikarohana faratampony: lalan-kaleha feno mamakivaky ny harena rehetra any Avaratra.',
-        duration: '7 andro',
-        difficulty: 'Sarotra',
-        price: '1200',
       },
     },
     services: {
