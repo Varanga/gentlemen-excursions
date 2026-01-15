@@ -4,26 +4,13 @@ import { ArrowRight, Clock } from 'lucide-react';
 import Layout from '@/components/Layout';
 import Hero from '@/components/Hero';
 import { useLanguage } from '@/i18n/LanguageContext';
-
-// Import images
-import merEmeraudeImg from '@/assets/excursions/mer-emeraude.jpg';
-import troisBaiesImg from '@/assets/excursions/trois-baies.jpg';
-import montagneAmbreImg from '@/assets/excursions/montagne-ambre.jpg';
-import tsingyRougesImg from '@/assets/excursions/tsingy-rouges.jpg';
-import ankaranaImg from '@/assets/excursions/ankarana.jpg';
-import nosyIranjaImg from '@/assets/excursions/nosy-iranja.jpg';
-import lokobeImg from '@/assets/excursions/lokobe.jpg';
-import routeCacaoImg from '@/assets/excursions/route-cacao.jpg';
-
-const featuredExcursions = [
-  { id: 'mer-emeraude', image: merEmeraudeImg, titleKey: 'merEmeraude', location: 'Diego-Suarez', duration: '1 jour' },
-  { id: 'nosy-iranja', image: nosyIranjaImg, titleKey: 'nosyIranja', location: 'Nosy Be', duration: '1 jour' },
-  { id: 'montagne-ambre', image: montagneAmbreImg, titleKey: 'montagneAmbre', location: 'Diego-Suarez', duration: '1 jour' },
-  { id: 'tsingy-rouges', image: tsingyRougesImg, titleKey: 'tsingyRouges', location: 'Diego-Suarez', duration: '1 jour' },
-];
+import { getFeaturedTours } from '@/lib/data';
 
 export default function Index() {
   const { t } = useLanguage();
+  
+  // Get featured excursions from centralized data
+  const featuredExcursions = getFeaturedTours();
 
   return (
     <Layout>
@@ -49,30 +36,33 @@ export default function Index() {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {featuredExcursions.map((excursion, index) => (
-              <motion.div
-                key={excursion.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Link to={`/expeditions/${excursion.id}`} className="group block">
-                  <div className="relative aspect-[3/4] overflow-hidden mb-5 border border-border hover:border-gold/30 transition-colors">
-                    <img src={excursion.image} alt="" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                    <div className="absolute inset-0 bg-navy/0 group-hover:bg-navy/20 transition-colors" />
-                  </div>
-                  <p className="text-xs text-zinc uppercase tracking-wider mb-2">{excursion.location}</p>
-                  <h3 className="font-serif text-xl text-white group-hover:text-gold transition-colors mb-2">
-                    {t.excursions[excursion.titleKey as keyof typeof t.excursions]?.title}
-                  </h3>
-                  <div className="flex items-center gap-1 text-xs text-zinc">
-                    <Clock className="w-3 h-3" />
-                    {excursion.duration}
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
+            {featuredExcursions.map((excursion, index) => {
+              const data = t.excursions[excursion.titleKey];
+              return (
+                <motion.div
+                  key={excursion.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <Link to={`/expeditions/${excursion.slug}`} className="group block">
+                    <div className="relative aspect-[3/4] overflow-hidden mb-5 border border-border hover:border-gold/30 transition-colors">
+                      <img src={excursion.image} alt={data.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                      <div className="absolute inset-0 bg-navy/0 group-hover:bg-navy/20 transition-colors" />
+                    </div>
+                    <p className="text-xs text-zinc uppercase tracking-wider mb-2">{excursion.location}</p>
+                    <h3 className="font-serif text-xl text-white group-hover:text-gold transition-colors mb-2">
+                      {data.title}
+                    </h3>
+                    <div className="flex items-center gap-1 text-xs text-zinc">
+                      <Clock className="w-3 h-3" />
+                      {data.duration}
+                    </div>
+                  </Link>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
