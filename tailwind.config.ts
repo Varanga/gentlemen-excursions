@@ -23,13 +23,14 @@ export default {
           DEFAULT: "hsl(var(--navy))",
           light: "hsl(var(--navy-light))",
         },
-        azure: {
-          DEFAULT: "hsl(var(--azure))",
-          dark: "hsl(var(--azure-dark))",
+        gold: {
+          DEFAULT: "hsl(var(--gold))",
+          dark: "hsl(var(--gold-dark))",
+          light: "hsl(var(--gold-light))",
         },
-        sand: {
-          DEFAULT: "hsl(var(--sand))",
-          dark: "hsl(var(--sand-dark))",
+        zinc: {
+          DEFAULT: "hsl(var(--zinc))",
+          dark: "hsl(var(--zinc-dark))",
         },
         primary: {
           DEFAULT: "hsl(var(--primary))",

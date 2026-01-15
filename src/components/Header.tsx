@@ -43,41 +43,33 @@ export default function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled 
-          ? 'bg-white shadow-sm' 
-          : 'bg-gradient-to-b from-navy/60 to-transparent'
+          ? 'bg-navy border-b border-gold/30' 
+          : 'bg-gradient-to-b from-navy/80 to-transparent'
       }`}
     >
       {/* Top bar - visible only on desktop */}
       <div className={`hidden lg:block border-b transition-colors duration-500 ${
-        isScrolled ? 'border-border' : 'border-white/10'
+        isScrolled ? 'border-gold/20' : 'border-white/10'
       }`}>
         <div className="container mx-auto px-8">
           <div className="flex items-center justify-end h-10 gap-6">
             <a 
               href="mailto:contact@gentlemen-excursions.com" 
-              className={`flex items-center gap-2 text-xs transition-colors ${
-                isScrolled ? 'text-muted-foreground hover:text-navy' : 'text-white/70 hover:text-white'
-              }`}
+              className="flex items-center gap-2 text-xs text-zinc hover:text-gold transition-colors"
             >
               <Mail className="w-3 h-3" />
               Newsletter
             </a>
             <a 
               href="/contact" 
-              className={`flex items-center gap-2 text-xs transition-colors ${
-                isScrolled ? 'text-muted-foreground hover:text-navy' : 'text-white/70 hover:text-white'
-              }`}
+              className="flex items-center gap-2 text-xs text-zinc hover:text-gold transition-colors"
             >
               <Phone className="w-3 h-3" />
               Contact
             </a>
             <a 
               href="tel:+261320000000"
-              className={`text-xs font-medium px-3 py-1 rounded transition-colors ${
-                isScrolled 
-                  ? 'text-navy border border-border hover:bg-sand' 
-                  : 'text-white border border-white/30 hover:bg-white/10'
-              }`}
+              className="text-xs font-medium px-3 py-1 text-gold border border-gold/50 hover:bg-gold hover:text-navy rounded transition-colors"
             >
               +261 32 00 000 00
             </a>
@@ -90,11 +82,7 @@ export default function Header() {
         <div className="flex items-center justify-between h-20 lg:h-24">
           {/* Logo */}
           <Link to="/" className="flex items-center">
-            <span
-              className={`font-serif text-xl lg:text-2xl font-medium tracking-wide italic transition-colors duration-500 ${
-                isScrolled ? 'text-navy' : 'text-white'
-              }`}
-            >
+            <span className="font-serif text-xl lg:text-2xl font-medium tracking-wide italic text-white hover:text-gold transition-colors duration-300">
               Gentlemen
             </span>
           </Link>
@@ -107,18 +95,10 @@ export default function Header() {
                 to={link.href}
                 className="group text-center"
               >
-                <span
-                  className={`block text-sm font-medium tracking-wide transition-colors duration-500 ${
-                    isScrolled ? 'text-navy' : 'text-white'
-                  }`}
-                >
+                <span className="block text-sm font-medium tracking-wide text-white group-hover:text-gold transition-colors duration-300">
                   {link.label}
                 </span>
-                <span
-                  className={`block text-[10px] uppercase tracking-wider transition-colors duration-500 ${
-                    isScrolled ? 'text-muted-foreground' : 'text-white/60'
-                  }`}
-                >
+                <span className="block text-[10px] uppercase tracking-wider text-zinc group-hover:text-gold/70 transition-colors duration-300">
                   {link.subtitle}
                 </span>
               </Link>
@@ -133,10 +113,10 @@ export default function Header() {
                 <button
                   key={lang.code}
                   onClick={() => setLanguage(lang.code)}
-                  className={`text-xs font-medium px-2 py-1 transition-colors duration-500 ${
+                  className={`text-xs font-medium px-2 py-1 transition-colors duration-300 ${
                     language === lang.code
-                      ? isScrolled ? 'text-navy' : 'text-white'
-                      : isScrolled ? 'text-muted-foreground hover:text-navy' : 'text-white/50 hover:text-white'
+                      ? 'text-gold'
+                      : 'text-zinc hover:text-white'
                   }`}
                 >
                   {lang.label}
@@ -147,9 +127,7 @@ export default function Header() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`lg:hidden p-2 transition-colors ${
-                isScrolled ? 'text-navy' : 'text-white'
-              }`}
+              className="lg:hidden p-2 text-white hover:text-gold transition-colors"
             >
               {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -164,19 +142,19 @@ export default function Header() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-white border-t border-border"
+            className="lg:hidden bg-navy border-t border-gold/20"
           >
             <nav className="container mx-auto px-6 py-8 space-y-6">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   to={link.href}
-                  className="block"
+                  className="block group"
                 >
-                  <span className="text-navy text-lg font-medium">
+                  <span className="text-white text-lg font-medium group-hover:text-gold transition-colors">
                     {link.label}
                   </span>
-                  <span className="block text-xs text-muted-foreground uppercase tracking-wider mt-1">
+                  <span className="block text-xs text-zinc uppercase tracking-wider mt-1">
                     {link.subtitle}
                   </span>
                 </Link>

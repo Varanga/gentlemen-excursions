@@ -45,22 +45,22 @@ export default function Services() {
 
   return (
     <Layout>
-      {/* Hero - Style 66°Nord */}
+      {/* Hero - Black & Gold Style */}
       <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center bg-navy">
         <div className="absolute inset-0 z-0">
           <img 
             src={routeCacaoImg} 
             alt="Services" 
-            className="w-full h-full object-cover opacity-50"
+            className="w-full h-full object-cover opacity-40"
             style={{ animation: 'kenburns 20s ease-in-out infinite alternate' }}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-navy/40 via-navy/20 to-navy/80" />
+          <div className="absolute inset-0 bg-gradient-to-b from-navy/60 via-navy/30 to-navy/90" />
         </div>
         <div className="relative z-10 text-center text-white px-6 max-w-4xl mx-auto">
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-block text-azure text-sm font-medium tracking-[0.3em] uppercase mb-6"
+            className="inline-block text-gold text-sm font-medium tracking-[0.3em] uppercase mb-6"
           >
             Style de vie
           </motion.span>
@@ -76,15 +76,15 @@ export default function Services() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed"
+            className="text-lg md:text-xl text-zinc max-w-2xl mx-auto leading-relaxed"
           >
             {t.services.subtitle}
           </motion.p>
         </div>
       </section>
 
-      {/* Split-Screen Services - Style 66°Nord */}
-      <section className="bg-white">
+      {/* Split-Screen Services - Black & Gold Style */}
+      <section className="bg-navy">
         {services.map((service, index) => {
           const data = t.services[service.key];
           const Icon = service.icon;
@@ -97,7 +97,7 @@ export default function Services() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.6 }}
-              className={`flex flex-col ${isReversed ? 'lg:flex-row-reverse' : 'lg:flex-row'} min-h-[80vh]`}
+              className={`flex flex-col ${isReversed ? 'lg:flex-row-reverse' : 'lg:flex-row'} min-h-[80vh] border-b border-gold/10`}
             >
               {/* Image Side */}
               <div className="relative lg:w-1/2 h-[50vh] lg:h-auto overflow-hidden">
@@ -106,11 +106,11 @@ export default function Services() {
                   alt={data.title}
                   className="absolute inset-0 w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-navy/10" />
+                <div className="absolute inset-0 bg-navy/20" />
               </div>
               
               {/* Content Side */}
-              <div className="lg:w-1/2 flex items-center justify-center p-12 lg:p-20 xl:p-32">
+              <div className="lg:w-1/2 flex items-center justify-center p-12 lg:p-20 xl:p-32 bg-card">
                 <div className="max-w-lg">
                   {/* Icon */}
                   <motion.div
@@ -118,9 +118,9 @@ export default function Services() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.2 }}
-                    className="w-16 h-16 rounded-full bg-azure/10 flex items-center justify-center mb-8"
+                    className="w-16 h-16 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center mb-8"
                   >
-                    <Icon className="w-7 h-7 text-azure" />
+                    <Icon className="w-7 h-7 text-gold" />
                   </motion.div>
                   
                   {/* Subtitle */}
@@ -129,7 +129,7 @@ export default function Services() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.3 }}
-                    className="inline-block text-azure text-sm font-medium tracking-[0.2em] uppercase mb-4"
+                    className="inline-block text-gold text-sm font-medium tracking-[0.2em] uppercase mb-4"
                   >
                     {data.subtitle}
                   </motion.span>
@@ -140,7 +140,7 @@ export default function Services() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.4 }}
-                    className="font-serif text-4xl lg:text-5xl xl:text-6xl font-medium text-navy mb-6 leading-tight"
+                    className="font-serif text-4xl lg:text-5xl xl:text-6xl font-medium text-white mb-6 leading-tight"
                   >
                     {data.title}
                   </motion.h2>
@@ -151,7 +151,7 @@ export default function Services() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.5 }}
-                    className="text-muted-foreground text-lg leading-relaxed mb-10"
+                    className="text-zinc text-lg leading-relaxed mb-10"
                   >
                     {data.description}
                   </motion.p>
@@ -165,7 +165,7 @@ export default function Services() {
                   >
                     <Link 
                       to="/contact"
-                      className="inline-flex items-center gap-3 text-sm font-medium tracking-wider uppercase text-navy hover:text-azure transition-colors group"
+                      className="inline-flex items-center gap-3 text-sm font-medium tracking-wider uppercase text-gold hover:text-gold-light transition-colors group"
                     >
                       {t.common.learnMore}
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
@@ -178,23 +178,23 @@ export default function Services() {
         })}
       </section>
 
-      {/* CTA Section - Style 66°Nord */}
-      <section className="py-32 bg-navy text-white">
+      {/* CTA Section - Black & Gold */}
+      <section className="py-32 bg-card border-t border-gold/20">
         <div className="max-w-4xl mx-auto px-6 lg:px-12 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <span className="inline-block text-azure text-sm font-medium tracking-[0.3em] uppercase mb-6">
+            <span className="inline-block text-gold text-sm font-medium tracking-[0.3em] uppercase mb-6">
               Contact
             </span>
-            <h2 className="font-serif text-4xl lg:text-5xl xl:text-6xl font-medium mb-8 leading-tight">
+            <h2 className="font-serif text-4xl lg:text-5xl xl:text-6xl font-medium mb-8 leading-tight text-white">
               {t.contact.subtitle}
             </h2>
             <Link 
               to="/contact"
-              className="inline-flex items-center justify-center px-12 py-5 text-sm font-medium tracking-[0.2em] uppercase bg-azure text-navy hover:bg-white transition-colors"
+              className="inline-flex items-center justify-center px-12 py-5 text-sm font-medium tracking-[0.2em] uppercase bg-gold text-navy hover:bg-gold-dark transition-colors"
             >
               {t.nav.contact}
             </Link>
