@@ -47,8 +47,8 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/expeditions" className="text-zinc hover:text-gold transition-colors text-sm">
-                    {t.excursions.merEmeraude.title}
+                  <Link to="/blog" className="text-zinc hover:text-gold transition-colors text-sm">
+                    {t.blog.title}
                   </Link>
                 </li>
               </ul>
