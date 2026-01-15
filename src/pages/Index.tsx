@@ -30,7 +30,7 @@ export default function Index() {
       <Hero />
       
       {/* Featured Expeditions */}
-      <section className="py-24 lg:py-32 bg-white">
+      <section className="py-24 lg:py-32 bg-navy">
         <div className="container mx-auto px-6 lg:px-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -39,10 +39,10 @@ export default function Index() {
             className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-16"
           >
             <div>
-              <p className="text-azure-dark text-sm tracking-[0.2em] uppercase font-medium mb-4">Nos Expéditions</p>
-              <h2 className="font-serif text-4xl lg:text-5xl xl:text-6xl text-navy">Voyages d'Exception</h2>
+              <p className="text-gold text-sm tracking-[0.2em] uppercase font-medium mb-4">Nos Expéditions</p>
+              <h2 className="font-serif text-4xl lg:text-5xl xl:text-6xl text-white">Voyages d'Exception</h2>
             </div>
-            <Link to="/expeditions" className="inline-flex items-center gap-2 text-navy font-medium hover:text-azure-dark transition-colors group">
+            <Link to="/expeditions" className="inline-flex items-center gap-2 text-gold font-medium hover:text-gold-light transition-colors group">
               Voir tous nos voyages
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
@@ -58,14 +58,15 @@ export default function Index() {
                 transition={{ delay: index * 0.1 }}
               >
                 <Link to={`/expeditions/${excursion.id}`} className="group block">
-                  <div className="relative aspect-[3/4] overflow-hidden mb-5">
+                  <div className="relative aspect-[3/4] overflow-hidden mb-5 border border-border hover:border-gold/30 transition-colors">
                     <img src={excursion.image} alt="" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                    <div className="absolute inset-0 bg-navy/0 group-hover:bg-navy/20 transition-colors" />
                   </div>
-                  <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">{excursion.location}</p>
-                  <h3 className="font-serif text-xl text-navy group-hover:text-azure-dark transition-colors mb-2">
+                  <p className="text-xs text-zinc uppercase tracking-wider mb-2">{excursion.location}</p>
+                  <h3 className="font-serif text-xl text-white group-hover:text-gold transition-colors mb-2">
                     {t.excursions[excursion.titleKey as keyof typeof t.excursions]?.title}
                   </h3>
-                  <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                  <div className="flex items-center gap-1 text-xs text-zinc">
                     <Clock className="w-3 h-3" />
                     {excursion.duration}
                   </div>
@@ -77,16 +78,16 @@ export default function Index() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 lg:py-32 bg-navy text-white">
+      <section className="py-24 lg:py-32 bg-card border-t border-gold/20">
         <div className="container mx-auto px-6 lg:px-12 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="max-w-3xl mx-auto">
-            <p className="text-azure text-sm tracking-[0.2em] uppercase font-medium mb-4">Prêt pour l'aventure ?</p>
-            <h2 className="font-serif text-4xl lg:text-5xl mb-8">Créons Ensemble Votre Voyage Idéal</h2>
+            <p className="text-gold text-sm tracking-[0.2em] uppercase font-medium mb-4">Prêt pour l'aventure ?</p>
+            <h2 className="font-serif text-4xl lg:text-5xl mb-8 text-white">Créons Ensemble Votre Voyage Idéal</h2>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link to="/contact" className="px-10 py-4 bg-white text-navy text-sm font-medium tracking-widest uppercase hover:bg-azure transition-colors">
+              <Link to="/contact" className="px-10 py-4 bg-gold text-navy text-sm font-medium tracking-widest uppercase hover:bg-gold-dark transition-colors">
                 Nous Contacter
               </Link>
-              <Link to="/expeditions" className="px-10 py-4 border border-white/50 text-white text-sm font-medium tracking-widest uppercase hover:bg-white/10 transition-colors">
+              <Link to="/expeditions" className="px-10 py-4 border border-gold/50 text-gold text-sm font-medium tracking-widest uppercase hover:bg-gold hover:text-navy transition-colors">
                 Voir les Expéditions
               </Link>
             </div>

@@ -73,22 +73,22 @@ export default function Gallery() {
 
   return (
     <Layout>
-      {/* Hero - Style 66°Nord */}
+      {/* Hero - Black & Gold Style */}
       <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center bg-navy">
         <div className="absolute inset-0 z-0">
           <img 
             src={heroImage} 
             alt="Gallery" 
-            className="w-full h-full object-cover opacity-50"
+            className="w-full h-full object-cover opacity-40"
             style={{ animation: 'kenburns 20s ease-in-out infinite alternate' }}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-navy/40 via-navy/20 to-navy/80" />
+          <div className="absolute inset-0 bg-gradient-to-b from-navy/60 via-navy/30 to-navy/90" />
         </div>
         <div className="relative z-10 text-center text-white px-6 max-w-4xl mx-auto">
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-block text-azure text-sm font-medium tracking-[0.3em] uppercase mb-6"
+            className="inline-block text-gold text-sm font-medium tracking-[0.3em] uppercase mb-6"
           >
             Inspiration
           </motion.span>
@@ -104,16 +104,16 @@ export default function Gallery() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed"
+            className="text-lg md:text-xl text-zinc max-w-2xl mx-auto leading-relaxed"
           >
             {t.gallery.subtitle}
           </motion.p>
         </div>
       </section>
 
-      {/* Masonry Gallery - Gap-0 Modern Style */}
-      <section className="bg-white">
-        <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-1">
+      {/* Masonry Gallery - Black & Gold Modern Style */}
+      <section className="bg-navy py-8">
+        <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-1 px-1">
           {images.map((image, index) => (
             <motion.div
               key={index}
@@ -125,7 +125,7 @@ export default function Gallery() {
             >
               <button
                 onClick={() => openLightbox(index)}
-                className="relative group w-full overflow-hidden block"
+                className="relative group w-full overflow-hidden block border border-border hover:border-gold/40 transition-colors"
               >
                 <img 
                   src={image.src}
@@ -134,10 +134,10 @@ export default function Gallery() {
                   className="w-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
                 {/* Minimal hover overlay */}
-                <div className="absolute inset-0 bg-navy/0 group-hover:bg-navy/40 transition-colors duration-500 flex items-end justify-start">
+                <div className="absolute inset-0 bg-navy/0 group-hover:bg-navy/60 transition-colors duration-500 flex items-end justify-start">
                   <div className="p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
                     <p className="text-white font-serif text-xl">{image.alt}</p>
-                    <p className="text-azure text-sm tracking-wider uppercase mt-1">{image.category}</p>
+                    <p className="text-gold text-sm tracking-wider uppercase mt-1">{image.category}</p>
                   </div>
                 </div>
               </button>
@@ -146,7 +146,7 @@ export default function Gallery() {
         </div>
       </section>
 
-      {/* Lightbox - Minimal Style */}
+      {/* Lightbox - Black & Gold Style */}
       <AnimatePresence>
         {selectedIndex !== null && (
           <motion.div
@@ -159,7 +159,7 @@ export default function Gallery() {
             {/* Close Button */}
             <button 
               onClick={closeLightbox}
-              className="absolute top-8 right-8 text-white/70 hover:text-white transition-colors z-10"
+              className="absolute top-8 right-8 text-zinc hover:text-gold transition-colors z-10"
             >
               <X className="w-8 h-8" />
             </button>
@@ -167,13 +167,13 @@ export default function Gallery() {
             {/* Navigation */}
             <button 
               onClick={(e) => { e.stopPropagation(); goPrev(); }}
-              className="absolute left-8 top-1/2 -translate-y-1/2 w-14 h-14 flex items-center justify-center text-white/50 hover:text-white transition-colors"
+              className="absolute left-8 top-1/2 -translate-y-1/2 w-14 h-14 flex items-center justify-center text-zinc hover:text-gold transition-colors"
             >
               <ChevronLeft className="w-8 h-8" />
             </button>
             <button 
               onClick={(e) => { e.stopPropagation(); goNext(); }}
-              className="absolute right-8 top-1/2 -translate-y-1/2 w-14 h-14 flex items-center justify-center text-white/50 hover:text-white transition-colors"
+              className="absolute right-8 top-1/2 -translate-y-1/2 w-14 h-14 flex items-center justify-center text-zinc hover:text-gold transition-colors"
             >
               <ChevronRight className="w-8 h-8" />
             </button>
@@ -187,14 +187,14 @@ export default function Gallery() {
               transition={{ duration: 0.3 }}
               src={images[selectedIndex].src}
               alt={images[selectedIndex].alt}
-              className="max-w-[85vw] max-h-[80vh] object-contain"
+              className="max-w-[85vw] max-h-[80vh] object-contain border border-gold/20"
               onClick={(e) => e.stopPropagation()}
             />
             
-            {/* Caption - Minimal */}
+            {/* Caption - Gold Accent */}
             <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-center text-white">
               <p className="font-serif text-2xl mb-2">{images[selectedIndex].alt}</p>
-              <p className="text-white/50 text-sm tracking-widest uppercase">
+              <p className="text-gold text-sm tracking-widest uppercase">
                 {selectedIndex + 1} / {images.length}
               </p>
             </div>
