@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MapPin, ArrowRight } from 'lucide-react';
+import { MapPin, ArrowRight, Search } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import Layout from '@/components/Layout';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { tours, getToursByRegion, Region } from '@/lib/data';
 
 // Use first tour image for hero
@@ -12,25 +12,71 @@ import merEmeraudeImg from '@/assets/excursions/mer-emeraude.jpg';
 type FilterKey = 'all' | Region;
 
 export default function Expeditions() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const location = useLocation();
-  const [activeFilter, setActiveFilter] = useState<FilterKey>('all');
+  const [searchParams, setSearchParams] = useSearchParams();
+  
+  // Get filter from URL or default to 'all'
+  const urlRegion = searchParams.get('region') as FilterKey | null;
+  const [activeFilter, setActiveFilter] = useState<FilterKey>(urlRegion || 'all');
+  const [searchQuery, setSearchQuery] = useState(searchParams.get('q') || '');
 
   // Scroll to top on route change
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
 
-  const filters: { key: FilterKey; label: string }[] = [
-    { key: 'all', label: 'Toutes les expéditions' },
-    { key: 'diego', label: 'Diego-Suarez' },
-    { key: 'nosybe', label: 'Nosy Be' },
-    { key: 'circuits', label: t.sections.toursTitle },
+  // Sync URL with filter changes
+  const handleFilterChange = (filter: FilterKey) => {
+    setActiveFilter(filter);
+    const params = new URLSearchParams(searchParams);
+    if (filter === 'all') {
+      params.delete('region');
+    } else {
+      params.set('region', filter);
+    }
+    if (searchQuery) {
+      params.set('q', searchQuery);
+    } else {
+      params.delete('q');
+    }
+    setSearchParams(params);
+  };
+
+  const filters: { key: FilterKey; label: string; labelEn: string }[] = [
+    { key: 'all', label: 'Toutes les expéditions', labelEn: 'All expeditions' },
+    { key: 'diego', label: 'Diego-Suarez', labelEn: 'Diego-Suarez' },
+    { key: 'nosybe', label: 'Nosy Be', labelEn: 'Nosy Be' },
+    { key: 'circuits', label: t.sections.toursTitle, labelEn: 'Tours' },
   ];
 
-  const filteredExcursions = activeFilter === 'all' 
-    ? tours 
-    : getToursByRegion(activeFilter as Region);
+  // Filter by region and search query
+  const filteredExcursions = useMemo(() => {
+    let results = activeFilter === 'all' 
+      ? tours 
+      : getToursByRegion(activeFilter as Region);
+    
+    // Filter by search query if present
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase();
+      results = results.filter(tour => {
+        const data = t.excursions[tour.titleKey];
+        return (
+          data.title.toLowerCase().includes(query) ||
+          data.description.toLowerCase().includes(query) ||
+          tour.location.toLowerCase().includes(query)
+        );
+      });
+    }
+    
+    return results;
+  }, [activeFilter, searchQuery, t.excursions]);
+
+  const noResultsText = language === 'en' 
+    ? 'No expedition matches your criteria.' 
+    : language === 'mg' 
+    ? 'Tsy misy fitsangatsanganana mifanaraka amin\'ny fepetra napetrakao.' 
+    : 'Aucune expédition ne correspond à vos critères.';
 
   return (
     <Layout>
@@ -75,27 +121,42 @@ export default function Expeditions() {
       {/* Sticky Filter Bar - Black & Gold Style */}
       <section className="sticky top-0 z-40 bg-navy border-b border-gold/20">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="flex items-center justify-center gap-8 py-5 overflow-x-auto">
-            {filters.map(filter => (
-              <button
-                key={filter.key}
-                onClick={() => setActiveFilter(filter.key)}
-                className={`relative text-sm font-medium tracking-wide whitespace-nowrap transition-colors ${
-                  activeFilter === filter.key
-                    ? 'text-gold'
-                    : 'text-zinc hover:text-white'
-                }`}
-              >
-                {filter.label}
-                {activeFilter === filter.key && (
-                  <motion.div
-                    layoutId="activeFilter"
-                    className="absolute -bottom-5 left-0 right-0 h-0.5 bg-gold"
-                    transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
-                  />
-                )}
-              </button>
-            ))}
+          <div className="flex items-center justify-between gap-4 py-4">
+            {/* Search Input */}
+            <div className="relative flex-1 max-w-xs">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder={language === 'en' ? 'Search...' : 'Rechercher...'}
+                className="w-full pl-10 pr-4 py-2 bg-transparent border border-gold/20 rounded-lg text-white text-sm placeholder:text-zinc-500 focus:outline-none focus:border-gold transition-colors"
+              />
+            </div>
+            
+            {/* Filter Tabs */}
+            <div className="flex items-center gap-6 overflow-x-auto">
+              {filters.map(filter => (
+                <button
+                  key={filter.key}
+                  onClick={() => handleFilterChange(filter.key)}
+                  className={`relative text-sm font-medium tracking-wide whitespace-nowrap transition-colors ${
+                    activeFilter === filter.key
+                      ? 'text-gold'
+                      : 'text-zinc hover:text-white'
+                  }`}
+                >
+                  {language === 'en' ? filter.labelEn : filter.label}
+                  {activeFilter === filter.key && (
+                    <motion.div
+                      layoutId="activeFilter"
+                      className="absolute -bottom-4 left-0 right-0 h-0.5 bg-gold"
+                      transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
+                    />
+                  )}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -103,6 +164,28 @@ export default function Expeditions() {
       {/* Expeditions Grid - Portrait Cards Black & Gold Style */}
       <section className="py-24 lg:py-32 bg-navy">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          {/* No Results Message */}
+          {filteredExcursions.length === 0 ? (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-center py-20"
+            >
+              <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-gold/10 flex items-center justify-center">
+                <Search className="w-8 h-8 text-gold" />
+              </div>
+              <p className="text-gold text-xl font-serif mb-4">{noResultsText}</p>
+              <button
+                onClick={() => {
+                  setSearchQuery('');
+                  handleFilterChange('all');
+                }}
+                className="text-zinc hover:text-white transition-colors text-sm"
+              >
+                {language === 'en' ? 'Clear filters' : 'Effacer les filtres'}
+              </button>
+            </motion.div>
+          ) : (
           <motion.div 
             layout
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12"
@@ -185,6 +268,7 @@ export default function Expeditions() {
               })}
             </AnimatePresence>
           </motion.div>
+          )}
         </div>
       </section>
 
