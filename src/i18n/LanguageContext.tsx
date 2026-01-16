@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode } from 'react';
 import { translations, Language } from './translations';
 
 export type { Language };
@@ -30,7 +30,6 @@ function detectBrowserLanguage(): Language {
     return 'fr';
   }
   
-  // Default to French for francophone Africa, otherwise English
   const francophoneCountries = ['fr', 'mg', 'be', 'ch', 'ca', 'sn', 'ci', 'cm', 'cd', 'ga', 'ml', 'ne', 'bf', 'tg', 'bj'];
   const countryCode = browserLang.split('-')[1]?.toLowerCase();
   
