@@ -133,18 +133,18 @@ export default function Header() {
             : 'bg-gradient-to-b from-[#050505]/60 to-transparent'
         }`}
       >
-        <div className="container mx-auto px-6 lg:px-8">
+        <div className="container mx-auto px-4 lg:px-8">
           <motion.div 
-            className={`flex items-center justify-between transition-all duration-500 ${
+            className={`grid grid-cols-3 items-center transition-all duration-500 ${
               isScrolled ? 'h-16 lg:h-18' : 'h-20 lg:h-24'
             }`}
             layout
           >
-            {/* Left: Empty spacer on mobile for symmetry, Menu on desktop */}
-            <motion.div variants={itemVariants} className="flex items-center gap-3 w-20 md:w-auto">
+            {/* Left Column: Menu Button (Desktop) / Empty spacer (Mobile) */}
+            <motion.div variants={itemVariants} className="flex items-center justify-start">
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="group flex items-center gap-2 text-white hover:text-gold transition-colors duration-300 md:flex hidden"
+                className="group hidden md:flex items-center gap-2 text-white hover:text-gold transition-colors duration-300"
               >
                 <div className="relative w-6 h-5 flex flex-col justify-between">
                   <motion.span 
@@ -163,17 +163,17 @@ export default function Header() {
                     transition={{ duration: 0.3 }}
                   />
                 </div>
-                <span className="hidden sm:block text-xs font-medium tracking-[0.2em] uppercase text-gold">
+                <span className="hidden lg:block text-xs font-medium tracking-[0.2em] uppercase text-gold">
                   Menu
                 </span>
               </button>
             </motion.div>
 
-            {/* Center: Logo */}
-            <motion.div variants={itemVariants} className="absolute left-1/2 -translate-x-1/2">
-              <Link to="/" className="group flex flex-col items-center">
+            {/* Center Column: Logo - Absolutely Centered */}
+            <motion.div variants={itemVariants} className="flex justify-center">
+              <Link to="/" className="group flex flex-col items-center pointer-events-auto">
                 <motion.span 
-                  className={`font-serif font-medium tracking-wide text-white group-hover:text-gold transition-all duration-500 ${
+                  className={`font-serif font-medium tracking-wide text-white group-hover:text-gold transition-all duration-500 whitespace-nowrap ${
                     isScrolled ? 'text-lg md:text-xl lg:text-2xl' : 'text-xl md:text-2xl lg:text-3xl'
                   }`}
                   layout
@@ -192,8 +192,8 @@ export default function Header() {
               </Link>
             </motion.div>
 
-            {/* Right: Menu Button on Mobile, Language + Reserve on Desktop */}
-            <motion.div variants={itemVariants} className="flex items-center gap-4 lg:gap-6">
+            {/* Right Column: Language + Reserve (Desktop) / Menu Button (Mobile) */}
+            <motion.div variants={itemVariants} className="flex items-center justify-end gap-3 lg:gap-6">
               {/* Language Switcher - Desktop only */}
               <div className="hidden md:flex items-center">
                 {languages.map((lang, index) => (
@@ -230,7 +230,7 @@ export default function Header() {
                 />
               </Link>
 
-              {/* Mobile Menu Button - Right side on mobile */}
+              {/* Mobile Menu Button */}
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="group flex items-center gap-2 text-white hover:text-gold transition-colors duration-300 md:hidden"
