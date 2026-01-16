@@ -16,11 +16,25 @@ export default function Expeditions() {
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   
-  // Get filter from URL or default to 'all'
+  // Get filters from URL
   const urlRegion = searchParams.get('region') as FilterKey | null;
+  const urlLocation = searchParams.get('location');
+  const urlTheme = searchParams.get('theme');
+  const urlDuration = searchParams.get('duration');
+  
   const [activeFilter, setActiveFilter] = useState<FilterKey>(urlRegion || 'all');
   const [searchQuery, setSearchQuery] = useState(searchParams.get('q') || '');
-
+  
+  // Set region based on location param from Hero search
+  useEffect(() => {
+    if (urlLocation) {
+      if (urlLocation === 'Diego-Suarez' || urlLocation === 'Anivorano') {
+        setActiveFilter('diego');
+      } else if (urlLocation === 'Nosy Be') {
+        setActiveFilter('nosybe');
+      }
+    }
+  }, [urlLocation]);
   // Scroll to top on route change
   useEffect(() => {
     window.scrollTo(0, 0);
