@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Phone, Mail, Send, MessageCircle } from 'lucide-react';
+import { MapPin, Phone, Mail, Send, MessageCircle, Smartphone } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import Layout from '@/components/Layout';
 import { SEO } from '@/lib/seo';
@@ -19,6 +19,7 @@ export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     destination: '',
     message: ''
   });
@@ -36,6 +37,7 @@ export default function Contact() {
     setFormData({
       name: '',
       email: '',
+      phone: '',
       destination: '',
       message: ''
     });
@@ -232,8 +234,28 @@ export default function Contact() {
                     <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required className="w-full bg-transparent border-b border-zinc-700 focus:border-gold outline-none py-3 text-white text-lg transition-colors placeholder:text-zinc-600" placeholder="votre@email.com" />
                   </div>
 
-                  {/* Destination Dropdown */}
-                  
+                  {/* Phone */}
+                  <div className="relative">
+                    <label htmlFor="phone" className="block text-xs font-medium text-zinc-500 uppercase tracking-wider mb-3">
+                      <span className="inline-flex items-center gap-2">
+                        <Smartphone className="w-4 h-4 text-gold" />
+                        Téléphone / WhatsApp
+                      </span>
+                      <span className="text-zinc-600 ml-2 normal-case tracking-normal">(Optionnel)</span>
+                    </label>
+                    <input 
+                      type="tel" 
+                      id="phone" 
+                      name="phone" 
+                      value={formData.phone} 
+                      onChange={handleChange} 
+                      className="w-full bg-transparent border-b border-zinc-700 focus:border-gold outline-none py-3 text-white text-lg transition-colors placeholder:text-zinc-600" 
+                      placeholder="+261 34 00 000 00" 
+                    />
+                    <p className="text-zinc-600 text-xs mt-2">
+                      Précisez si vous préférez être recontacté par WhatsApp pour plus de réactivité.
+                    </p>
+                  </div>
 
                   {/* Message */}
                   <div className="relative">
