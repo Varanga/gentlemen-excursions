@@ -3,11 +3,13 @@ import { useParams, Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Calendar, CircleDot, MapPin, Clock, Users, ChevronLeft, ChevronRight, 
-  X, Check, XCircle, Star, MessageCircle, ArrowLeft
+  X, Check, XCircle, Star, MessageCircle, ArrowLeft, ChevronDown
 } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import Layout from '@/components/Layout';
 import { tours, getTourBySlug } from '@/lib/data';
+import { SEO, generateTourSchema, generateFAQSchema, generateBreadcrumbSchema } from '@/lib/seo';
+import { getExcursionFAQs } from '@/lib/faqData';
 
 // Import images
 import merEmeraudeImg from '@/assets/excursions/mer-emeraude.jpg';
