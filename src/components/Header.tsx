@@ -140,11 +140,11 @@ export default function Header() {
             }`}
             layout
           >
-            {/* Left: Menu Button */}
-            <motion.div variants={itemVariants} className="flex items-center gap-3">
+            {/* Left: Empty spacer on mobile for symmetry, Menu on desktop */}
+            <motion.div variants={itemVariants} className="flex items-center gap-3 w-20 md:w-auto">
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="group flex items-center gap-2 text-white hover:text-gold transition-colors duration-300"
+                className="group flex items-center gap-2 text-white hover:text-gold transition-colors duration-300 md:flex hidden"
               >
                 <div className="relative w-6 h-5 flex flex-col justify-between">
                   <motion.span 
@@ -174,15 +174,15 @@ export default function Header() {
               <Link to="/" className="group flex flex-col items-center">
                 <motion.span 
                   className={`font-serif font-medium tracking-wide text-white group-hover:text-gold transition-all duration-500 ${
-                    isScrolled ? 'text-xl lg:text-2xl' : 'text-2xl lg:text-3xl'
+                    isScrolled ? 'text-lg md:text-xl lg:text-2xl' : 'text-xl md:text-2xl lg:text-3xl'
                   }`}
                   layout
                 >
                   <span className="italic">Gentlemen</span>
                 </motion.span>
                 <motion.span 
-                  className={`text-gold uppercase tracking-[0.3em] transition-all duration-500 ${
-                    isScrolled ? 'text-[8px]' : 'text-[10px]'
+                  className={`text-gold uppercase tracking-[0.2em] md:tracking-[0.3em] transition-all duration-500 ${
+                    isScrolled ? 'text-[7px] md:text-[8px]' : 'text-[8px] md:text-[10px]'
                   }`}
                   layout
                 >
@@ -191,10 +191,10 @@ export default function Header() {
               </Link>
             </motion.div>
 
-            {/* Right: Language + Reserve Button */}
+            {/* Right: Menu Button on Mobile, Language + Reserve on Desktop */}
             <motion.div variants={itemVariants} className="flex items-center gap-4 lg:gap-6">
-              {/* Language Switcher */}
-              <div className="hidden sm:flex items-center">
+              {/* Language Switcher - Desktop only */}
+              <div className="hidden md:flex items-center">
                 {languages.map((lang, index) => (
                   <button
                     key={lang.code}
@@ -213,10 +213,10 @@ export default function Header() {
                 ))}
               </div>
 
-              {/* Reserve Button */}
+              {/* Reserve Button - Desktop only */}
               <Link
                 to="/contact"
-                className="group relative px-4 py-2 lg:px-6 lg:py-2.5 border border-gold/60 hover:border-gold text-white hover:text-gold transition-all duration-300 overflow-hidden"
+                className="hidden md:block group relative px-4 py-2 lg:px-6 lg:py-2.5 border border-gold/60 hover:border-gold text-white hover:text-gold transition-all duration-300 overflow-hidden"
               >
                 <span className="relative z-10 text-xs lg:text-sm font-medium tracking-wider uppercase">
                   Réserver
@@ -228,6 +228,30 @@ export default function Header() {
                   transition={{ duration: 0.3 }}
                 />
               </Link>
+
+              {/* Mobile Menu Button - Right side on mobile */}
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="group flex items-center gap-2 text-white hover:text-gold transition-colors duration-300 md:hidden"
+              >
+                <div className="relative w-6 h-5 flex flex-col justify-between">
+                  <motion.span 
+                    className="w-full h-[1.5px] bg-current origin-right"
+                    animate={isMobileMenuOpen ? { rotate: -45, y: 0 } : { rotate: 0, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                  <motion.span 
+                    className="w-4 h-[1.5px] bg-current ml-auto"
+                    animate={isMobileMenuOpen ? { opacity: 0, x: 10 } : { opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                  <motion.span 
+                    className="w-full h-[1.5px] bg-current origin-right"
+                    animate={isMobileMenuOpen ? { rotate: 45, y: 0 } : { rotate: 0, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </div>
+              </button>
             </motion.div>
           </motion.div>
         </div>
