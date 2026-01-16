@@ -642,11 +642,6 @@ Message: ${formData.message}`;
           <ChevronRight className="w-6 h-6 text-white group-hover:text-black" />
         </button>
 
-        {/* Image Counter */}
-        <div className="absolute top-6 right-6 bg-black/40 backdrop-blur-sm px-4 py-2 rounded-full border border-gold/30">
-          <span className="text-gold font-medium">{String(currentImageIndex + 1).padStart(2, '0')}</span>
-          <span className="text-zinc-400"> / {String(excursion.images.length).padStart(2, '0')}</span>
-        </div>
 
         {/* Thumbnails */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3">
