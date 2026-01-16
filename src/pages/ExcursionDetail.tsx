@@ -610,7 +610,7 @@ Message: ${formData.message}`;
       />
 
       {/* Hero Gallery - Magazine Style */}
-      <section className="relative h-[70vh] min-h-[600px] bg-[#050505] overflow-hidden">
+      <section className="relative h-[70vh] min-h-[600px] bg-[#050505] overflow-hidden pt-[100px]">
         <AnimatePresence mode="wait">
           <motion.img
             key={currentImageIndex}
@@ -624,7 +624,9 @@ Message: ${formData.message}`;
             onClick={() => setShowLightbox(true)}
           />
         </AnimatePresence>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-black/30 to-black/20" />
+        {/* Gradient de lisibilité pour le header */}
+        <div className="absolute top-0 left-0 right-0 h-[30%] bg-gradient-to-b from-black/80 via-black/40 to-transparent z-10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-black/30 to-transparent" />
         
         {/* Navigation Arrows */}
         <button

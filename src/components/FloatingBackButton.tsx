@@ -25,7 +25,7 @@ export default function FloatingBackButton({ to, label }: FloatingBackButtonProp
   return (
     <motion.div
       style={{ opacity, x }}
-      className="fixed left-4 lg:left-8 top-[20%] z-40 hidden md:block"
+      className="fixed left-4 lg:left-8 top-[22%] z-30 hidden md:block"
     >
       <Link 
         to={to}
