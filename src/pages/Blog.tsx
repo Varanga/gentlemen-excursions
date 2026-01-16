@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Calendar, Clock, ArrowRight, User } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import Layout from '@/components/Layout';
+import { SEO } from '@/lib/seo';
 import { Link } from 'react-router-dom';
 import { blogArticles } from '@/lib/blogData';
 
@@ -24,8 +25,32 @@ export default function Blog() {
   const featuredArticle = blogArticles[0];
   const otherArticles = blogArticles.slice(1);
 
+  // SEO content per language
+  const seoContent = {
+    fr: {
+      title: 'Blog | Légendes Malgaches & Conseils Voyage',
+      description: 'Découvrez les légendes de Madagascar, conseils kitesurf Diego-Suarez, vanille SAVA et secrets du Nord. Articles par des experts locaux.',
+    },
+    en: {
+      title: 'Blog | Malagasy Legends & Travel Tips',
+      description: 'Discover Madagascar legends, Diego-Suarez kitesurfing tips, SAVA vanilla and Northern secrets. Articles by local experts.',
+    },
+    mg: {
+      title: 'Blog | Angano Malagasy & Torohevitra Dia',
+      description: 'Fantaro ny angano Malagasy, torohevitra kitesurf Diego-Suarez, vanila SAVA ary tsiambaratelon\'ny Avaratra.',
+    },
+  };
+
   return (
     <Layout>
+      <SEO
+        title={seoContent[language].title}
+        description={seoContent[language].description}
+        canonical="/blog"
+        language={language}
+        keywords={['Blog Madagascar', 'Légendes malgaches', 'Kitesurf Diego-Suarez', 'Vanille Madagascar SAVA']}
+      />
+
       {/* Hero Section */}
       <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center bg-[#050505] overflow-hidden">
         <div className="absolute inset-0 z-0">

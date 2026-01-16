@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Award, Heart, Users, Compass } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import Layout from '@/components/Layout';
+import { SEO } from '@/lib/seo';
 import heroImage from '@/assets/hero-madagascar.jpg';
 
 export default function About() {
@@ -51,8 +52,32 @@ export default function About() {
 
   const t = content[language];
 
+  // SEO content per language
+  const seoContent = {
+    fr: {
+      title: 'À Propos de Gentlemen Excursions',
+      description: 'Découvrez notre passion pour Madagascar. 10 ans d\'expertise dans les excursions haut de gamme à Diego-Suarez et Nosy Be. Authenticité et excellence.',
+    },
+    en: {
+      title: 'About Gentlemen Excursions',
+      description: 'Discover our passion for Madagascar. 10 years of expertise in premium excursions in Diego-Suarez and Nosy Be. Authenticity and excellence.',
+    },
+    mg: {
+      title: 'Momba ny Gentlemen Excursions',
+      description: 'Fantaro ny fitiavanay an\'i Madagasikara. 10 taona traikefa amin\'ny fitsangatsanganana ambony any Diego-Suarez sy Nosy Be.',
+    },
+  };
+
   return (
     <Layout>
+      <SEO
+        title={seoContent[language].title}
+        description={seoContent[language].description}
+        canonical="/about"
+        language={language}
+        keywords={['Agence voyage Madagascar', 'Tour opérateur Diego-Suarez', 'Voyage responsable Madagascar']}
+      />
+
       {/* Hero */}
       <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
