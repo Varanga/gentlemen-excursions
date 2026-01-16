@@ -1,31 +1,28 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Phone, Mail } from 'lucide-react';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { Language } from '@/i18n/translations';
+
 const languages: {
   code: Language;
   label: string;
-}[] = [{
-  code: 'fr',
-  label: 'FR'
-}, {
-  code: 'en',
-  label: 'EN'
-}, {
-  code: 'mg',
-  label: 'MG'
-}];
+}[] = [
+  { code: 'fr', label: 'FR' },
+  { code: 'en', label: 'EN' },
+  { code: 'mg', label: 'MG' }
+];
+
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const {
-    language,
-    setLanguage,
-    t
-  } = useLanguage();
+  const { language, setLanguage, t } = useLanguage();
   const location = useLocation();
+  
+  // Scroll progress for reading indicator
+  const { scrollYProgress } = useScroll();
+  
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -33,102 +30,319 @@ export default function Header() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
-  const navLinks = [{
-    href: '/expeditions',
-    label: t.nav.expeditions,
-    subtitle: 'Nos voyages'
-  }, {
-    href: '/services',
-    label: t.nav.services,
-    subtitle: 'Premium'
-  }, {
-    href: '/gallery',
-    label: 'Galerie',
-    subtitle: 'Photos'
-  }, {
-    href: '/about',
-    label: t.nav.about,
-    subtitle: 'Notre histoire'
-  }, {
-    href: '/blog',
-    label: 'Blog',
-    subtitle: 'Actualités'
-  }, {
-    href: '/contact',
-    label: t.nav.contact,
-    subtitle: 'Nous joindre'
-  }];
-  return <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-navy border-b border-gold/30' : 'bg-gradient-to-b from-navy/80 to-transparent'}`}>
-      {/* Top bar - visible only on desktop */}
-      <div className={`hidden lg:block border-b transition-colors duration-500 ${isScrolled ? 'border-gold/20' : 'border-white/10'}`}>
-        
-      </div>
 
-      {/* Main header */}
-      <div className="container mx-auto px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20 lg:h-24">
-          {/* Logo */}
-          <Link to="/" className="flex items-center">
-            <span className="font-serif text-xl lg:text-2xl font-medium tracking-wide italic text-white hover:text-gold transition-colors duration-300">
-              Gentlemen
-            </span>
-          </Link>
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMobileMenuOpen]);
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-8">
-            {navLinks.map(link => <Link key={link.href} to={link.href} className="group text-center">
-                <span className="block text-sm font-medium tracking-wide text-white group-hover:text-gold transition-colors duration-300">
-                  {link.label}
+  const navLinks = [
+    { href: '/expeditions', label: t.nav.expeditions },
+    { href: '/services', label: t.nav.services },
+    { href: '/gallery', label: 'Galerie' },
+    { href: '/about', label: t.nav.about },
+    { href: '/blog', label: 'Blog' },
+    { href: '/contact', label: t.nav.contact }
+  ];
+
+  // Staggered animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: -20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut" as const
+      }
+    }
+  };
+
+  // Mobile menu animation variants
+  const menuOverlayVariants = {
+    hidden: { 
+      clipPath: 'inset(0 0 100% 0)',
+      transition: { duration: 0.6, ease: "easeInOut" as const }
+    },
+    visible: { 
+      clipPath: 'inset(0 0 0% 0)',
+      transition: { duration: 0.6, ease: "easeInOut" as const }
+    }
+  };
+
+  const menuLinkVariants = {
+    hidden: { 
+      opacity: 0, 
+      x: -50,
+      skewX: 5
+    },
+    visible: (i: number) => ({
+      opacity: 1,
+      x: 0,
+      skewX: 0,
+      transition: {
+        duration: 0.5,
+        delay: 0.3 + i * 0.1,
+        ease: "easeOut" as const
+      }
+    }),
+    exit: {
+      opacity: 0,
+      x: 50,
+      transition: { duration: 0.3 }
+    }
+  };
+
+  return (
+    <>
+      {/* Scroll Progress Indicator */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-[2px] bg-gold z-[60] origin-left"
+        style={{ scaleX: scrollYProgress }}
+      />
+
+      <motion.header
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+        className={`fixed top-[2px] left-0 right-0 z-50 transition-all duration-700 ${
+          isScrolled
+            ? 'bg-[#050505]/95 backdrop-blur-md shadow-[0_4px_30px_rgba(212,175,55,0.1)]'
+            : 'bg-gradient-to-b from-[#050505]/60 to-transparent'
+        }`}
+      >
+        <div className="container mx-auto px-6 lg:px-8">
+          <motion.div 
+            className={`flex items-center justify-between transition-all duration-500 ${
+              isScrolled ? 'h-16 lg:h-18' : 'h-20 lg:h-24'
+            }`}
+            layout
+          >
+            {/* Left: Menu Button */}
+            <motion.div variants={itemVariants} className="flex items-center gap-3">
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="group flex items-center gap-2 text-white hover:text-gold transition-colors duration-300"
+              >
+                <div className="relative w-6 h-5 flex flex-col justify-between">
+                  <motion.span 
+                    className="w-full h-[1.5px] bg-current origin-left"
+                    animate={isMobileMenuOpen ? { rotate: 45, y: 0 } : { rotate: 0, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                  <motion.span 
+                    className="w-4 h-[1.5px] bg-current"
+                    animate={isMobileMenuOpen ? { opacity: 0, x: -10 } : { opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                  <motion.span 
+                    className="w-full h-[1.5px] bg-current origin-left"
+                    animate={isMobileMenuOpen ? { rotate: -45, y: 0 } : { rotate: 0, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </div>
+                <span className="hidden sm:block text-xs font-medium tracking-[0.2em] uppercase text-gold">
+                  Menu
                 </span>
-                <span className="block text-[10px] uppercase tracking-wider text-zinc group-hover:text-gold/70 transition-colors duration-300">
-                  {link.subtitle}
+              </button>
+            </motion.div>
+
+            {/* Center: Logo */}
+            <motion.div variants={itemVariants} className="absolute left-1/2 -translate-x-1/2">
+              <Link to="/" className="group flex flex-col items-center">
+                <motion.span 
+                  className={`font-serif font-medium tracking-wide text-white group-hover:text-gold transition-all duration-500 ${
+                    isScrolled ? 'text-xl lg:text-2xl' : 'text-2xl lg:text-3xl'
+                  }`}
+                  layout
+                >
+                  <span className="italic">Gentlemen</span>
+                </motion.span>
+                <motion.span 
+                  className={`text-gold uppercase tracking-[0.3em] transition-all duration-500 ${
+                    isScrolled ? 'text-[8px]' : 'text-[10px]'
+                  }`}
+                  layout
+                >
+                  Excursions
+                </motion.span>
+              </Link>
+            </motion.div>
+
+            {/* Right: Language + Reserve Button */}
+            <motion.div variants={itemVariants} className="flex items-center gap-4 lg:gap-6">
+              {/* Language Switcher */}
+              <div className="hidden sm:flex items-center">
+                {languages.map((lang, index) => (
+                  <button
+                    key={lang.code}
+                    onClick={() => setLanguage(lang.code)}
+                    className={`relative text-xs font-medium px-2 py-1 transition-colors duration-300 ${
+                      language === lang.code
+                        ? 'text-gold'
+                        : 'text-zinc-400 hover:text-white'
+                    }`}
+                  >
+                    {lang.label}
+                    {index < languages.length - 1 && (
+                      <span className="absolute right-0 top-1/2 -translate-y-1/2 text-zinc-600">|</span>
+                    )}
+                  </button>
+                ))}
+              </div>
+
+              {/* Reserve Button */}
+              <Link
+                to="/contact"
+                className="group relative px-4 py-2 lg:px-6 lg:py-2.5 border border-gold/60 hover:border-gold text-white hover:text-gold transition-all duration-300 overflow-hidden"
+              >
+                <span className="relative z-10 text-xs lg:text-sm font-medium tracking-wider uppercase">
+                  Réserver
                 </span>
-              </Link>)}
-          </nav>
-
-          {/* Language Switcher & Mobile Menu Button */}
-          <div className="flex items-center gap-4">
-            {/* Language Switcher - Minimal */}
-            <div className="flex items-center gap-1">
-              {languages.map((lang, index) => <button key={lang.code} onClick={() => setLanguage(lang.code)} className={`text-xs font-medium px-2 py-1 transition-colors duration-300 ${language === lang.code ? 'text-gold' : 'text-zinc hover:text-white'}`}>
-                  {lang.label}
-                </button>)}
-            </div>
-
-            {/* Mobile Menu Button */}
-            <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="lg:hidden p-2 text-white hover:text-gold transition-colors">
-              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
+                <motion.div
+                  className="absolute inset-0 bg-gold/10"
+                  initial={{ x: '-100%' }}
+                  whileHover={{ x: 0 }}
+                  transition={{ duration: 0.3 }}
+                />
+              </Link>
+            </motion.div>
+          </motion.div>
         </div>
-      </div>
 
-      {/* Mobile Menu */}
+        {/* Bottom border on scroll */}
+        <motion.div
+          className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-gold/40 to-transparent"
+          initial={{ opacity: 0, scaleX: 0 }}
+          animate={{ 
+            opacity: isScrolled ? 1 : 0, 
+            scaleX: isScrolled ? 1 : 0 
+          }}
+          transition={{ duration: 0.5 }}
+        />
+      </motion.header>
+
+      {/* Full-Screen Mobile Menu */}
       <AnimatePresence>
-        {isMobileMenuOpen && <motion.div initial={{
-        opacity: 0,
-        height: 0
-      }} animate={{
-        opacity: 1,
-        height: 'auto'
-      }} exit={{
-        opacity: 0,
-        height: 0
-      }} className="lg:hidden bg-navy border-t border-gold/20">
-            <nav className="container mx-auto px-6 py-8 space-y-6">
-              {navLinks.map(link => <Link key={link.href} to={link.href} className="block group">
-                  <span className="text-white text-lg font-medium group-hover:text-gold transition-colors">
-                    {link.label}
-                  </span>
-                  <span className="block text-xs text-zinc uppercase tracking-wider mt-1">
-                    {link.subtitle}
-                  </span>
-                </Link>)}
+        {isMobileMenuOpen && (
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            variants={menuOverlayVariants}
+            className="fixed inset-0 z-40 bg-[#050505] flex items-center justify-center"
+          >
+            {/* Close Button */}
+            <button
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="absolute top-6 right-6 p-2 text-white hover:text-gold transition-colors z-50"
+            >
+              <X className="w-8 h-8" />
+            </button>
+
+            {/* Navigation Links */}
+            <nav className="flex flex-col items-center gap-6 lg:gap-8">
+              {navLinks.map((link, i) => (
+                <motion.div
+                  key={link.href}
+                  custom={i}
+                  variants={menuLinkVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                >
+                  <Link
+                    to={link.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="group relative block text-center"
+                  >
+                    <span className="text-3xl lg:text-5xl font-serif text-white group-hover:text-gold transition-colors duration-300">
+                      {link.label}
+                    </span>
+                    {/* Animated underline */}
+                    <motion.span
+                      className="absolute -bottom-2 left-1/2 h-[1px] bg-gold"
+                      initial={{ width: 0, x: '-50%' }}
+                      whileHover={{ width: '100%' }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  </Link>
+                </motion.div>
+              ))}
+
+              {/* Mobile Language Switcher */}
+              <motion.div
+                custom={navLinks.length}
+                variants={menuLinkVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                className="flex items-center gap-4 mt-8 pt-8 border-t border-gold/20"
+              >
+                {languages.map((lang) => (
+                  <button
+                    key={lang.code}
+                    onClick={() => setLanguage(lang.code)}
+                    className={`text-lg font-medium px-4 py-2 transition-colors duration-300 ${
+                      language === lang.code
+                        ? 'text-gold border border-gold'
+                        : 'text-zinc-400 hover:text-white border border-transparent'
+                    }`}
+                  >
+                    {lang.label}
+                  </button>
+                ))}
+              </motion.div>
+
+              {/* Reserve CTA in Menu */}
+              <motion.div
+                custom={navLinks.length + 1}
+                variants={menuLinkVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                className="mt-4"
+              >
+                <Link
+                  to="/contact"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="inline-block px-8 py-3 bg-gold text-[#050505] font-medium tracking-wider uppercase hover:bg-gold/90 transition-colors"
+                >
+                  Réserver une expédition
+                </Link>
+              </motion.div>
             </nav>
-          </motion.div>}
+
+            {/* Decorative Elements */}
+            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-center">
+              <p className="text-zinc-500 text-sm tracking-wider">Diego-Suarez, Madagascar</p>
+              <p className="text-gold text-xs mt-2 tracking-[0.3em] uppercase">Expériences d'exception</p>
+            </div>
+          </motion.div>
+        )}
       </AnimatePresence>
-    </header>;
+    </>
+  );
 }
