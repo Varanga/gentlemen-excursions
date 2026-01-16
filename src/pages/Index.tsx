@@ -11,6 +11,7 @@ import ServicesPreview from '@/components/home/ServicesPreview';
 import GalleryPreview from '@/components/home/GalleryPreview';
 import BlogPreview from '@/components/home/BlogPreview';
 import TestimonialsSection from '@/components/TestimonialsSection';
+import VideoTestimonialsSection from '@/components/VideoTestimonialsSection';
 
 export default function Index() {
   const { t, language } = useLanguage();
@@ -130,6 +131,9 @@ export default function Index() {
 
       {/* Testimonials Section */}
       <TestimonialsSection />
+
+      {/* Video Testimonials Section */}
+      <VideoTestimonialsSection />
 
       {/* CTA Section */}
       <section className="relative py-24 lg:py-32 bg-[#050505] border-t border-gold/20">
