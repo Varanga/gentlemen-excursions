@@ -31,6 +31,9 @@ export interface Tour {
   region: Region;
   location: string;
   featured?: boolean;
+  altFr: string;
+  altEn: string;
+  altMg: string;
 }
 
 // Complete catalog of 13 expeditions
@@ -44,6 +47,9 @@ export const tours: Tour[] = [
     region: 'diego', 
     location: 'Diego-Suarez',
     featured: true,
+    altFr: 'Bateau traditionnel sur la Mer d\'Émeraude Diego-Suarez Madagascar',
+    altEn: 'Traditional boat on the Emerald Sea Diego-Suarez Madagascar',
+    altMg: 'Sambo nentim-paharazana ao amin\'ny Ranomasina Safira Diego-Suarez',
   },
   { 
     id: 'trois-baies', 
@@ -52,6 +58,9 @@ export const tours: Tour[] = [
     titleKey: 'troisBaies', 
     region: 'diego', 
     location: 'Diego-Suarez',
+    altFr: 'Vue panoramique des Trois Baies Diego-Suarez Nord Madagascar',
+    altEn: 'Panoramic view of the Three Bays Diego-Suarez Northern Madagascar',
+    altMg: 'Fijery panoramika ny Helodrano Telo Diego-Suarez',
   },
   { 
     id: 'montagne-ambre', 
@@ -61,6 +70,9 @@ export const tours: Tour[] = [
     region: 'diego', 
     location: 'Diego-Suarez',
     featured: true,
+    altFr: 'Forêt tropicale et cascades Montagne d\'Ambre Madagascar',
+    altEn: 'Tropical rainforest and waterfalls Amber Mountain Madagascar',
+    altMg: 'Ala tropikaly sy riandrano Ambohitra Ambra Madagasikara',
   },
   { 
     id: 'tsingy-rouges', 
@@ -70,6 +82,9 @@ export const tours: Tour[] = [
     region: 'diego', 
     location: 'Diego-Suarez',
     featured: true,
+    altFr: 'Formations géologiques Tsingy Rouges Diego-Suarez Madagascar',
+    altEn: 'Red Tsingy geological formations Diego-Suarez Madagascar',
+    altMg: 'Fananganana jeolojika Tsingy Mena Diego-Suarez',
   },
   { 
     id: 'ankarana', 
@@ -78,30 +93,42 @@ export const tours: Tour[] = [
     titleKey: 'ankarana', 
     region: 'diego', 
     location: 'Diego-Suarez',
+    altFr: 'Tsingy calcaires Massif de l\'Ankarana Nord Madagascar',
+    altEn: 'Limestone Tsingy Ankarana Massif Northern Madagascar',
+    altMg: 'Tsingy vato sokay Ankarana Avaratra Madagasikara',
   },
   { 
     id: 'nosy-hara', 
     slug: 'nosy-hara',
-    image: merEmeraudeImg, // TODO: Replace with specific image
+    image: merEmeraudeImg,
     titleKey: 'nosyHara', 
     region: 'diego', 
     location: 'Diego-Suarez',
+    altFr: 'Archipel Nosy Hara îlots calcaires bivouac luxe Madagascar',
+    altEn: 'Nosy Hara Archipelago limestone islets luxury bivouac Madagascar',
+    altMg: 'Nosy Hara nosy kely vato sokay bivouac de luxe',
   },
   { 
     id: 'lac-sacre', 
     slug: 'lac-sacre',
-    image: lokobeImg, // TODO: Replace with specific image
+    image: lokobeImg,
     titleKey: 'lacSacre', 
     region: 'diego', 
     location: 'Anivorano',
+    altFr: 'Lac Sacré d\'Anivorano crocodiles sacrés légende malgache',
+    altEn: 'Sacred Lake of Anivorano sacred crocodiles Malagasy legend',
+    altMg: 'Farihy Masina Anivorano voay masina angano malagasy',
   },
   { 
     id: 'montagne-francais', 
     slug: 'montagne-francais',
-    image: troisBaiesImg, // TODO: Replace with specific image
+    image: troisBaiesImg,
     titleKey: 'montagneFrancais', 
     region: 'diego', 
     location: 'Diego-Suarez',
+    altFr: 'Trekking Montagne des Français vue baie Diego-Suarez',
+    altEn: 'French Mountain trekking Diego-Suarez bay view',
+    altMg: 'Fitsangatsanganana Tendrombohitra Frantsay fijery helodrano',
   },
   // Nosy Be Region
   { 
@@ -112,14 +139,20 @@ export const tours: Tour[] = [
     region: 'nosybe', 
     location: 'Nosy Be',
     featured: true,
+    altFr: 'Nosy Iranja banc de sable blanc îles jumelles Madagascar',
+    altEn: 'Nosy Iranja white sandbank twin islands Madagascar',
+    altMg: 'Nosy Iranja fasika fotsy nosy kambana Madagasikara',
   },
   { 
     id: 'nosy-tanikely', 
     slug: 'nosy-tanikely',
-    image: merEmeraudeImg, // TODO: Replace with specific image
+    image: merEmeraudeImg,
     titleKey: 'nosyTanikely', 
     region: 'nosybe', 
     location: 'Nosy Be',
+    altFr: 'Réserve marine Nosy Tanikely snorkeling tortues Nosy Be',
+    altEn: 'Nosy Tanikely marine reserve snorkeling turtles Nosy Be',
+    altMg: 'Zaridaina an-dranomasina Nosy Tanikely snorkeling sokatra',
   },
   { 
     id: 'lokobe', 
@@ -128,6 +161,9 @@ export const tours: Tour[] = [
     titleKey: 'lokobe', 
     region: 'nosybe', 
     location: 'Nosy Be',
+    altFr: 'Réserve naturelle Lokobe forêt primaire lémuriens Nosy Be',
+    altEn: 'Lokobe Nature Reserve primary forest lemurs Nosy Be',
+    altMg: 'Zaridaina voajanahary Lokobe ala voalohany gidro Nosy Be',
   },
 ];
 
