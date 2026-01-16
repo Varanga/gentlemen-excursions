@@ -530,6 +530,41 @@ export default function ExcursionDetail() {
   const notIncluded = language === 'en' ? excursion.notIncludedEn : language === 'mg' ? excursion.notIncludedMg : excursion.notIncludedFr;
   const program = language === 'en' ? excursion.programEn : language === 'mg' ? excursion.programMg : excursion.programFr;
 
+  // FAQ data for SEO
+  const faqs = getExcursionFAQs(excursion.key, language);
+  
+  // Structured data for SEO
+  const tourSchema = generateTourSchema({
+    name: data.title,
+    description: data.description,
+    image: excursion.images[0],
+    duration: data.duration,
+    price: data.price,
+    location: excursion.location,
+    region: excursion.region,
+    slug: excursion.id,
+    included,
+    difficulty: data.difficulty,
+    maxParticipants: excursion.maxParticipants,
+  });
+
+  const faqSchema = generateFAQSchema(faqs);
+
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: 'Accueil', url: '/' },
+    { name: 'Expéditions', url: '/expeditions' },
+    { name: data.title, url: `/expeditions/${excursion.id}` },
+  ]);
+
+  const combinedSchema = [tourSchema, faqSchema, breadcrumbSchema];
+
+  // SEO meta descriptions by language
+  const seoDescriptions = {
+    fr: `${data.title} à ${excursion.location} - ${data.description.slice(0, 120)}`,
+    en: `${data.title} in ${excursion.location} - ${data.description.slice(0, 120)}`,
+    mg: `${data.title} ao ${excursion.location} - ${data.description.slice(0, 120)}`,
+  };
+
   const nextImage = () => setCurrentImageIndex((prev) => (prev + 1) % excursion.images.length);
   const prevImage = () => setCurrentImageIndex((prev) => (prev - 1 + excursion.images.length) % excursion.images.length);
 
@@ -550,6 +585,23 @@ Message: ${formData.message}`;
 
   return (
     <Layout>
+      {/* SEO Meta Tags */}
+      <SEO
+        title={`${data.title} | Excursion ${excursion.location}`}
+        description={seoDescriptions[language]}
+        canonical={`/expeditions/${excursion.id}`}
+        image={excursion.images[0]}
+        language={language}
+        keywords={[
+          data.title,
+          excursion.location,
+          'Excursion Madagascar',
+          'Voyage luxe Diego-Suarez',
+          'Guide touristique Nosy Be',
+        ]}
+        structuredData={combinedSchema}
+      />
+
       {/* Back Button Bar */}
       <div className="bg-[#050505] border-b border-gold/20">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-4">
@@ -857,6 +909,68 @@ Message: ${formData.message}`;
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* FAQ Section - SEO Optimized */}
+      <section className="bg-[#050505] py-20 border-t border-gold/20">
+        <div className="max-w-4xl mx-auto px-6 lg:px-12">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <span className="text-gold text-sm tracking-[0.3em] uppercase font-medium">FAQ</span>
+            <h2 className="text-3xl md:text-4xl font-serif text-white mt-3">
+              {language === 'en' ? 'Frequently Asked Questions' : language === 'mg' ? 'Fanontaniana Matetika' : 'Questions Fréquentes'}
+            </h2>
+          </motion.div>
+
+          <div className="space-y-4">
+            {faqs.map((faq, index) => (
+              <motion.details
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="group bg-zinc-900/50 border border-gold/20 rounded-xl overflow-hidden"
+              >
+                <summary className="flex items-center justify-between p-6 cursor-pointer list-none hover:bg-zinc-900/80 transition-colors">
+                  <h3 className="text-lg font-medium text-white pr-4">{faq.question}</h3>
+                  <ChevronDown className="w-5 h-5 text-gold flex-shrink-0 transition-transform group-open:rotate-180" />
+                </summary>
+                <div className="px-6 pb-6 pt-2">
+                  <p className="text-zinc-400 leading-relaxed">{faq.answer}</p>
+                </div>
+              </motion.details>
+            ))}
+          </div>
+
+          {/* Related Expedition CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mt-16 text-center"
+          >
+            <p className="text-zinc-400 mb-6">
+              {language === 'en' 
+                ? 'Discover more adventures in Northern Madagascar' 
+                : language === 'mg' 
+                ? 'Tadiavo ny aventure bebe kokoa any Avaratra Madagasikara' 
+                : 'Découvrez d\'autres aventures au Nord de Madagascar'}
+            </p>
+            <Link
+              to="/expeditions"
+              className="inline-flex items-center gap-2 px-8 py-4 border-2 border-gold text-gold hover:bg-gold hover:text-black transition-all duration-300 rounded-lg font-medium"
+            >
+              {language === 'en' ? 'View All Expeditions' : language === 'mg' ? 'Jereo ny Fitsangatsanganana rehetra' : 'Voir toutes les expéditions'}
+            </Link>
+          </motion.div>
         </div>
       </section>
 
