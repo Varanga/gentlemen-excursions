@@ -8,23 +8,23 @@ import { tours, getToursByRegion, Region } from '@/lib/data';
 
 // Use first tour image for hero
 import merEmeraudeImg from '@/assets/excursions/mer-emeraude.jpg';
-
 type FilterKey = 'all' | Region;
-
 export default function Expeditions() {
-  const { t, language } = useLanguage();
+  const {
+    t,
+    language
+  } = useLanguage();
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
-  
+
   // Get filters from URL
   const urlRegion = searchParams.get('region') as FilterKey | null;
   const urlLocation = searchParams.get('location');
   const urlTheme = searchParams.get('theme');
   const urlDuration = searchParams.get('duration');
-  
   const [activeFilter, setActiveFilter] = useState<FilterKey>(urlRegion || 'all');
   const [searchQuery, setSearchQuery] = useState(searchParams.get('q') || '');
-  
+
   // Set region based on location param from Hero search
   useEffect(() => {
     if (urlLocation) {
@@ -56,77 +56,82 @@ export default function Expeditions() {
     }
     setSearchParams(params);
   };
-
-  const filters: { key: FilterKey; label: string; labelEn: string }[] = [
-    { key: 'all', label: 'Toutes les expéditions', labelEn: 'All expeditions' },
-    { key: 'diego', label: 'Diego-Suarez', labelEn: 'Diego-Suarez' },
-    { key: 'nosybe', label: 'Nosy Be', labelEn: 'Nosy Be' },
-    { key: 'circuits', label: t.sections.toursTitle, labelEn: 'Tours' },
-  ];
+  const filters: {
+    key: FilterKey;
+    label: string;
+    labelEn: string;
+  }[] = [{
+    key: 'all',
+    label: 'Toutes les expéditions',
+    labelEn: 'All expeditions'
+  }, {
+    key: 'diego',
+    label: 'Diego-Suarez',
+    labelEn: 'Diego-Suarez'
+  }, {
+    key: 'nosybe',
+    label: 'Nosy Be',
+    labelEn: 'Nosy Be'
+  }, {
+    key: 'circuits',
+    label: t.sections.toursTitle,
+    labelEn: 'Tours'
+  }];
 
   // Filter by region and search query
   const filteredExcursions = useMemo(() => {
-    let results = activeFilter === 'all' 
-      ? tours 
-      : getToursByRegion(activeFilter as Region);
-    
+    let results = activeFilter === 'all' ? tours : getToursByRegion(activeFilter as Region);
+
     // Filter by search query if present
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase();
       results = results.filter(tour => {
         const data = t.excursions[tour.titleKey];
-        return (
-          data.title.toLowerCase().includes(query) ||
-          data.description.toLowerCase().includes(query) ||
-          tour.location.toLowerCase().includes(query)
-        );
+        return data.title.toLowerCase().includes(query) || data.description.toLowerCase().includes(query) || tour.location.toLowerCase().includes(query);
       });
     }
-    
     return results;
   }, [activeFilter, searchQuery, t.excursions]);
-
-  const noResultsText = language === 'en' 
-    ? 'No expedition matches your criteria.' 
-    : language === 'mg' 
-    ? 'Tsy misy fitsangatsanganana mifanaraka amin\'ny fepetra napetrakao.' 
-    : 'Aucune expédition ne correspond à vos critères.';
-
-  return (
-    <Layout>
+  const noResultsText = language === 'en' ? 'No expedition matches your criteria.' : language === 'mg' ? 'Tsy misy fitsangatsanganana mifanaraka amin\'ny fepetra napetrakao.' : 'Aucune expédition ne correspond à vos critères.';
+  return <Layout>
       {/* Hero - Style Black & Gold */}
       <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center bg-navy">
         <div className="absolute inset-0 z-0">
-          <img 
-            src={merEmeraudeImg} 
-            alt="Expeditions" 
-            className="w-full h-full object-cover opacity-40"
-            style={{ animation: 'kenburns 20s ease-in-out infinite alternate' }}
-          />
+          <img src={merEmeraudeImg} alt="Expeditions" className="w-full h-full object-cover opacity-40" style={{
+          animation: 'kenburns 20s ease-in-out infinite alternate'
+        }} />
           <div className="absolute inset-0 bg-gradient-to-b from-navy/60 via-navy/30 to-navy/90" />
         </div>
         <div className="relative z-10 text-center text-white px-6 max-w-4xl mx-auto">
-          <motion.span
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-block text-gold text-sm font-medium tracking-[0.3em] uppercase mb-6"
-          >
+          <motion.span initial={{
+          opacity: 0,
+          y: 20
+        }} animate={{
+          opacity: 1,
+          y: 0
+        }} className="inline-block text-gold text-sm font-medium tracking-[0.3em] uppercase mb-6">
             {t.sections.forYou}
           </motion.span>
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="font-serif text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight mb-6"
-          >
+          <motion.h1 initial={{
+          opacity: 0,
+          y: 20
+        }} animate={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          delay: 0.1
+        }} className="font-serif text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight mb-6">
             {t.nav.expeditions}
           </motion.h1>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-lg md:text-xl text-zinc max-w-2xl mx-auto leading-relaxed"
-          >
+          <motion.p initial={{
+          opacity: 0,
+          y: 20
+        }} animate={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          delay: 0.2
+        }} className="text-lg md:text-xl text-zinc max-w-2xl mx-auto leading-relaxed">
             {t.sections.featuredSubtitle}
           </motion.p>
         </div>
@@ -137,39 +142,18 @@ export default function Expeditions() {
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="flex items-center justify-between gap-4 py-4">
             {/* Search Input */}
-            <div className="relative flex-1 max-w-xs">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder={language === 'en' ? 'Search...' : 'Rechercher...'}
-                className="w-full pl-10 pr-4 py-2 bg-transparent border border-gold/20 rounded-lg text-white text-sm placeholder:text-zinc-500 focus:outline-none focus:border-gold transition-colors"
-              />
-            </div>
+            
             
             {/* Filter Tabs */}
             <div className="flex items-center gap-6 overflow-x-auto">
-              {filters.map(filter => (
-                <button
-                  key={filter.key}
-                  onClick={() => handleFilterChange(filter.key)}
-                  className={`relative text-sm font-medium tracking-wide whitespace-nowrap transition-colors ${
-                    activeFilter === filter.key
-                      ? 'text-gold'
-                      : 'text-zinc hover:text-white'
-                  }`}
-                >
+              {filters.map(filter => <button key={filter.key} onClick={() => handleFilterChange(filter.key)} className={`relative text-sm font-medium tracking-wide whitespace-nowrap transition-colors ${activeFilter === filter.key ? 'text-gold' : 'text-zinc hover:text-white'}`}>
                   {language === 'en' ? filter.labelEn : filter.label}
-                  {activeFilter === filter.key && (
-                    <motion.div
-                      layoutId="activeFilter"
-                      className="absolute -bottom-4 left-0 right-0 h-0.5 bg-gold"
-                      transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
-                    />
-                  )}
-                </button>
-              ))}
+                  {activeFilter === filter.key && <motion.div layoutId="activeFilter" className="absolute -bottom-4 left-0 right-0 h-0.5 bg-gold" transition={{
+                type: 'spring',
+                bounce: 0.2,
+                duration: 0.6
+              }} />}
+                </button>)}
             </div>
           </div>
         </div>
@@ -179,63 +163,51 @@ export default function Expeditions() {
       <section className="py-24 lg:py-32 bg-navy">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           {/* No Results Message */}
-          {filteredExcursions.length === 0 ? (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-center py-20"
-            >
+          {filteredExcursions.length === 0 ? <motion.div initial={{
+          opacity: 0,
+          y: 20
+        }} animate={{
+          opacity: 1,
+          y: 0
+        }} className="text-center py-20">
               <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-gold/10 flex items-center justify-center">
                 <Search className="w-8 h-8 text-gold" />
               </div>
               <p className="text-gold text-xl font-serif mb-4">{noResultsText}</p>
-              <button
-                onClick={() => {
-                  setSearchQuery('');
-                  handleFilterChange('all');
-                }}
-                className="text-zinc hover:text-white transition-colors text-sm"
-              >
+              <button onClick={() => {
+            setSearchQuery('');
+            handleFilterChange('all');
+          }} className="text-zinc hover:text-white transition-colors text-sm">
                 {language === 'en' ? 'Clear filters' : 'Effacer les filtres'}
               </button>
-            </motion.div>
-          ) : (
-          <motion.div 
-            layout
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12"
-          >
+            </motion.div> : <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
             <AnimatePresence mode="popLayout">
               {filteredExcursions.map((excursion, index) => {
-                const data = t.excursions[excursion.titleKey];
-                return (
-                  <motion.div
-                    key={excursion.id}
-                    layout
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.4, delay: index * 0.08 }}
-                  >
-                    <Link 
-                      to={`/expeditions/${excursion.slug}`}
-                      className="block group"
-                    >
+              const data = t.excursions[excursion.titleKey];
+              return <motion.div key={excursion.id} layout initial={{
+                opacity: 0,
+                y: 30
+              }} animate={{
+                opacity: 1,
+                y: 0
+              }} exit={{
+                opacity: 0,
+                scale: 0.95
+              }} transition={{
+                duration: 0.4,
+                delay: index * 0.08
+              }}>
+                    <Link to={`/expeditions/${excursion.slug}`} className="block group">
                       {/* Portrait Image Container */}
                       <div className="relative aspect-[3/4] overflow-hidden mb-6 border border-border hover:border-gold/40 transition-colors">
-                        <img 
-                          src={excursion.image} 
-                          alt={data.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                        />
+                        <img src={excursion.image} alt={data.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
                         {/* Subtle overlay on hover */}
                         <div className="absolute inset-0 bg-navy/0 group-hover:bg-navy/30 transition-colors duration-500" />
                         
                         {/* Exclusive badge */}
-                        {'exclusive' in data && data.exclusive && (
-                          <div className="absolute top-4 left-4 bg-gold text-navy text-xs font-medium tracking-wider uppercase px-3 py-1.5">
+                        {'exclusive' in data && data.exclusive && <div className="absolute top-4 left-4 bg-gold text-navy text-xs font-medium tracking-wider uppercase px-3 py-1.5">
                             {data.exclusive}
-                          </div>
-                        )}
+                          </div>}
                       </div>
                       
                       {/* Content - Minimal Typography */}
@@ -277,12 +249,10 @@ export default function Expeditions() {
                         </div>
                       </div>
                     </Link>
-                  </motion.div>
-                );
-              })}
+                  </motion.div>;
+            })}
             </AnimatePresence>
-          </motion.div>
-          )}
+          </motion.div>}
         </div>
       </section>
 
@@ -293,6 +263,5 @@ export default function Expeditions() {
           100% { transform: scale(1.1); }
         }
       `}</style>
-    </Layout>
-  );
+    </Layout>;
 }
