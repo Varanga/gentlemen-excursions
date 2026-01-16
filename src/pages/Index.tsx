@@ -5,19 +5,27 @@ import Layout from '@/components/Layout';
 import Hero from '@/components/Hero';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { getFeaturedTours } from '@/lib/data';
+import AboutPreview from '@/components/home/AboutPreview';
+import ServicesPreview from '@/components/home/ServicesPreview';
+import GalleryPreview from '@/components/home/GalleryPreview';
+import BlogPreview from '@/components/home/BlogPreview';
 
 export default function Index() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   
   // Get featured excursions from centralized data
   const featuredExcursions = getFeaturedTours();
+
+  const altText = (excursion: typeof featuredExcursions[0]) => {
+    return language === 'en' ? excursion.altEn : language === 'mg' ? excursion.altMg : excursion.altFr;
+  };
 
   return (
     <Layout>
       <Hero />
       
       {/* Featured Expeditions */}
-      <section className="py-24 lg:py-32 bg-navy">
+      <section className="py-24 lg:py-32 bg-[#050505]">
         <div className="container mx-auto px-6 lg:px-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -29,7 +37,7 @@ export default function Index() {
               <p className="text-gold text-sm tracking-[0.2em] uppercase font-medium mb-4">Nos Expéditions</p>
               <h2 className="font-serif text-4xl lg:text-5xl xl:text-6xl text-white">Voyages d'Exception</h2>
             </div>
-            <Link to="/expeditions" className="inline-flex items-center gap-2 text-gold font-medium hover:text-gold-light transition-colors group">
+            <Link to="/expeditions" className="inline-flex items-center gap-2 text-gold font-medium hover:text-gold/80 transition-colors group">
               Voir tous nos voyages
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
@@ -47,15 +55,20 @@ export default function Index() {
                   transition={{ delay: index * 0.1 }}
                 >
                   <Link to={`/expeditions/${excursion.slug}`} className="group block">
-                    <div className="relative aspect-[3/4] overflow-hidden mb-5 border border-border hover:border-gold/30 transition-colors">
-                      <img src={excursion.image} alt={data.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                      <div className="absolute inset-0 bg-navy/0 group-hover:bg-navy/20 transition-colors" />
+                    <div className="relative aspect-[3/4] overflow-hidden mb-5 border border-zinc-800 hover:border-gold/30 transition-colors">
+                      <img 
+                        src={excursion.image} 
+                        alt={altText(excursion)} 
+                        loading="lazy"
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                      />
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors" />
                     </div>
-                    <p className="text-xs text-zinc uppercase tracking-wider mb-2">{excursion.location}</p>
+                    <p className="text-xs text-zinc-500 uppercase tracking-wider mb-2">{excursion.location}</p>
                     <h3 className="font-serif text-xl text-white group-hover:text-gold transition-colors mb-2">
                       {data.title}
                     </h3>
-                    <div className="flex items-center gap-1 text-xs text-zinc">
+                    <div className="flex items-center gap-1 text-xs text-zinc-500">
                       <Clock className="w-3 h-3" />
                       {data.duration}
                     </div>
@@ -67,17 +80,32 @@ export default function Index() {
         </div>
       </section>
 
+      {/* About Preview Section */}
+      <AboutPreview />
+
+      {/* Services Preview Section */}
+      <ServicesPreview />
+
+      {/* Gallery Preview Section */}
+      <GalleryPreview />
+
+      {/* Blog Preview Section */}
+      <BlogPreview />
+
       {/* CTA Section */}
-      <section className="py-24 lg:py-32 bg-card border-t border-gold/20">
+      <section className="relative py-24 lg:py-32 bg-[#050505] border-t border-gold/20">
+        {/* Golden separator line at top */}
+        <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
+        
         <div className="container mx-auto px-6 lg:px-12 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="max-w-3xl mx-auto">
             <p className="text-gold text-sm tracking-[0.2em] uppercase font-medium mb-4">Prêt pour l'aventure ?</p>
             <h2 className="font-serif text-4xl lg:text-5xl mb-8 text-white">Créons Ensemble Votre Voyage Idéal</h2>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link to="/contact" className="px-10 py-4 bg-gold text-navy text-sm font-medium tracking-widest uppercase hover:bg-gold-dark transition-colors">
+              <Link to="/contact" className="px-10 py-4 bg-gold text-black text-sm font-medium tracking-widest uppercase hover:bg-gold/90 transition-colors">
                 Nous Contacter
               </Link>
-              <Link to="/expeditions" className="px-10 py-4 border border-gold/50 text-gold text-sm font-medium tracking-widest uppercase hover:bg-gold hover:text-navy transition-colors">
+              <Link to="/expeditions" className="px-10 py-4 border border-gold/50 text-gold text-sm font-medium tracking-widest uppercase hover:bg-gold hover:text-black transition-colors">
                 Voir les Expéditions
               </Link>
             </div>
