@@ -5,6 +5,7 @@ import Layout from '@/components/Layout';
 import Hero from '@/components/Hero';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { getFeaturedTours } from '@/lib/data';
+import { SEO, generateOrganizationSchema } from '@/lib/seo';
 import AboutPreview from '@/components/home/AboutPreview';
 import ServicesPreview from '@/components/home/ServicesPreview';
 import GalleryPreview from '@/components/home/GalleryPreview';
@@ -20,8 +21,42 @@ export default function Index() {
     return language === 'en' ? excursion.altEn : language === 'mg' ? excursion.altMg : excursion.altFr;
   };
 
+  // SEO content per language
+  const seoContent = {
+    fr: {
+      title: 'Excursions de Luxe au Nord de Madagascar',
+      description: 'Gentlemen Excursions : voyages haut de gamme à Diego-Suarez et Nosy Be. Mer d\'Émeraude, Tsingy, randonnées et kitesurf. Expériences authentiques.',
+    },
+    en: {
+      title: 'Luxury Excursions in Northern Madagascar',
+      description: 'Gentlemen Excursions: premium tours in Diego-Suarez and Nosy Be. Emerald Sea, Tsingy, hiking and kitesurfing. Authentic experiences.',
+    },
+    mg: {
+      title: 'Fitsangatsanganana Ambony any Avaratra Madagasikara',
+      description: 'Gentlemen Excursions: dia ambony any Diego-Suarez sy Nosy Be. Ranomasina Safira, Tsingy, fitsangatsanganana ary kitesurf.',
+    },
+  };
+
+  const organizationSchema = generateOrganizationSchema();
+
   return (
     <Layout>
+      <SEO
+        title={seoContent[language].title}
+        description={seoContent[language].description}
+        canonical="/"
+        language={language}
+        keywords={[
+          'Excursion Nord Madagascar',
+          'Voyage luxe Diego-Suarez',
+          'Guide touristique Nosy Be',
+          'Mer d\'Émeraude',
+          'Tsingy Ankarana',
+          'Kitesurf Madagascar',
+        ]}
+        structuredData={organizationSchema}
+      />
+      
       <Hero />
       
       {/* Featured Expeditions */}

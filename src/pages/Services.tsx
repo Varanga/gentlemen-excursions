@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Leaf, Shirt, Wind, Truck, ArrowRight } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import Layout from '@/components/Layout';
+import { SEO } from '@/lib/seo';
 import { Link, useLocation } from 'react-router-dom';
 
 // Import images
@@ -35,7 +36,7 @@ const services = [
 ];
 
 export default function Services() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const location = useLocation();
 
   // Scroll to top on route change
@@ -43,8 +44,32 @@ export default function Services() {
     window.scrollTo(0, 0);
   }, [location.pathname]);
 
+  // SEO content per language
+  const seoContent = {
+    fr: {
+      title: 'Nos Services Premium',
+      description: 'Vanille de Madagascar, collection vestimentaire, kitesurf Sakalava et logistique haut de gamme. Services exclusifs au Nord de Madagascar.',
+    },
+    en: {
+      title: 'Our Premium Services',
+      description: 'Madagascar vanilla, clothing collection, Sakalava kitesurfing and premium logistics. Exclusive services in Northern Madagascar.',
+    },
+    mg: {
+      title: 'Ny Serivisy Ambony',
+      description: 'Vanila Malagasy, fitafiana, kitesurf Sakalava ary logistique ambony. Serivisy manokana any Avaratra Madagasikara.',
+    },
+  };
+
   return (
     <Layout>
+      <SEO
+        title={seoContent[language].title}
+        description={seoContent[language].description}
+        canonical="/services"
+        language={language}
+        keywords={['Vanille Madagascar', 'Kitesurf Diego-Suarez', 'Baie Sakalava', 'Transfer 4x4 Madagascar']}
+      />
+
       {/* Hero - Black & Gold Style */}
       <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center bg-navy">
         <div className="absolute inset-0 z-0">

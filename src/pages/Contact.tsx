@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { MapPin, Phone, Mail, Send, MessageCircle } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import Layout from '@/components/Layout';
+import { SEO } from '@/lib/seo';
 import { tours } from '@/lib/data';
 import { useToast } from '@/hooks/use-toast';
 import {
@@ -58,8 +59,32 @@ export default function Contact() {
   const whatsappMessage = encodeURIComponent("Bonjour, je souhaite organiser une excursion sur mesure...");
   const whatsappLink = `https://wa.me/261340000000?text=${whatsappMessage}`;
 
+  // SEO content per language
+  const seoContent = {
+    fr: {
+      title: 'Contactez-nous | Devis Gratuit',
+      description: 'Contactez Gentlemen Excursions pour organiser votre voyage sur mesure au Nord de Madagascar. Réponse sous 24h. WhatsApp, email ou formulaire.',
+    },
+    en: {
+      title: 'Contact Us | Free Quote',
+      description: 'Contact Gentlemen Excursions to plan your custom trip to Northern Madagascar. Response within 24h. WhatsApp, email or form.',
+    },
+    mg: {
+      title: 'Mifandraisa Aminay | Devis Maimaim-poana',
+      description: 'Mifandraisa amin\'ny Gentlemen Excursions mba hanomanana ny dianao any Avaratra Madagasikara. Valiny ao anatin\'ny 24h.',
+    },
+  };
+
   return (
     <Layout>
+      <SEO
+        title={seoContent[language].title}
+        description={seoContent[language].description}
+        canonical="/contact"
+        language={language}
+        keywords={['Contact agence voyage Madagascar', 'Devis excursion Diego-Suarez', 'Réserver voyage Nosy Be']}
+      />
+
       {/* Hero Section */}
       <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
