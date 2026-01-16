@@ -178,6 +178,7 @@ export default function Header() {
                   }`}
                   layout
                 >
+                  <span className="text-gold mr-1">+</span>
                   <span className="italic">Gentlemen</span>
                 </motion.span>
                 <motion.span 
