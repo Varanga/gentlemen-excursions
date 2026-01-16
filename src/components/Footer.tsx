@@ -1,167 +1,216 @@
 import { Link } from 'react-router-dom';
-import { Facebook, Instagram, Youtube, Mail, Phone, MapPin } from 'lucide-react';
-import { useLanguage } from '@/i18n/LanguageContext';
+import { Facebook, Instagram, Youtube, Mail, MapPin, MessageCircle } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { useLanguage, type Language } from '@/i18n/LanguageContext';
 
 export default function Footer() {
-  const { t } = useLanguage();
+  const { t, language, setLanguage } = useLanguage();
+
+  const languages: { code: Language; label: string }[] = [
+    { code: 'fr', label: 'FR' },
+    { code: 'en', label: 'EN' },
+    { code: 'mg', label: 'MG' },
+  ];
 
   return (
-    <footer className="bg-card">
-      {/* Main Footer */}
-      <div className="border-t border-gold/20">
-        <div className="container mx-auto px-6 lg:px-12 py-16 lg:py-20">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-            {/* Agency Column */}
-            <div>
-              <h3 className="font-serif text-xl font-medium text-white mb-6">
-                {t.footer.agency}
-              </h3>
-              <ul className="space-y-3">
-                <li>
-                  <Link to="/about" className="text-zinc hover:text-gold transition-colors text-sm">
-                    {t.footer.ourCommitments}
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/about" className="text-zinc hover:text-gold transition-colors text-sm">
-                    {t.footer.loyaltyProgram}
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            {/* Travel Ideas Column */}
-            <div>
-              <h3 className="font-serif text-xl font-medium text-white mb-6">
-                {t.footer.travelIdeas}
-              </h3>
-              <ul className="space-y-3">
-                <li>
-                  <Link to="/expeditions" className="text-zinc hover:text-gold transition-colors text-sm">
-                    Diego-Suarez
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/expeditions" className="text-zinc hover:text-gold transition-colors text-sm">
-                    Nosy Be
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/blog" className="text-zinc hover:text-gold transition-colors text-sm">
-                    {t.blog.title}
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            {/* Contact Column */}
-            <div>
-              <h3 className="font-serif text-xl font-medium text-white mb-6">
-                {t.footer.contact}
-              </h3>
-              <ul className="space-y-4">
-                <li>
-                  <Link to="/contact" className="text-gold hover:text-gold-light transition-colors text-sm font-medium">
-                    {t.contact.requestQuote}
-                  </Link>
-                </li>
-                <li className="flex items-center gap-2 text-zinc text-sm">
-                  <Phone className="w-4 h-4 text-gold" />
-                  {t.contact.info.phone}
-                </li>
-                <li className="flex items-center gap-2 text-zinc text-sm">
-                  <Mail className="w-4 h-4 text-gold" />
-                  {t.contact.info.email}
-                </li>
-              </ul>
-            </div>
-
-            {/* Company Info */}
-            <div>
-              <div className="bg-secondary border border-gold/20 rounded-lg p-6">
-                <h2 className="font-serif text-xl font-medium text-white mb-2">
-                  GENTLEMEN EXCURSIONS
-                </h2>
-                <div className="flex items-start gap-2 text-zinc text-sm mb-4">
-                  <MapPin className="w-4 h-4 text-gold shrink-0 mt-0.5" />
-                  <span>{t.contact.info.address}</span>
-                </div>
-                <p className="text-sm text-zinc mb-4">
-                  {t.footer.tagline}
-                </p>
-                
-                {/* Social Links */}
-                <div className="pt-4 border-t border-gold/20">
-                  <p className="text-sm font-medium text-white mb-3">{t.footer.followUs}</p>
-                  <div className="flex gap-3">
-                    <a href="#" className="w-9 h-9 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center hover:bg-gold hover:text-navy transition-colors">
-                      <Facebook className="w-4 h-4 text-gold hover:text-navy" />
-                    </a>
-                    <a href="#" className="w-9 h-9 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center hover:bg-gold hover:text-navy transition-colors">
-                      <Instagram className="w-4 h-4 text-gold" />
-                    </a>
-                    <a href="#" className="w-9 h-9 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center hover:bg-gold hover:text-navy transition-colors">
-                      <Youtube className="w-4 h-4 text-gold" />
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+    <footer className="bg-[#050505] relative">
+      {/* Golden top border - 80% width, centered */}
+      <div className="flex justify-center">
+        <div className="w-[80%] h-[0.5px] bg-gradient-to-r from-transparent via-gold to-transparent" />
       </div>
 
-      {/* Newsletter Section */}
-      <div className="border-t border-gold/20 py-12">
-        <div className="container mx-auto px-6 lg:px-12">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
+      {/* Main Footer Content */}
+      <div className="container mx-auto px-6 lg:px-12 py-16 lg:py-20">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ staggerChildren: 0.15 }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16"
+        >
+          {/* Column 1 - Identity */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0 }}
+            className="space-y-6"
+          >
             <div>
-              <span className="text-gold text-sm font-medium tracking-[0.2em] uppercase block mb-1">
-                {t.footer.newsletter.subscribe}
-              </span>
-              <h3 className="font-serif text-3xl font-medium text-white">
-                {t.footer.newsletter.title}
-              </h3>
+              <h2 className="font-serif text-2xl font-medium text-white tracking-wide">
+                GENTLEMEN EXCURSIONS
+              </h2>
+              <p className="text-zinc-400 text-sm mt-4 leading-relaxed">
+                {language === 'fr' && "L'art de l'aventure exclusive dans le Nord de Madagascar."}
+                {language === 'en' && "The art of exclusive adventure in Northern Madagascar."}
+                {language === 'mg' && "Ny kanto amin'ny fikarohana manokana any avaratr'i Madagasikara."}
+              </p>
             </div>
-            <form className="flex w-full lg:w-auto">
-              <div className="relative flex-1 lg:w-80">
-                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc" />
-                <input 
-                  type="email"
-                  placeholder={t.footer.newsletter.placeholder}
-                  className="w-full pl-12 pr-4 py-4 bg-secondary border border-gold/20 text-white placeholder:text-zinc focus:outline-none focus:border-gold"
-                />
-              </div>
-              <button 
-                type="submit"
-                className="bg-gold text-navy px-8 py-4 font-medium hover:bg-gold-dark transition-colors whitespace-nowrap"
+
+            {/* GPS Coordinates */}
+            <div className="flex items-center gap-2 text-gold text-sm font-mono tracking-wider">
+              <MapPin className="w-4 h-4" />
+              <span>12.2777° S, 49.2913° E</span>
+            </div>
+
+            {/* Social Links */}
+            <div className="flex gap-3 pt-2">
+              <a 
+                href="#" 
+                className="w-10 h-10 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center hover:bg-gold hover:border-gold transition-all duration-300 group"
+                aria-label="Facebook"
               >
-                {t.footer.newsletter.button}
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
-
-      {/* Bottom Bar */}
-      <div className="bg-navy border-t border-gold/30">
-        <div className="container mx-auto px-6 lg:px-12 py-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-zinc text-sm">
-              © {new Date().getFullYear()} Gentlemen Excursions. {t.footer.rights}.
-            </p>
-            <div className="flex items-center gap-6 text-sm">
-              <a href="#" className="text-zinc hover:text-gold transition-colors">
-                {t.footer.legal}
+                <Facebook className="w-4 h-4 text-gold group-hover:text-[#050505]" />
               </a>
-              <a href="#" className="text-zinc hover:text-gold transition-colors">
-                {t.footer.privacy}
+              <a 
+                href="#" 
+                className="w-10 h-10 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center hover:bg-gold hover:border-gold transition-all duration-300 group"
+                aria-label="Instagram"
+              >
+                <Instagram className="w-4 h-4 text-gold group-hover:text-[#050505]" />
               </a>
-              <a href="#" className="text-zinc hover:text-gold transition-colors">
-                {t.footer.cookies}
+              <a 
+                href="#" 
+                className="w-10 h-10 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center hover:bg-gold hover:border-gold transition-all duration-300 group"
+                aria-label="YouTube"
+              >
+                <Youtube className="w-4 h-4 text-gold group-hover:text-[#050505]" />
               </a>
             </div>
-          </div>
+          </motion.div>
+
+          {/* Column 2 - Exploration */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="space-y-6"
+          >
+            <h3 className="text-gold text-sm font-medium tracking-[0.3em] uppercase">
+              EXPLORATION
+            </h3>
+            <ul className="space-y-4">
+              <li>
+                <Link 
+                  to="/expeditions" 
+                  className="text-zinc-400 hover:text-gold transition-colors text-sm inline-block relative group"
+                >
+                  {t.nav.expeditions}
+                  <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-gold transition-all duration-300 group-hover:w-full" />
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/services" 
+                  className="text-zinc-400 hover:text-gold transition-colors text-sm inline-block relative group"
+                >
+                  {t.nav.services}
+                  <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-gold transition-all duration-300 group-hover:w-full" />
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/gallery" 
+                  className="text-zinc-400 hover:text-gold transition-colors text-sm inline-block relative group"
+                >
+                  {t.nav.gallery}
+                  <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-gold transition-all duration-300 group-hover:w-full" />
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/blog" 
+                  className="text-zinc-400 hover:text-gold transition-colors text-sm inline-block relative group"
+                >
+                  {t.nav.blog}
+                  <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-gold transition-all duration-300 group-hover:w-full" />
+                </Link>
+              </li>
+            </ul>
+          </motion.div>
+
+          {/* Column 3 - Concierge */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="space-y-6"
+          >
+            <h3 className="text-gold text-sm font-medium tracking-[0.3em] uppercase">
+              CONTACT
+            </h3>
+            <ul className="space-y-4">
+              <li>
+                <a 
+                  href="https://wa.me/261320000000" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-zinc-400 hover:text-gold transition-colors text-sm group"
+                >
+                  <MessageCircle className="w-4 h-4 text-gold" />
+                  <span className="relative">
+                    WhatsApp
+                    <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-gold transition-all duration-300 group-hover:w-full" />
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="mailto:contact@gentlemen-excursions.mg"
+                  className="flex items-center gap-2 text-zinc-400 hover:text-gold transition-colors text-sm group"
+                >
+                  <Mail className="w-4 h-4 text-gold" />
+                  <span className="relative">
+                    {t.contact.info.email}
+                    <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-gold transition-all duration-300 group-hover:w-full" />
+                  </span>
+                </a>
+              </li>
+              <li>
+                <Link 
+                  to="/about" 
+                  className="text-zinc-400 hover:text-gold transition-colors text-sm inline-block relative group"
+                >
+                  {t.nav.about}
+                  <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-gold transition-all duration-300 group-hover:w-full" />
+                </Link>
+              </li>
+            </ul>
+
+            {/* Language Selector - Discrete */}
+            <div className="pt-4">
+              <div className="flex items-center gap-1 text-xs">
+                {languages.map((lang, index) => (
+                  <span key={lang.code} className="flex items-center">
+                    <button
+                      onClick={() => setLanguage(lang.code)}
+                      className={`transition-colors duration-200 px-1 ${
+                        language === lang.code 
+                          ? 'text-gold font-medium' 
+                          : 'text-zinc-500 hover:text-zinc-300'
+                      }`}
+                    >
+                      {lang.label}
+                    </button>
+                    {index < languages.length - 1 && (
+                      <span className="text-zinc-600 mx-1">|</span>
+                    )}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      </div>
+
+      {/* Bottom Bar - Copyright */}
+      <div className="container mx-auto px-6 lg:px-12 pb-8">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-4 text-center">
+          <p className="text-zinc-600 text-xs">
+            © {new Date().getFullYear()} Gentlemen Excursions. {t.footer.rights}.
+          </p>
         </div>
       </div>
     </footer>
