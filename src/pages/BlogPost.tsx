@@ -66,19 +66,21 @@ export default function BlogPost() {
       />
 
       {/* Hero Image */}
-      <section className="relative h-[50vh] min-h-[400px] bg-[#050505] overflow-hidden">
+      <section className="relative h-[50vh] min-h-[400px] bg-[#050505] overflow-hidden pt-[100px]">
         <motion.img
           initial={{ scale: 1.1 }}
           animate={{ scale: 1 }}
           transition={{ duration: 0.8 }}
           src={article.image}
           alt={getLocalizedText(article.title)}
-          className="w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-black/50 to-black/30" />
+        {/* Gradient de lisibilité pour le header */}
+        <div className="absolute top-0 left-0 right-0 h-[30%] bg-gradient-to-b from-black/80 via-black/40 to-transparent z-10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-black/50 to-transparent" />
         
         {/* Category Badge */}
-        <div className="absolute top-8 left-1/2 -translate-x-1/2">
+        <div className="absolute top-28 left-1/2 -translate-x-1/2 z-20">
           <span className="bg-gold text-black text-xs font-semibold px-4 py-2 rounded-full uppercase tracking-wider">
             {getLocalizedText(article.category)}
           </span>
