@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
 import { useParams, Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Calendar, Clock, User, ArrowLeft, Share2 } from 'lucide-react';
+import { Calendar, Clock, User, Share2 } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import Layout from '@/components/Layout';
+import FloatingBackButton from '@/components/FloatingBackButton';
 import { getArticleBySlug, blogArticles } from '@/lib/blogData';
 
 export default function BlogPost() {
@@ -48,7 +49,6 @@ export default function BlogPost() {
               to="/blog" 
               className="inline-flex items-center gap-2 text-gold hover:text-gold/80 transition-colors"
             >
-              <ArrowLeft className="w-4 h-4" />
               {language === 'en' ? 'Back to blog' : language === 'mg' ? 'Miverina any amin\'ny blog' : 'Retour au blog'}
             </Link>
           </div>
@@ -59,20 +59,11 @@ export default function BlogPost() {
 
   return (
     <Layout>
-      {/* Back Button Bar */}
-      <div className="bg-[#050505] border-b border-gold/20">
-        <div className="max-w-4xl mx-auto px-6 lg:px-12 py-4">
-          <Link 
-            to="/blog" 
-            className="inline-flex items-center gap-2 text-zinc-400 hover:text-gold transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            <span className="text-sm font-medium">
-              {language === 'en' ? 'Back to blog' : language === 'mg' ? 'Miverina any amin\'ny blog' : 'Retour au blog'}
-            </span>
-          </Link>
-        </div>
-      </div>
+      {/* Floating Back Button - Premium Sticky */}
+      <FloatingBackButton 
+        to="/blog" 
+        label={language === 'en' ? 'Blog' : language === 'mg' ? 'Blog' : 'Blog'}
+      />
 
       {/* Hero Image */}
       <section className="relative h-[50vh] min-h-[400px] bg-[#050505] overflow-hidden">
