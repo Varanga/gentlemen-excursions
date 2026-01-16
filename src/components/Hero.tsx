@@ -1,16 +1,47 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { MapPin, Compass, Search, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { MapPin, Compass, Clock, Search, ChevronLeft, ChevronRight, ChevronDown } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
-import { tours, Tour } from '@/lib/data';
+import { tours } from '@/lib/data';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 
 export default function Hero() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  
+  // Search filters state
+  const [selectedDestination, setSelectedDestination] = useState<string | null>(null);
+  const [selectedTheme, setSelectedTheme] = useState<string | null>(null);
+  const [selectedDuration, setSelectedDuration] = useState<string | null>(null);
 
-  // Use all 13 tours for the slider
+  // Get unique destinations from tours
+  const destinations = [...new Set(tours.map(tour => tour.location))];
+  
+  // Themes
+  const themes = [
+    { key: 'aventure', label: language === 'en' ? 'Adventure' : 'Aventure' },
+    { key: 'nature', label: 'Nature' },
+    { key: 'plage', label: language === 'en' ? 'Beach' : 'Plage' },
+    { key: 'culture', label: 'Culture' },
+    { key: 'trek', label: 'Trek' },
+  ];
+  
+  // Durations
+  const durations = [
+    { key: 'half-day', label: language === 'en' ? 'Half day' : 'Demi-journée' },
+    { key: '1-day', label: language === 'en' ? '1 day' : '1 jour' },
+    { key: '2-days', label: language === 'en' ? '2 days' : '2 jours' },
+    { key: 'multi', label: language === 'en' ? '3+ days' : '3+ jours' },
+  ];
+
   const slides = tours;
   const totalSlides = slides.length;
 
@@ -19,7 +50,7 @@ export default function Hero() {
     
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % totalSlides);
-    }, 5000); // 5 seconds per slide
+    }, 5000);
 
     return () => clearInterval(timer);
   }, [isAutoPlaying, totalSlides]);
@@ -33,12 +64,29 @@ export default function Hero() {
   const nextSlide = () => goToSlide((currentSlide + 1) % totalSlides);
   const prevSlide = () => goToSlide((currentSlide - 1 + totalSlides) % totalSlides);
 
-  // Get current tour data
   const currentTour = slides[currentSlide];
   const currentData = t.excursions[currentTour.titleKey];
 
-  // Format slide number with leading zero
   const formatNumber = (num: number) => String(num).padStart(2, '0');
+
+  // Handle search/explore click
+  const handleExplore = () => {
+    const params = new URLSearchParams();
+    if (selectedDestination) params.set('location', selectedDestination);
+    if (selectedTheme) params.set('theme', selectedTheme);
+    if (selectedDuration) params.set('duration', selectedDuration);
+    
+    const queryString = params.toString();
+    navigate(`/expeditions${queryString ? `?${queryString}` : ''}`);
+    
+    // Scroll to results after navigation
+    setTimeout(() => {
+      const resultsSection = document.querySelector('section.py-24');
+      if (resultsSection) {
+        resultsSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+  };
 
   return (
     <section className="relative h-screen min-h-[800px] flex items-center justify-center overflow-hidden bg-navy">
@@ -60,7 +108,6 @@ export default function Hero() {
             alt={currentData.title}
             className="w-full h-full object-cover"
           />
-          {/* Premium gradient overlay - smooth transition to black background */}
           <div 
             className="absolute inset-0"
             style={{
@@ -118,7 +165,7 @@ export default function Hero() {
               {currentData.title}
             </h1>
 
-            {/* Malagasy Name (if available) */}
+            {/* Malagasy Name */}
             {'titleMg' in currentData && currentData.titleMg && (
               <motion.p
                 initial={{ opacity: 0 }}
@@ -141,19 +188,19 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
             >
-              <Link 
-                to={`/expeditions/${currentTour.slug}`}
+              <button 
+                onClick={() => navigate(`/expeditions/${currentTour.slug}`)}
                 className="inline-flex items-center justify-center px-10 py-4 bg-gold text-navy text-sm font-medium tracking-widest uppercase hover:bg-gold-dark transition-all duration-300"
                 style={{ boxShadow: '0 0 30px -8px hsl(43 63% 53% / 0.4)' }}
               >
-                Découvrir l'excursion
-              </Link>
+                {language === 'en' ? 'Discover the excursion' : 'Découvrir l\'excursion'}
+              </button>
             </motion.div>
           </motion.div>
         </AnimatePresence>
       </div>
 
-      {/* Slide Counter - Gold accent */}
+      {/* Slide Counter */}
       <div className="absolute left-6 lg:left-10 bottom-40 z-20 flex items-center gap-3 text-sm font-medium">
         <span className="text-gold text-2xl font-serif">{formatNumber(currentSlide + 1)}</span>
         <span className="text-zinc">/</span>
@@ -176,7 +223,7 @@ export default function Hero() {
         ))}
       </div>
 
-      {/* Search Bar - Glassmorphism Dark with Gold Border */}
+      {/* Search Bar - Functional with Dropdowns */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -189,57 +236,125 @@ export default function Hero() {
         >
           <div className="container mx-auto">
             <div className="flex items-stretch divide-x divide-gold/20">
-              {/* Destination */}
-              <div className="flex-1 px-6 py-5 flex items-center gap-4 cursor-pointer hover:bg-white/5 transition-colors group">
-                <MapPin className="w-5 h-5 text-zinc group-hover:text-gold transition-colors" />
-                <div>
-                  <p className="text-xs text-zinc uppercase tracking-wider font-medium mb-1">
-                    Destination
-                  </p>
-                  <p className="text-white font-medium">
-                    Diego-Suarez, Nosy Be...
-                  </p>
-                </div>
-              </div>
+              {/* Destination Dropdown */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <div className="flex-1 px-6 py-5 flex items-center gap-4 cursor-pointer hover:bg-white/5 transition-colors group">
+                    <MapPin className="w-5 h-5 text-gold" />
+                    <div className="flex-1">
+                      <p className="text-xs text-zinc uppercase tracking-wider font-medium mb-1">
+                        Destination
+                      </p>
+                      <p className="text-white font-medium">
+                        {selectedDestination || (language === 'en' ? 'All destinations' : 'Toutes les destinations')}
+                      </p>
+                    </div>
+                    <ChevronDown className="w-4 h-4 text-zinc group-hover:text-gold transition-colors" />
+                  </div>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="bg-navy border-gold/30 min-w-[200px]">
+                  <DropdownMenuItem 
+                    onClick={() => setSelectedDestination(null)}
+                    className="text-white hover:bg-gold/10 hover:text-gold cursor-pointer"
+                  >
+                    {language === 'en' ? 'All destinations' : 'Toutes les destinations'}
+                  </DropdownMenuItem>
+                  {destinations.map(dest => (
+                    <DropdownMenuItem 
+                      key={dest}
+                      onClick={() => setSelectedDestination(dest)}
+                      className="text-white hover:bg-gold/10 hover:text-gold cursor-pointer"
+                    >
+                      {dest}
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
 
-              {/* Type de voyage */}
-              <div className="flex-1 px-6 py-5 flex items-center gap-4 cursor-pointer hover:bg-white/5 transition-colors group hidden md:flex">
-                <Compass className="w-5 h-5 text-zinc group-hover:text-gold transition-colors" />
-                <div>
-                  <p className="text-xs text-zinc uppercase tracking-wider font-medium mb-1">
-                    Thématiques
-                  </p>
-                  <p className="text-white font-medium">
-                    Aventure, Nature, Plage...
-                  </p>
-                </div>
-              </div>
+              {/* Theme Dropdown */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <div className="flex-1 px-6 py-5 flex items-center gap-4 cursor-pointer hover:bg-white/5 transition-colors group hidden md:flex">
+                    <Compass className="w-5 h-5 text-gold" />
+                    <div className="flex-1">
+                      <p className="text-xs text-zinc uppercase tracking-wider font-medium mb-1">
+                        {language === 'en' ? 'Themes' : 'Thématiques'}
+                      </p>
+                      <p className="text-white font-medium">
+                        {selectedTheme 
+                          ? themes.find(th => th.key === selectedTheme)?.label 
+                          : (language === 'en' ? 'All themes' : 'Toutes les thématiques')}
+                      </p>
+                    </div>
+                    <ChevronDown className="w-4 h-4 text-zinc group-hover:text-gold transition-colors" />
+                  </div>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="bg-navy border-gold/30 min-w-[200px]">
+                  <DropdownMenuItem 
+                    onClick={() => setSelectedTheme(null)}
+                    className="text-white hover:bg-gold/10 hover:text-gold cursor-pointer"
+                  >
+                    {language === 'en' ? 'All themes' : 'Toutes les thématiques'}
+                  </DropdownMenuItem>
+                  {themes.map(theme => (
+                    <DropdownMenuItem 
+                      key={theme.key}
+                      onClick={() => setSelectedTheme(theme.key)}
+                      className="text-white hover:bg-gold/10 hover:text-gold cursor-pointer"
+                    >
+                      {theme.label}
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
 
-              {/* Durée */}
-              <div className="flex-1 px-6 py-5 flex items-center gap-4 cursor-pointer hover:bg-white/5 transition-colors group hidden lg:flex">
-                <div className="w-5 h-5 flex items-center justify-center">
-                  <span className="text-xl text-zinc group-hover:text-gold transition-colors">+</span>
-                </div>
-                <div>
-                  <p className="text-xs text-zinc uppercase tracking-wider font-medium mb-1">
-                    Durée
-                  </p>
-                  <p className="text-white font-medium">
-                    1 jour à 7 jours
-                  </p>
-                </div>
-              </div>
+              {/* Duration Dropdown */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <div className="flex-1 px-6 py-5 flex items-center gap-4 cursor-pointer hover:bg-white/5 transition-colors group hidden lg:flex">
+                    <Clock className="w-5 h-5 text-gold" />
+                    <div className="flex-1">
+                      <p className="text-xs text-zinc uppercase tracking-wider font-medium mb-1">
+                        {language === 'en' ? 'Duration' : 'Durée'}
+                      </p>
+                      <p className="text-white font-medium">
+                        {selectedDuration 
+                          ? durations.find(d => d.key === selectedDuration)?.label 
+                          : (language === 'en' ? 'Any duration' : 'Toutes les durées')}
+                      </p>
+                    </div>
+                    <ChevronDown className="w-4 h-4 text-zinc group-hover:text-gold transition-colors" />
+                  </div>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="bg-navy border-gold/30 min-w-[200px]">
+                  <DropdownMenuItem 
+                    onClick={() => setSelectedDuration(null)}
+                    className="text-white hover:bg-gold/10 hover:text-gold cursor-pointer"
+                  >
+                    {language === 'en' ? 'Any duration' : 'Toutes les durées'}
+                  </DropdownMenuItem>
+                  {durations.map(duration => (
+                    <DropdownMenuItem 
+                      key={duration.key}
+                      onClick={() => setSelectedDuration(duration.key)}
+                      className="text-white hover:bg-gold/10 hover:text-gold cursor-pointer"
+                    >
+                      {duration.label}
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
 
               {/* Search Button */}
-              <Link
-                to="/expeditions"
+              <button
+                onClick={handleExplore}
                 className="px-8 lg:px-12 flex items-center justify-center gap-3 bg-gold hover:bg-gold-dark transition-colors"
               >
                 <Search className="w-5 h-5 text-navy" />
                 <span className="text-navy font-medium tracking-wide hidden sm:inline">
                   Explorer
                 </span>
-              </Link>
+              </button>
             </div>
           </div>
         </div>
