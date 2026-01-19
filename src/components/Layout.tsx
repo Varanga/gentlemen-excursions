@@ -24,8 +24,8 @@ export default function Layout({ children }: LayoutProps) {
       </main>
       <Footer />
       <WhatsAppButton 
-        phoneNumber="+261320000000"
-        message="Bonjour, je souhaite avoir des informations sur vos excursions à Madagascar."
+        phoneNumber="+261326850423"
+        message="Bonjour Gentlemen Excursions, je souhaite organiser une expédition..."
       />
     </div>
   );

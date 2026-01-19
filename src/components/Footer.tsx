@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Facebook, Instagram, Youtube, Mail, MapPin, MessageCircle } from 'lucide-react';
+import { Facebook, Instagram, Youtube, Mail, MapPin, MessageCircle, Phone } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useLanguage, type Language } from '@/i18n/LanguageContext';
 
@@ -142,28 +142,43 @@ export default function Footer() {
               CONTACT
             </h3>
             <ul className="space-y-4">
+              {/* Email - formal first */}
               <li>
                 <a 
-                  href="https://wa.me/261320000000" 
+                  href="mailto:gentlemenexcursions@gmail.com"
+                  className="flex items-center gap-2 text-zinc-400 hover:text-gold transition-colors text-sm group"
+                >
+                  <Mail className="w-4 h-4 text-gold" />
+                  <span className="relative">
+                    gentlemenexcursions@gmail.com
+                    <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-gold transition-all duration-300 group-hover:w-full" />
+                  </span>
+                </a>
+              </li>
+              {/* WhatsApp - direct */}
+              <li>
+                <a 
+                  href="https://wa.me/261326850423?text=Bonjour%20Gentlemen%20Excursions%2C%20je%20souhaite%20organiser%20une%20exp%C3%A9dition..." 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-zinc-400 hover:text-gold transition-colors text-sm group"
                 >
                   <MessageCircle className="w-4 h-4 text-gold" />
                   <span className="relative">
-                    WhatsApp
+                    +261 32 68 504 23 <span className="text-zinc-600">(WhatsApp)</span>
                     <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-gold transition-all duration-300 group-hover:w-full" />
                   </span>
                 </a>
               </li>
+              {/* Phone - calls only */}
               <li>
                 <a 
-                  href="mailto:contact@gentlemen-excursions.mg"
+                  href="tel:+261382122147"
                   className="flex items-center gap-2 text-zinc-400 hover:text-gold transition-colors text-sm group"
                 >
-                  <Mail className="w-4 h-4 text-gold" />
+                  <Phone className="w-4 h-4 text-gold" />
                   <span className="relative">
-                    {t.contact.info.email}
+                    +261 38 21 221 47 <span className="text-zinc-600">(Appels)</span>
                     <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-gold transition-all duration-300 group-hover:w-full" />
                   </span>
                 </a>
@@ -207,7 +222,10 @@ export default function Footer() {
 
       {/* Bottom Bar - Copyright */}
       <div className="container mx-auto px-6 lg:px-12 pb-8">
-        <div className="flex flex-col md:flex-row items-center justify-center gap-4 text-center">
+        <div className="flex flex-col items-center justify-center gap-3 text-center">
+          <p className="text-zinc-500 text-xs italic max-w-md">
+            Disponible 7j/7 pour concevoir vos itinéraires sur mesure dans le Nord de Madagascar.
+          </p>
           <p className="text-zinc-600 text-xs">
             © {new Date().getFullYear()} Gentlemen Excursions. {t.footer.rights}.
           </p>

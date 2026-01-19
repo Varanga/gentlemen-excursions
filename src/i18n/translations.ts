@@ -216,8 +216,8 @@ export const translations = {
       },
       info: {
         address: 'Diego-Suarez, Madagascar',
-        phone: '+261 32 XX XXX XX',
-        email: 'contact@gentlemen-excursions.mg',
+        phone: '+261 32 68 504 23',
+        email: 'gentlemenexcursions@gmail.com',
       },
     },
     // Footer
@@ -463,8 +463,8 @@ export const translations = {
       },
       info: {
         address: 'Diego-Suarez, Madagascar',
-        phone: '+261 32 XX XXX XX',
-        email: 'contact@gentlemen-excursions.mg',
+        phone: '+261 32 68 504 23',
+        email: 'gentlemenexcursions@gmail.com',
       },
     },
     footer: {
@@ -708,8 +708,8 @@ export const translations = {
       },
       info: {
         address: 'Diego-Suarez, Madagasikara',
-        phone: '+261 32 XX XXX XX',
-        email: 'contact@gentlemen-excursions.mg',
+        phone: '+261 32 68 504 23',
+        email: 'gentlemenexcursions@gmail.com',
       },
     },
     footer: {

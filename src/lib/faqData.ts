@@ -32,9 +32,9 @@ export const generalFAQs: FAQItem[] = [
       mg: 'Ahoana ny fomba hanaovako booking amin\'ny Gentlemen Excursions?',
     },
     answer: {
-      fr: 'Vous pouvez réserver directement via notre formulaire en ligne, par WhatsApp au +261 32 XX XXX XX, ou par email à contact@gentlemen-excursions.mg. Nous répondons sous 24h avec un devis personnalisé.',
-      en: 'You can book directly via our online form, by WhatsApp at +261 32 XX XXX XX, or by email at contact@gentlemen-excursions.mg. We respond within 24 hours with a personalized quote.',
-      mg: 'Afaka manao booking mivantana amin\'ny alalan\'ny taratasy an-tserasera ianao, na amin\'ny WhatsApp +261 32 XX XXX XX, na amin\'ny email contact@gentlemen-excursions.mg.',
+      fr: 'Vous pouvez réserver directement via notre formulaire en ligne, par WhatsApp au +261 32 68 504 23, ou par email à gentlemenexcursions@gmail.com. Nous répondons sous 24h avec un devis personnalisé.',
+      en: 'You can book directly via our online form, by WhatsApp at +261 32 68 504 23, or by email at gentlemenexcursions@gmail.com. We respond within 24 hours with a personalized quote.',
+      mg: 'Afaka manao booking mivantana amin\'ny alalan\'ny taratasy an-tserasera ianao, na amin\'ny WhatsApp +261 32 68 504 23, na amin\'ny email gentlemenexcursions@gmail.com.',
     },
   },
   {

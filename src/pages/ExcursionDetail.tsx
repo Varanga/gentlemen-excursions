@@ -580,7 +580,7 @@ Date souhaitée: ${formData.date}
 Nombre de participants: ${formData.participants}
 Message: ${formData.message}`;
     
-    const whatsappUrl = `https://wa.me/261320000000?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/261326850423?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
 

@@ -55,8 +55,8 @@ export default function Contact() {
       destination: value
     }));
   };
-  const whatsappMessage = encodeURIComponent("Bonjour, je souhaite organiser une excursion sur mesure...");
-  const whatsappLink = `https://wa.me/261340000000?text=${whatsappMessage}`;
+  const whatsappMessage = encodeURIComponent("Bonjour Gentlemen Excursions, je souhaite organiser une expédition...");
+  const whatsappLink = `https://wa.me/261326850423?text=${whatsappMessage}`;
 
   // SEO content per language
   const seoContent = {
@@ -130,49 +130,61 @@ export default function Contact() {
                 </p>
               </div>
 
-              {/* Quick Contact Actions */}
-              <div className="space-y-4">
-                {/* WhatsApp Button */}
-                <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 p-5 border border-gold/30 rounded-lg hover:border-gold hover:bg-gold/5 transition-all group">
-                  <div className="w-14 h-14 rounded-full border border-gold flex items-center justify-center group-hover:bg-gold transition-colors">
-                    <MessageCircle className="w-6 h-6 text-gold group-hover:text-black transition-colors" />
-                  </div>
-                  <div>
-                    <p className="text-white font-medium">WhatsApp</p>
-                    <p className="text-zinc-400 text-sm">Réponse immédiate</p>
-                  </div>
-                </a>
+              {/* Two Columns: Quick Assistance vs Detailed Requests */}
+              <div className="space-y-6">
+                {/* Quick Assistance Section */}
+                <div>
+                  <h3 className="text-gold text-xs font-medium tracking-[0.2em] uppercase mb-4">Assistance Rapide</h3>
+                  <div className="space-y-3">
+                    {/* WhatsApp - Primary */}
+                    <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 p-5 border border-gold/30 rounded-lg hover:border-gold hover:bg-gold/5 transition-all group">
+                      <div className="w-14 h-14 rounded-full border border-gold flex items-center justify-center group-hover:bg-gold transition-colors">
+                        <MessageCircle className="w-6 h-6 text-gold group-hover:text-black transition-colors" />
+                      </div>
+                      <div>
+                        <p className="text-white font-medium">+261 32 68 504 23</p>
+                        <p className="text-zinc-400 text-sm">Ligne Privée WhatsApp • Réponse instantanée</p>
+                      </div>
+                    </a>
 
-                {/* Email */}
-                <a href="mailto:hello@gentlemen-excursions.com" className="flex items-center gap-4 p-5 border border-zinc-800 rounded-lg hover:border-gold/50 transition-all group">
-                  <div className="w-14 h-14 rounded-full border border-zinc-700 flex items-center justify-center group-hover:border-gold transition-colors">
-                    <Mail className="w-6 h-6 text-zinc-400 group-hover:text-gold transition-colors" />
+                    {/* Phone - Calls only */}
+                    <a href="tel:+261382122147" className="flex items-center gap-4 p-5 border border-zinc-800 rounded-lg hover:border-gold/50 transition-all group">
+                      <div className="w-14 h-14 rounded-full border border-zinc-700 flex items-center justify-center group-hover:border-gold transition-colors">
+                        <Phone className="w-6 h-6 text-zinc-400 group-hover:text-gold transition-colors" />
+                      </div>
+                      <div>
+                        <p className="text-white font-medium">+261 38 21 221 47</p>
+                        <p className="text-zinc-400 text-sm">Bureau & Logistique • Suivi de dossiers</p>
+                      </div>
+                    </a>
                   </div>
-                  <div>
-                    <p className="text-white font-medium">{t.contact.info.email}</p>
-                    <p className="text-zinc-400 text-sm">Email direct</p>
-                  </div>
-                </a>
+                </div>
 
-                {/* Phone */}
-                <a href="tel:+261340000000" className="flex items-center gap-4 p-5 border border-zinc-800 rounded-lg hover:border-gold/50 transition-all group">
-                  <div className="w-14 h-14 rounded-full border border-zinc-700 flex items-center justify-center group-hover:border-gold transition-colors">
-                    <Phone className="w-6 h-6 text-zinc-400 group-hover:text-gold transition-colors" />
-                  </div>
-                  <div>
-                    <p className="text-white font-medium">{t.contact.info.phone}</p>
-                    <p className="text-zinc-400 text-sm">Appel direct</p>
-                  </div>
-                </a>
+                {/* Detailed Requests Section */}
+                <div>
+                  <h3 className="text-gold text-xs font-medium tracking-[0.2em] uppercase mb-4">Demandes de Devis</h3>
+                  <div className="space-y-3">
+                    {/* Email */}
+                    <a href="mailto:gentlemenexcursions@gmail.com" className="flex items-center gap-4 p-5 border border-zinc-800 rounded-lg hover:border-gold/50 transition-all group">
+                      <div className="w-14 h-14 rounded-full border border-zinc-700 flex items-center justify-center group-hover:border-gold transition-colors">
+                        <Mail className="w-6 h-6 text-zinc-400 group-hover:text-gold transition-colors" />
+                      </div>
+                      <div>
+                        <p className="text-white font-medium">gentlemenexcursions@gmail.com</p>
+                        <p className="text-zinc-400 text-sm">Pour devis détaillés et itinéraires sur mesure</p>
+                      </div>
+                    </a>
 
-                {/* Location */}
-                <div className="flex items-center gap-4 p-5 border border-zinc-800 rounded-lg">
-                  <div className="w-14 h-14 rounded-full border border-zinc-700 flex items-center justify-center">
-                    <MapPin className="w-6 h-6 text-zinc-400" />
-                  </div>
-                  <div>
-                    <p className="text-white font-medium">Diego-Suarez</p>
-                    <p className="text-zinc-400 text-sm">Nord Madagascar</p>
+                    {/* Location */}
+                    <div className="flex items-center gap-4 p-5 border border-zinc-800 rounded-lg">
+                      <div className="w-14 h-14 rounded-full border border-zinc-700 flex items-center justify-center">
+                        <MapPin className="w-6 h-6 text-zinc-400" />
+                      </div>
+                      <div>
+                        <p className="text-white font-medium">Diego-Suarez</p>
+                        <p className="text-zinc-400 text-sm">Nord Madagascar</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
