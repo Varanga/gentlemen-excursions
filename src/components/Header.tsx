@@ -50,9 +50,9 @@ export default function Header() {
   const navLinks = [
     { href: '/expeditions', label: t.nav.expeditions },
     { href: '/services', label: t.nav.services },
-    { href: '/gallery', label: 'Galerie' },
+    { href: '/gallery', label: t.nav.gallery },
     { href: '/about', label: t.nav.about },
-    { href: '/blog', label: 'Blog' },
+    { href: '/blog', label: t.nav.blog },
     { href: '/contact', label: t.nav.contact }
   ];
 
@@ -164,7 +164,7 @@ export default function Header() {
                   />
                 </div>
                 <span className="hidden lg:block text-xs font-medium tracking-[0.2em] uppercase text-gold">
-                  Menu
+                  {t.common.menu}
                 </span>
               </button>
             </motion.div>
@@ -220,7 +220,7 @@ export default function Header() {
                 className="hidden md:block group relative px-4 py-2 lg:px-6 lg:py-2.5 border border-gold/60 hover:border-gold text-white hover:text-gold transition-all duration-300 overflow-hidden"
               >
                 <span className="relative z-10 text-xs lg:text-sm font-medium tracking-wider uppercase">
-                  Réserver
+                  {t.common.reserve}
                 </span>
                 <motion.div
                   className="absolute inset-0 bg-gold/10"
@@ -355,7 +355,7 @@ export default function Header() {
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="inline-block px-8 py-3 bg-gold text-[#050505] font-medium tracking-wider uppercase hover:bg-gold/90 transition-colors"
                 >
-                  Réserver une expédition
+                  {t.common.reserveExpedition}
                 </Link>
               </motion.div>
             </nav>
@@ -363,7 +363,7 @@ export default function Header() {
             {/* Decorative Elements */}
             <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-center">
               <p className="text-zinc-500 text-sm tracking-wider">Diego-Suarez, Madagascar</p>
-              <p className="text-gold text-xs mt-2 tracking-[0.3em] uppercase">Expériences d'exception</p>
+              <p className="text-gold text-xs mt-2 tracking-[0.3em] uppercase">{t.common.exceptionalExperiences}</p>
             </div>
           </motion.div>
         )}

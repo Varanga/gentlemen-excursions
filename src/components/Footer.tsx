@@ -178,7 +178,7 @@ export default function Footer() {
                 >
                   <Phone className="w-4 h-4 text-gold" />
                   <span className="relative">
-                    +261 38 21 221 47 <span className="text-zinc-600">(Appels)</span>
+                    +261 38 21 221 47 <span className="text-zinc-600">({t.common.calls})</span>
                     <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-gold transition-all duration-300 group-hover:w-full" />
                   </span>
                 </a>
@@ -224,7 +224,7 @@ export default function Footer() {
       <div className="container mx-auto px-6 lg:px-12 pb-8">
         <div className="flex flex-col items-center justify-center gap-3 text-center">
           <p className="text-zinc-500 text-xs italic max-w-md">
-            Disponible 7j/7 pour concevoir vos itinéraires sur mesure dans le Nord de Madagascar.
+            {t.common.availableDaily}
           </p>
           <p className="text-zinc-600 text-xs">
             © {new Date().getFullYear()} Gentlemen Excursions. {t.footer.rights}.

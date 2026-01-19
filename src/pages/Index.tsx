@@ -82,11 +82,11 @@ export default function Index() {
             className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-16"
           >
             <div>
-              <p className="text-gold text-sm tracking-[0.2em] uppercase font-medium mb-4">Nos Expéditions</p>
-              <h2 className="font-serif text-4xl lg:text-5xl xl:text-6xl text-white">Voyages d'Exception</h2>
+              <p className="text-gold text-sm tracking-[0.2em] uppercase font-medium mb-4">{t.common.ourExpeditions}</p>
+              <h2 className="font-serif text-4xl lg:text-5xl xl:text-6xl text-white">{t.common.exceptionalJourneys}</h2>
             </div>
             <Link to="/expeditions" className="inline-flex items-center gap-2 text-gold font-medium hover:text-gold/80 transition-colors group">
-              Voir tous nos voyages
+              {t.common.viewAllJourneys}
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </motion.div>
@@ -153,14 +153,14 @@ export default function Index() {
         
         <div className="container mx-auto px-6 lg:px-12 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="max-w-3xl mx-auto">
-            <p className="text-gold text-sm tracking-[0.2em] uppercase font-medium mb-4">Prêt pour l'aventure ?</p>
-            <h2 className="font-serif text-4xl lg:text-5xl mb-8 text-white">Créons Ensemble Votre Voyage Idéal</h2>
+            <p className="text-gold text-sm tracking-[0.2em] uppercase font-medium mb-4">{t.common.readyForAdventure}</p>
+            <h2 className="font-serif text-4xl lg:text-5xl mb-8 text-white">{t.common.createIdealTrip}</h2>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link to="/contact" className="px-10 py-4 bg-gold text-black text-sm font-medium tracking-widest uppercase hover:bg-gold/90 transition-colors">
-                Nous Contacter
+                {t.common.contactUs}
               </Link>
               <Link to="/expeditions" className="px-10 py-4 border border-gold/50 text-gold text-sm font-medium tracking-widest uppercase hover:bg-gold hover:text-black transition-colors">
-                Voir les Expéditions
+                {t.common.viewExpeditions}
               </Link>
             </div>
           </motion.div>
