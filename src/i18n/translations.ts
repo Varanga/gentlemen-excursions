@@ -136,6 +136,15 @@ export const translations = {
         difficulty: 'Modéré',
         price: '95',
       },
+      nosySakatia: {
+        title: 'Nosy Sakatia : L\'Île Authentique',
+        titleMg: 'Nosy Sakatia',
+        description: 'Excursion privée sur l\'île aux orchidées pour une baignade privilégiée avec les tortues vertes dans une eau cristalline. Visite des plantations de vanille et poivre, déjeuner traditionnel sur la plage et sentiers botaniques préservés.',
+        duration: 'Journée complète',
+        difficulty: 'Facile',
+        price: 'Sur demande',
+        guideTip: 'Nous vous conseillons de partir tôt le matin pour profiter de la plage avant l\'arrivée des autres visiteurs et avoir la meilleure visibilité pour observer les tortues.',
+      },
     },
     // Services
     services: {
@@ -388,6 +397,15 @@ export const translations = {
         difficulty: 'Moderate',
         price: '95',
       },
+      nosySakatia: {
+        title: 'Nosy Sakatia: The Authentic Island',
+        titleMg: 'Nosy Sakatia',
+        description: 'Private excursion to the orchid island for a privileged swim with green sea turtles in crystal-clear water. Visit vanilla and pepper plantations, traditional beach lunch and preserved botanical trails.',
+        duration: 'Full day',
+        difficulty: 'Easy',
+        price: 'On request',
+        guideTip: 'We recommend leaving early in the morning to enjoy the beach before other visitors arrive and have the best visibility for observing the turtles.',
+      },
     },
     services: {
       title: 'Our Services',
@@ -632,6 +650,15 @@ export const translations = {
         duration: '1 andro',
         difficulty: 'Antonony',
         price: '95',
+      },
+      nosySakatia: {
+        title: 'Nosy Sakatia: Nosy Tena Izy',
+        titleMg: 'Nosy Sakatia',
+        description: 'Fitsangatsanganana manokana any amin\'ny nosy orkide hilanonana miaraka amin\'ny sokatra maitso ao anaty rano kristaly. Fitsidihana ny fambolena lavanila sy dipoavatra, sakafo eo amoron-dranomasina ary lalana botanika voatahiry.',
+        duration: 'Andro iray manontolo',
+        difficulty: 'Mora',
+        price: 'Araka ny fangatahana',
+        guideTip: 'Manoro anao izahay hiala maraina be mba hahafinaritra ny morontsiraka alohan\'ny fahatongavan\'ny mpitsidika hafa ary hahitana tsara indrindra ny sokatra.',
       },
     },
     services: {
