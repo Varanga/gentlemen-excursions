@@ -6,6 +6,7 @@ import tsingyRougesImg from '@/assets/excursions/tsingy-rouges.jpg';
 import ankarana from '@/assets/excursions/ankarana.jpg';
 import nosyIranjaImg from '@/assets/excursions/nosy-iranja.jpg';
 import lokobeImg from '@/assets/excursions/lokobe.jpg';
+import nosySakatiaImg from '@/assets/excursions/nosy-sakatia.jpg';
 import heroImage from '@/assets/hero-madagascar.jpg';
 
 export type Region = 'diego' | 'nosybe' | 'circuits';
@@ -21,7 +22,8 @@ export type ExcursionKey =
   | 'montagneFrancais' 
   | 'nosyIranja' 
   | 'nosyTanikely' 
-  | 'lokobe';
+  | 'lokobe'
+  | 'nosySakatia';
 
 export interface Tour {
   id: string;
@@ -164,6 +166,18 @@ export const tours: Tour[] = [
     altFr: 'Réserve naturelle Lokobe forêt primaire lémuriens Nosy Be',
     altEn: 'Lokobe Nature Reserve primary forest lemurs Nosy Be',
     altMg: 'Zaridaina voajanahary Lokobe ala voalohany gidro Nosy Be',
+  },
+  { 
+    id: 'nosy-sakatia', 
+    slug: 'nosy-sakatia',
+    image: nosySakatiaImg, 
+    titleKey: 'nosySakatia', 
+    region: 'nosybe', 
+    location: 'Nosy Be',
+    featured: true,
+    altFr: 'Snorkeling tortues vertes Nosy Sakatia île aux orchidées Madagascar',
+    altEn: 'Green sea turtle snorkeling Nosy Sakatia orchid island Madagascar',
+    altMg: 'Snorkeling sokatra maitso Nosy Sakatia nosy orkide Madagasikara',
   },
 ];
 
