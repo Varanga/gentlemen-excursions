@@ -806,7 +806,7 @@ Cordialement`);
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
               >
-                <h2 className="font-serif text-3xl text-white mb-6">L'Expérience</h2>
+                <h2 className="font-serif text-3xl text-white mb-6">{t.common.theExperience}</h2>
                 <p className="text-zinc-400 leading-relaxed text-lg">
                   {data.description}
                 </p>
@@ -871,7 +871,7 @@ Cordialement`);
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
               >
-                <h2 className="font-serif text-3xl text-white mb-8">Programme</h2>
+                <h2 className="font-serif text-3xl text-white mb-8">{t.common.program}</h2>
                 <div className="space-y-0">
                   {program.map((item, index) => (
                     <motion.div
@@ -903,13 +903,13 @@ Cordialement`);
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
               >
-                <h2 className="font-serif text-3xl text-white mb-8">Détails du Prix</h2>
+                <h2 className="font-serif text-3xl text-white mb-8">{t.common.priceDetails}</h2>
                 <div className="grid md:grid-cols-2 gap-8">
                   {/* Included */}
                   <div className="bg-[#0A0A0A] border border-gold/20 rounded-xl p-8">
                     <h3 className="text-gold font-medium uppercase tracking-wider text-sm mb-6 flex items-center gap-2">
                       <Check className="w-5 h-5" />
-                      Inclus dans le prix
+                      {t.common.includedInPrice}
                     </h3>
                     <ul className="space-y-4">
                       {included.map((item, index) => (
@@ -927,11 +927,7 @@ Cordialement`);
                       <div className="flex items-start gap-3">
                         <Award className="w-5 h-5 text-gold flex-shrink-0 mt-0.5" />
                         <p className="text-xs text-zinc-400 leading-relaxed">
-                          {language === 'en' 
-                            ? 'All our expeditions are guided exclusively by native guides from the region, experts in the fauna, flora and history of Madagascar.'
-                            : language === 'mg'
-                            ? 'Ny fitsangatsanganana rehetra dia tarihin\'ny mpitarika teratany ihany, manam-pahaizana momba ny biby, ny zavamaniry ary ny tantaran\'i Madagasikara.'
-                            : 'Toutes nos expéditions sont accompagnées exclusivement par des guides natifs de la région, experts de la faune, de la flore et de l\'histoire de Madagascar.'}
+                          {t.common.localExpertise}
                         </p>
                       </div>
                     </div>
@@ -941,7 +937,7 @@ Cordialement`);
                   <div className="bg-[#0A0A0A] border border-zinc-800 rounded-xl p-8">
                     <h3 className="text-zinc-400 font-medium uppercase tracking-wider text-sm mb-6 flex items-center gap-2">
                       <XCircle className="w-5 h-5" />
-                      Non inclus
+                      {t.common.notIncluded}
                     </h3>
                     <ul className="space-y-4">
                       {notIncluded.map((item, index) => (
@@ -1043,7 +1039,7 @@ Cordialement`);
                       className="w-full bg-gold text-black font-semibold py-4 rounded-lg hover:bg-gold/90 transition-colors flex items-center justify-center gap-2"
                     >
                       <Mail className="w-5 h-5" />
-                      {language === 'en' ? 'Request a Quote' : language === 'mg' ? 'Mangataka vidiny' : 'Demander un Devis'}
+                      {t.common.requestQuote}
                     </button>
                   </form>
 
@@ -1051,15 +1047,11 @@ Cordialement`);
                     <div className="flex items-center gap-3 justify-center">
                       <Award className="w-5 h-5 text-gold" />
                       <p className="text-xs text-zinc-400">
-                        {language === 'en' 
-                          ? '100% certified local guides' 
-                          : language === 'mg'
-                          ? 'Mpitarika teratany voamarina 100%'
-                          : '100% guides locaux certifiés'}
+                        {t.common.localGuidesCertified}
                       </p>
                     </div>
                     <p className="text-xs text-zinc-500 text-center mt-4">
-                      ✨ {language === 'en' ? 'Response guaranteed within 24h' : language === 'mg' ? 'Valiny antoka ao anatin\'ny 24 ora' : 'Réponse garantie sous 24h'}
+                      ✨ {t.common.responseGuaranteed}
                     </p>
                   </div>
                 </motion.div>
