@@ -16,8 +16,12 @@ import VideoTestimonialsSection from '@/components/VideoTestimonialsSection';
 export default function Index() {
   const { t, language } = useLanguage();
   
-  // Get featured excursions from centralized data
-  const featuredExcursions = getFeaturedTours();
+  // Get featured excursions from centralized data - limit to 4 for homepage elegance
+  // Exclude Nosy Sakatia from homepage (keep it in full catalog)
+  const allFeaturedExcursions = getFeaturedTours();
+  const featuredExcursions = allFeaturedExcursions
+    .filter(excursion => excursion.slug !== 'nosy-sakatia')
+    .slice(0, 4);
 
   const altText = (excursion: typeof featuredExcursions[0]) => {
     return language === 'en' ? excursion.altEn : language === 'mg' ? excursion.altMg : excursion.altFr;
