@@ -3,8 +3,9 @@ import { useParams, Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Calendar, CircleDot, MapPin, Clock, Users, ChevronLeft, ChevronRight, 
-  X, Check, XCircle, Star, MessageCircle, ChevronDown, Lightbulb
+  X, Check, XCircle, Star, Mail, ChevronDown, Lightbulb, Award
 } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/i18n/LanguageContext';
 import Layout from '@/components/Layout';
 import FloatingBackButton from '@/components/FloatingBackButton';
@@ -654,19 +655,46 @@ export default function ExcursionDetail() {
   const nextImage = () => setCurrentImageIndex((prev) => (prev + 1) % excursion.images.length);
   const prevImage = () => setCurrentImageIndex((prev) => (prev - 1 + excursion.images.length) % excursion.images.length);
 
+  const { toast } = useToast();
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const message = `Bonjour, je souhaite réserver l'excursion "${data.title}".
     
-Nom: ${formData.name}
-Email: ${formData.email}
-Téléphone: ${formData.phone}
-Date souhaitée: ${formData.date}
-Nombre de participants: ${formData.participants}
-Message: ${formData.message}`;
+    const subject = encodeURIComponent(`Nouvelle demande de réservation : ${data.title}`);
+    const body = encodeURIComponent(`Bonjour Gentlemen Excursions,
+
+Je souhaite réserver l'excursion "${data.title}".
+
+═══════════════════════════════
+📋 DÉTAILS DE LA RÉSERVATION
+═══════════════════════════════
+
+👤 Nom: ${formData.name}
+📧 Email: ${formData.email}
+📞 Téléphone: ${formData.phone || 'Non renseigné'}
+📅 Date souhaitée: ${formData.date}
+👥 Nombre de participants: ${formData.participants}
+
+💬 Message:
+${formData.message || 'Aucun message additionnel'}
+
+═══════════════════════════════
+
+Merci de me recontacter pour confirmer la disponibilité.
+
+Cordialement`);
     
-    const whatsappUrl = `https://wa.me/261326850423?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
+    const mailtoUrl = `mailto:gentlemenexcursions@gmail.com?subject=${subject}&body=${body}`;
+    window.location.href = mailtoUrl;
+    
+    toast({
+      title: language === 'en' ? "Request sent!" : language === 'mg' ? "Fangatahana nalefa!" : "Demande envoyée !",
+      description: language === 'en' 
+        ? "Thank you, your request has been sent. A Gentleman will respond within 24 hours." 
+        : language === 'mg'
+        ? "Misaotra, ny fangatahana dia nalefa. Hamaly anao ao anatin'ny 24 ora ny Gentleman."
+        : "Merci, votre demande a été transmise. Un Gentleman vous répondra par email sous 24h.",
+    });
   };
 
   return (
@@ -893,6 +921,20 @@ Message: ${formData.message}`;
                         </li>
                       ))}
                     </ul>
+                    
+                    {/* Local Guide Certification Notice */}
+                    <div className="mt-6 pt-6 border-t border-gold/10">
+                      <div className="flex items-start gap-3">
+                        <Award className="w-5 h-5 text-gold flex-shrink-0 mt-0.5" />
+                        <p className="text-xs text-zinc-400 leading-relaxed">
+                          {language === 'en' 
+                            ? 'All our expeditions are guided exclusively by native guides from the region, experts in the fauna, flora and history of Madagascar.'
+                            : language === 'mg'
+                            ? 'Ny fitsangatsanganana rehetra dia tarihin\'ny mpitarika teratany ihany, manam-pahaizana momba ny biby, ny zavamaniry ary ny tantaran\'i Madagasikara.'
+                            : 'Toutes nos expéditions sont accompagnées exclusivement par des guides natifs de la région, experts de la faune, de la flore et de l\'histoire de Madagascar.'}
+                        </p>
+                      </div>
+                    </div>
                   </div>
 
                   {/* Not Included */}
@@ -1000,14 +1042,26 @@ Message: ${formData.message}`;
                       type="submit"
                       className="w-full bg-gold text-black font-semibold py-4 rounded-lg hover:bg-gold/90 transition-colors flex items-center justify-center gap-2"
                     >
-                      <MessageCircle className="w-5 h-5" />
-                      Réserver via WhatsApp
+                      <Mail className="w-5 h-5" />
+                      {language === 'en' ? 'Request a Quote' : language === 'mg' ? 'Mangataka vidiny' : 'Demander un Devis'}
                     </button>
                   </form>
 
-                  <p className="text-xs text-zinc-500 text-center mt-6">
-                    ✨ Réponse garantie sous 24h
-                  </p>
+                  <div className="mt-6 pt-6 border-t border-gold/20">
+                    <div className="flex items-center gap-3 justify-center">
+                      <Award className="w-5 h-5 text-gold" />
+                      <p className="text-xs text-zinc-400">
+                        {language === 'en' 
+                          ? '100% certified local guides' 
+                          : language === 'mg'
+                          ? 'Mpitarika teratany voamarina 100%'
+                          : '100% guides locaux certifiés'}
+                      </p>
+                    </div>
+                    <p className="text-xs text-zinc-500 text-center mt-4">
+                      ✨ {language === 'en' ? 'Response guaranteed within 24h' : language === 'mg' ? 'Valiny antoka ao anatin\'ny 24 ora' : 'Réponse garantie sous 24h'}
+                    </p>
+                  </div>
                 </motion.div>
               </div>
             </div>
