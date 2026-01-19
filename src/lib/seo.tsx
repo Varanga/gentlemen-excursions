@@ -129,7 +129,7 @@ export function generateOrganizationSchema() {
     },
     contactPoint: {
       '@type': 'ContactPoint',
-      telephone: '+261-32-XX-XXX-XX',
+      telephone: '+261-32-68-504-23',
       contactType: 'customer service',
       availableLanguage: ['French', 'English', 'Malagasy'],
     },

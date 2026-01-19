@@ -7,8 +7,8 @@ interface WhatsAppButtonProps {
 }
 
 export default function WhatsAppButton({ 
-  phoneNumber = '+261320000000',
-  message = 'Bonjour, je souhaite avoir des informations sur vos excursions.'
+  phoneNumber = '+261326850423',
+  message = 'Bonjour Gentlemen Excursions, je souhaite organiser une expédition...'
 }: WhatsAppButtonProps) {
   const encodedMessage = encodeURIComponent(message);
   const whatsappUrl = `https://wa.me/${phoneNumber.replace(/[^0-9]/g, '')}?text=${encodedMessage}`;
