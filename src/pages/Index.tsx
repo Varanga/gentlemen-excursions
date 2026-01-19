@@ -53,12 +53,19 @@ export default function Index() {
         canonical="/"
         language={language}
         keywords={[
-          'Excursion Nord Madagascar',
-          'Voyage luxe Diego-Suarez',
-          'Guide touristique Nosy Be',
-          'Mer d\'Émeraude',
-          'Tsingy Ankarana',
-          'Kitesurf Madagascar',
+          // Primary keywords
+          'Excursion luxe Madagascar',
+          'Guide privé Diego-Suarez',
+          'Tour opérateur Nosy Be',
+          // Niche keywords
+          'Mer d\'Émeraude bateau privatisé',
+          'Tsingy Ankarana circuit privé',
+          'Snorkeling tortues Nosy Sakatia',
+          'Kitesurf Baie Sakalava',
+          // Long tail
+          'Voyage haut de gamme Nord Madagascar',
+          'Excursion Nosy Iranja luxe',
+          'Safari lémuriens Montagne d\'Ambre',
         ]}
         structuredData={organizationSchema}
       />

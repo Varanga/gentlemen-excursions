@@ -9,6 +9,7 @@ interface ExcursionCardProps {
   description: string;
   tag?: string;
   index?: number;
+  location?: string;
 }
 
 export default function ExcursionCard({
@@ -18,8 +19,16 @@ export default function ExcursionCard({
   description,
   tag,
   index = 0,
+  location,
 }: ExcursionCardProps) {
   const { t, language } = useLanguage();
+  
+  // SEO-optimized alt text
+  const altText = language === 'en' 
+    ? `Private excursion ${title}${location ? ` in ${location}` : ''}, Northern Madagascar`
+    : language === 'mg'
+    ? `Fitsangatsanganana manokana ${title}${location ? ` ao ${location}` : ''}, Avaratra Madagasikara`
+    : `Excursion privée ${title}${location ? ` à ${location}` : ''} au Nord de Madagascar`;
 
   return (
     <motion.div
@@ -29,11 +38,11 @@ export default function ExcursionCard({
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className="excursion-card group cursor-pointer"
     >
-      {/* Image Container */}
       <div className="relative overflow-hidden aspect-[4/3]">
         <img
           src={image}
-          alt={title}
+          alt={altText}
+          loading="lazy"
           className="excursion-card-image"
         />
         

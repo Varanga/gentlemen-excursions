@@ -5,10 +5,28 @@ import { useLanguage } from '@/i18n/LanguageContext';
 import Layout from '@/components/Layout';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { tours, getToursByRegion, Region } from '@/lib/data';
+import { SEO, generateBreadcrumbSchema } from '@/lib/seo';
 
 // Use first tour image for hero
 import merEmeraudeImg from '@/assets/excursions/mer-emeraude.jpg';
 type FilterKey = 'all' | Region;
+
+// SEO content per language
+const seoContent = {
+  fr: {
+    title: 'Expéditions & Excursions Privées au Nord Madagascar',
+    description: 'Découvrez nos excursions privées à Diego-Suarez et Nosy Be : Mer d\'Émeraude, Tsingy Ankarana, Montagne d\'Ambre. Guides locaux certifiés, 4x4 privatisés.',
+  },
+  en: {
+    title: 'Private Expeditions & Excursions in Northern Madagascar',
+    description: 'Explore our private excursions in Diego-Suarez and Nosy Be: Emerald Sea, Ankarana Tsingy, Amber Mountain. Certified local guides, private 4x4.',
+  },
+  mg: {
+    title: 'Fitsangatsanganana Manokana any Avaratra Madagasikara',
+    description: 'Fantaro ny fitsangatsanganana manokana any Diego-Suarez sy Nosy Be. Mpitarika teratany voamarina, 4x4 manokana.',
+  },
+};
+
 export default function Expeditions() {
   const {
     t,
@@ -93,13 +111,40 @@ export default function Expeditions() {
     return results;
   }, [activeFilter, searchQuery, t.excursions]);
   const noResultsText = language === 'en' ? 'No expedition matches your criteria.' : language === 'mg' ? 'Tsy misy fitsangatsanganana mifanaraka amin\'ny fepetra napetrakao.' : 'Aucune expédition ne correspond à vos critères.';
+
+  // Breadcrumb schema for SEO
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: 'Accueil', url: '/' },
+    { name: language === 'en' ? 'Expeditions' : 'Expéditions', url: '/expeditions' },
+  ]);
+
   return <Layout>
+      {/* SEO Meta Tags */}
+      <SEO
+        title={seoContent[language].title}
+        description={seoContent[language].description}
+        canonical="/expeditions"
+        language={language}
+        keywords={[
+          'Excursion privée Madagascar',
+          'Guide Diego-Suarez',
+          'Tour opérateur Nosy Be',
+          'Mer d\'Émeraude excursion',
+          'Tsingy Ankarana visite',
+          'Safari lémuriens Madagascar',
+        ]}
+        structuredData={breadcrumbSchema}
+      />
+
       {/* Hero - Style Black & Gold */}
       <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center bg-navy">
         <div className="absolute inset-0 z-0">
-          <img src={merEmeraudeImg} alt="Expeditions" className="w-full h-full object-cover opacity-40" style={{
-          animation: 'kenburns 20s ease-in-out infinite alternate'
-        }} />
+          <img 
+            src={merEmeraudeImg} 
+            alt={language === 'en' ? 'Private expeditions catalog in Northern Madagascar' : 'Catalogue des expéditions privées au Nord de Madagascar'} 
+            className="w-full h-full object-cover opacity-40" 
+            style={{animation: 'kenburns 20s ease-in-out infinite alternate'}} 
+          />
           <div className="absolute inset-0 bg-gradient-to-b from-navy/60 via-navy/30 to-navy/90" />
         </div>
         <div className="relative z-10 text-center text-white px-6 max-w-4xl mx-auto">

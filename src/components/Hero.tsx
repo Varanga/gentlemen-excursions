@@ -105,7 +105,9 @@ export default function Hero() {
         >
           <img
             src={currentTour.image}
-            alt={currentData.title}
+            alt={language === 'en' 
+              ? `Private luxury excursion ${currentData.title} in ${currentTour.location}, Northern Madagascar`
+              : `Excursion privée de luxe ${currentData.title} à ${currentTour.location}, Nord Madagascar`}
             className="w-full h-full object-cover"
           />
           <div 
@@ -138,6 +140,15 @@ export default function Hero() {
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-6 lg:px-12 text-center text-white">
+        {/* SEO H1 - Hidden visually but accessible to search engines */}
+        <h1 className="sr-only">
+          {language === 'en' 
+            ? 'Gentlemen Excursions - Luxury Private Tours in Northern Madagascar' 
+            : language === 'mg'
+            ? 'Gentlemen Excursions - Fitsangatsanganana Manokana any Avaratra Madagasikara'
+            : 'Gentlemen Excursions - Excursions Privées de Luxe au Nord Madagascar'}
+        </h1>
+
         <AnimatePresence mode="wait">
           <motion.div
             key={currentSlide}
@@ -160,10 +171,10 @@ export default function Hero() {
               </span>
             </motion.div>
 
-            {/* Main Title */}
-            <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-medium tracking-tight mb-4 leading-none text-white">
+            {/* Featured Tour Title - H2 for SEO */}
+            <h2 className="font-serif text-5xl md:text-7xl lg:text-8xl font-medium tracking-tight mb-4 leading-none text-white">
               {currentData.title}
-            </h1>
+            </h2>
 
             {/* Malagasy Name */}
             {'titleMg' in currentData && currentData.titleMg && (

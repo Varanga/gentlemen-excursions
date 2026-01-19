@@ -37,13 +37,25 @@ export function SEO({
   const fullCanonical = canonical ? `${baseUrl}${canonical}` : baseUrl;
   const fullImage = image.startsWith('http') ? image : `${baseUrl}${image}`;
 
-  // Default keywords for Madagascar tourism
+  // Default keywords for Madagascar luxury tourism - SEO optimized
   const defaultKeywords = [
-    'Excursion Nord Madagascar',
-    'Voyage luxe Diego-Suarez',
-    'Guide touristique Nosy Be',
-    'Kitesurf Mer d\'Émeraude',
-    'Trekking Tsingy Ankarana',
+    // Primary keywords
+    'Excursion luxe Madagascar',
+    'Guide privé Diego-Suarez',
+    'Tour opérateur Nosy Be',
+    'Privatisation 4x4 Madagascar',
+    'Voyage haut de gamme Madagascar',
+    // Niche keywords
+    'Snorkeling tortues Nosy Sakatia',
+    'Tsingy de l\'Ankarana circuit privé',
+    'Mer d\'Émeraude bateau privatisé',
+    'Kitesurf Baie Sakalava',
+    'Excursion Nosy Iranja luxe',
+    // Long tail keywords
+    'Meilleur guide touristique Diego-Suarez',
+    'Excursion privée Montagne d\'Ambre',
+    'Safari lemuriens Madagascar nord',
+    'Agence voyage luxe Antsiranana',
   ];
 
   const allKeywords = [...new Set([...keywords, ...defaultKeywords])];
@@ -111,15 +123,26 @@ export function generateOrganizationSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'TravelAgency',
+    '@id': 'https://gentlemen-excursions.mg/#organization',
     name: 'Gentlemen Excursions',
     alternateName: 'Gentlemen Excursions Madagascar',
     url: 'https://gentlemen-excursions.mg',
-    logo: 'https://gentlemen-excursions.mg/logo.png',
-    description: 'Agence de voyage haut de gamme spécialisée dans les excursions au Nord de Madagascar',
+    logo: {
+      '@type': 'ImageObject',
+      url: 'https://gentlemen-excursions.mg/logo.png',
+      width: 300,
+      height: 100,
+    },
+    image: 'https://gentlemen-excursions.mg/og-image.jpg',
+    description: 'Agence de voyage haut de gamme spécialisée dans les excursions privées au Nord de Madagascar. Guides locaux certifiés, 4x4 privatisés, expériences authentiques à Diego-Suarez et Nosy Be.',
+    slogan: 'L\'Excellence du Voyage à Madagascar',
+    foundingDate: '2018',
     address: {
       '@type': 'PostalAddress',
+      streetAddress: 'Centre-ville',
       addressLocality: 'Diego-Suarez',
       addressRegion: 'Diana',
+      postalCode: '201',
       addressCountry: 'MG',
     },
     geo: {
@@ -127,25 +150,86 @@ export function generateOrganizationSchema() {
       latitude: -12.2765,
       longitude: 49.2913,
     },
-    contactPoint: {
-      '@type': 'ContactPoint',
-      telephone: '+261-32-68-504-23',
-      contactType: 'customer service',
-      availableLanguage: ['French', 'English', 'Malagasy'],
-    },
+    telephone: '+261-32-68-504-23',
+    email: 'gentlemenexcursions@gmail.com',
+    contactPoint: [
+      {
+        '@type': 'ContactPoint',
+        telephone: '+261-32-68-504-23',
+        contactType: 'customer service',
+        availableLanguage: ['French', 'English', 'Malagasy'],
+        areaServed: 'MG',
+      },
+      {
+        '@type': 'ContactPoint',
+        telephone: '+261-38-21-221-47',
+        contactType: 'reservations',
+        availableLanguage: ['French', 'English', 'Malagasy'],
+      },
+    ],
     sameAs: [
       'https://www.facebook.com/gentlemenexcursions',
       'https://www.instagram.com/gentlemenexcursions',
+      'https://www.tripadvisor.com/gentlemenexcursions',
     ],
     priceRange: '€€€',
-    areaServed: {
-      '@type': 'GeoCircle',
-      geoMidpoint: {
-        '@type': 'GeoCoordinates',
-        latitude: -12.2765,
-        longitude: 49.2913,
+    currenciesAccepted: 'EUR, MGA',
+    paymentAccepted: 'Cash, Bank Transfer',
+    openingHoursSpecification: {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+      opens: '07:00',
+      closes: '19:00',
+    },
+    areaServed: [
+      {
+        '@type': 'City',
+        name: 'Diego-Suarez',
+        alternateName: 'Antsiranana',
       },
-      geoRadius: '200 km',
+      {
+        '@type': 'City',
+        name: 'Nosy Be',
+      },
+      {
+        '@type': 'AdministrativeArea',
+        name: 'Nord Madagascar',
+      },
+    ],
+    knowsAbout: [
+      'Excursions privées Madagascar',
+      'Tsingy de l\'Ankarana',
+      'Mer d\'Émeraude',
+      'Parc National Montagne d\'Ambre',
+      'Snorkeling Nosy Be',
+      'Kitesurf Diego-Suarez',
+    ],
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Catalogue des Expéditions',
+      itemListElement: [
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'TouristTrip',
+            name: 'Mer d\'Émeraude',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'TouristTrip',
+            name: 'Tsingy de l\'Ankarana',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'TouristTrip',
+            name: 'Nosy Iranja',
+          },
+        },
+      ],
     },
   };
 }
