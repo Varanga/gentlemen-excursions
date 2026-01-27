@@ -4,7 +4,7 @@ import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import { Menu, X } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { Language } from '@/i18n/translations';
-
+import logo from '@/assets/logo.png';
 const languages: {
   code: Language;
   label: string;
@@ -170,27 +170,42 @@ export default function Header() {
             </motion.div>
 
             {/* Center Column: Logo - Absolutely Centered */}
-            <motion.div variants={itemVariants} className="flex justify-center">
-              <Link to="/" className="group flex flex-col items-center pointer-events-auto">
-                <motion.span 
-                  className={`font-serif font-medium tracking-wide text-white group-hover:text-gold transition-all duration-500 whitespace-nowrap ${
-                    isScrolled ? 'text-lg md:text-xl lg:text-2xl' : 'text-xl md:text-2xl lg:text-3xl'
-                  }`}
-                  layout
-                >
-                  <span className="text-gold mr-1">+</span>
-                  <span className="italic">Gentlemen</span>
-                </motion.span>
-                <motion.span 
-                  className={`text-gold uppercase tracking-[0.2em] md:tracking-[0.3em] transition-all duration-500 ${
-                    isScrolled ? 'text-[7px] md:text-[8px]' : 'text-[8px] md:text-[10px]'
-                  }`}
-                  layout
-                >
-                  Excursions
-                </motion.span>
-              </Link>
-            </motion.div>
+<motion.div variants={itemVariants} className="flex justify-center">
+  <Link to="/" className="group flex items-center gap-4 pointer-events-auto">
+    
+    {/* LOGO à gauche */}
+    <motion.img 
+      src={logo} 
+      alt="Gentlemen Excursions Logo" 
+      className={`transition-all duration-500 object-contain ${
+        isScrolled ? 'h-10 md:h-12' : 'h-14 md:h-16'
+      }`}
+      layout
+    />
+
+    {/* TEXTES à droite, empilés verticalement */}
+    <div className="flex flex-col justify-center border-l border-white/20 pl-4">
+      <motion.span 
+        className={`font-serif font-medium tracking-wide text-white group-hover:text-gold transition-all duration-500 whitespace-nowrap ${
+          isScrolled ? 'text-lg md:text-xl' : 'text-xl md:text-2xl'
+        }`}
+        layout
+      >
+        <span className="italic">Gentlemen</span>
+      </motion.span>
+      
+      <motion.span 
+        className={`text-gold uppercase tracking-[0.2em] md:tracking-[0.3em] transition-all duration-500 ${
+          isScrolled ? 'text-[7px] md:text-[8px]' : 'text-[8px] md:text-[10px]'
+        }`}
+        layout
+      >
+        Excursions
+      </motion.span>
+    </div>
+
+  </Link>
+</motion.div>
 
             {/* Right Column: Language + Reserve (Desktop) / Menu Button (Mobile) */}
             <motion.div variants={itemVariants} className="flex items-center justify-end gap-3 lg:gap-6">
@@ -284,7 +299,7 @@ export default function Header() {
               onClick={() => setIsMobileMenuOpen(false)}
               className="absolute top-6 right-6 p-2 text-white hover:text-gold transition-colors z-50"
             >
-              <X className="w-8 h-8" />
+              {/* <X className="w-8 h-8" /> */}
             </button>
 
             {/* Navigation Links */}

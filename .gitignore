@@ -8,7 +8,23 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-dist
+# Secrets
+.env
+server/.env
+
+# Dépendances
+node_modules/
+server/node_modules/
+
+# Build
+dist/
+build/
+
+# Système
+.DS_Store
+Thumbs.db
+dist/
+build/
 dist-ssr
 *.local
 

@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
-import heroImage from '@/assets/hero-madagascar.jpg';
+import troisBaiesImg5 from '@/assets/gallery/trois-baies5.jpg';
 
 export default function AboutPreview() {
   const { language } = useLanguage();
@@ -47,7 +47,7 @@ export default function AboutPreview() {
           >
             <div className="relative aspect-[4/5] overflow-hidden">
               <img 
-                src={heroImage} 
+                src={troisBaiesImg5} 
                 alt="Paysage Nord Madagascar Diego-Suarez" 
                 className="w-full h-full object-cover"
               />

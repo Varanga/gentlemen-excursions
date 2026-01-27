@@ -13,16 +13,64 @@ import { tours, getTourBySlug } from '@/lib/data';
 import { SEO, generateTourSchema, generateFAQSchema, generateBreadcrumbSchema } from '@/lib/seo';
 import { getExcursionFAQs } from '@/lib/faqData';
 
-// Import images
+// Importer des images
+
 import merEmeraudeImg from '@/assets/excursions/mer-emeraude.jpg';
+
+import merEmeraudeImg1 from '@/assets/excursions/mer-emeraude1.jpg';
+
+import merEmeraudeImg2 from '@/assets/excursions/mer-emeraude2.png';
+
 import troisBaiesImg from '@/assets/excursions/trois-baies.jpg';
+
+import troisBaiesImg1 from '@/assets/excursions/trois-baies1.jpg';
+
+import troisBaiesImg2 from '@/assets/excursions/trois-baies2.jpg';
+
+import montfraImg from '@/assets/excursions/franc.jpg';
+import montfraImg1 from '@/assets/excursions/franc1.jpg';
+import montfraImg2 from '@/assets/excursions/franc2.jpg';
+
 import montagneAmbreImg from '@/assets/excursions/montagne-ambre.jpg';
+
+import montagneAmbreImg1 from '@/assets/excursions/montagne-ambre1.jpg';
+
+import montagneAmbreImg2 from '@/assets/excursions/montagne-ambre2.jpg';
+
 import tsingyRougesImg from '@/assets/excursions/tsingy-rouges.jpg';
+
+import tsingyRougesImg1 from '@/assets/excursions/tsingy-rouges1.jpg';
+
+import tsingyRougesImg2 from '@/assets/excursions/tsingy-rouges2.jpg';
+
 import ankarana from '@/assets/excursions/ankarana.jpg';
+
+import ankarana1 from '@/assets/excursions/ankarana1.jpg';
+
+import ankarana2 from '@/assets/excursions/ankarana2.jpg';
+
 import nosyIranjaImg from '@/assets/excursions/nosy-iranja.jpg';
+import nosyIranjaImg1 from '@/assets/excursions/nosy-iranja1.jpg';
+import nosyIranjaImg2 from '@/assets/excursions/nosy-iranja2.jpg';
+
 import lokobeImg from '@/assets/excursions/lokobe.jpg';
+import lokobeImg1 from '@/assets/excursions/lokobe1.jpg';
+import lokobeImg2 from '@/assets/excursions/lokobe2.jpg';
+
 import nosySakatiaImg from '@/assets/excursions/nosy-sakatia.jpg';
-import heroImage from '@/assets/hero-madagascar.jpg';
+import nosySakatiaImg1 from '@/assets/excursions/nosy-sakatia1.jpg';
+import nosySakatiaImg2 from '@/assets/excursions/nosy-sakatia2.jpg';
+import haraImg from '@/assets/excursions/hara.jpg';
+import haraImg1 from '@/assets/excursions/hara1.jpg';
+import haraImg2 from '@/assets/excursions/hara2.jpg';
+import anivorano from '@/assets/excursions/lac.jpeg';
+
+import anivorano1 from '@/assets/excursions/lac1.jpg';
+
+import anivorano2 from'@/assets/excursions/lac2.jpg';
+import kombaImg from '@/assets/excursions/komba.jpg';
+import kombaImg1 from '@/assets/excursions/komba1.jpg';
+import kombaImg2 from '@/assets/excursions/komba2.jpg';
 
 type ExcursionKey = 'merEmeraude' | 'troisBaies' | 'montagneAmbre' | 'tsingyRouges' | 'ankarana' | 'nosyHara' | 'lacSacre' | 'montagneFrancais' | 'nosyIranja' | 'nosyTanikely' | 'lokobe' | 'nosySakatia';
 
@@ -51,7 +99,7 @@ const excursionsData: ExcursionData[] = [
   {
     id: 'mer-emeraude',
     key: 'merEmeraude',
-    images: [merEmeraudeImg, heroImage, troisBaiesImg],
+    images: [merEmeraudeImg, merEmeraudeImg1, merEmeraudeImg2],
     location: 'Diego-Suarez',
     region: 'Nord Madagascar',
     includedFr: ['Transport en 4x4 climatisé', 'Guide francophone certifié', 'Déjeuner gastronomique sur la plage', 'Équipement snorkeling premium', 'Boissons fraîches illimitées', 'Taxes de parcs'],
@@ -95,7 +143,7 @@ const excursionsData: ExcursionData[] = [
   {
     id: 'trois-baies',
     key: 'troisBaies',
-    images: [troisBaiesImg, merEmeraudeImg, heroImage],
+    images: [troisBaiesImg, troisBaiesImg1, troisBaiesImg2],
     location: 'Diego-Suarez',
     region: 'Nord Madagascar',
     includedFr: ['Transport en 4x4 privé', 'Guide local expert', 'Déjeuner traditionnel', 'Entrées aux sites', 'Rafraîchissements', 'Taxes de parcs'],
@@ -136,7 +184,7 @@ const excursionsData: ExcursionData[] = [
   {
     id: 'montagne-ambre',
     key: 'montagneAmbre',
-    images: [montagneAmbreImg, lokobeImg, heroImage],
+    images: [montagneAmbreImg, montagneAmbreImg1, montagneAmbreImg2 ],
     location: 'Diego-Suarez',
     region: 'Nord Madagascar',
     includedFr: ['Transport en 4x4 privé', 'Guide naturaliste certifié', 'Droits d\'entrée au parc', 'Pique-nique gourmet', 'Rafraîchissements', 'Taxes de parcs'],
@@ -180,7 +228,7 @@ const excursionsData: ExcursionData[] = [
   {
     id: 'tsingy-rouges',
     key: 'tsingyRouges',
-    images: [tsingyRougesImg, montagneAmbreImg, heroImage],
+    images: [tsingyRougesImg, tsingyRougesImg1, tsingyRougesImg2],
     location: 'Diego-Suarez',
     region: 'Nord Madagascar',
     includedFr: ['Transport en 4x4 privé', 'Guide local expert', 'Droits d\'entrée', 'Rafraîchissements', 'Taxes de parcs'],
@@ -221,7 +269,7 @@ const excursionsData: ExcursionData[] = [
   {
     id: 'ankarana',
     key: 'ankarana',
-    images: [ankarana, tsingyRougesImg, heroImage],
+    images: [ankarana, ankarana1, ankarana2],
     location: 'Diego-Suarez',
     region: 'Nord Madagascar',
     includedFr: ['Transport en 4x4 privé', 'Guide naturaliste', 'Droits d\'entrée', 'Hébergement en lodge', 'Repas complets', 'Équipement spéléo', 'Taxes de parcs'],
@@ -265,7 +313,7 @@ const excursionsData: ExcursionData[] = [
   {
     id: 'nosy-hara',
     key: 'nosyHara',
-    images: [merEmeraudeImg, nosyIranjaImg, heroImage],
+    images: [haraImg, haraImg1, haraImg2],
     location: 'Diego-Suarez',
     region: 'Nord Madagascar',
     includedFr: ['Transport en bateau rapide', 'Guide expérimenté', 'Bivouac de luxe', 'Repas gastronomiques', 'Équipement snorkeling', 'Kayaks', 'Taxes de parcs'],
@@ -309,7 +357,7 @@ const excursionsData: ExcursionData[] = [
   {
     id: 'lac-sacre',
     key: 'lacSacre',
-    images: [lokobeImg, montagneAmbreImg, heroImage],
+    images: [anivorano, anivorano1, anivorano2],
     location: 'Anivorano',
     region: 'Nord Madagascar',
     includedFr: ['Transport en 4x4 privé', 'Guide local expert', 'Offrandes traditionnelles', 'Rafraîchissements', 'Taxes de parcs'],
@@ -350,7 +398,7 @@ const excursionsData: ExcursionData[] = [
   {
     id: 'montagne-francais',
     key: 'montagneFrancais',
-    images: [troisBaiesImg, tsingyRougesImg, heroImage],
+    images: [montfraImg, montfraImg1, montfraImg2],
     location: 'Diego-Suarez',
     region: 'Nord Madagascar',
     includedFr: ['Transport en 4x4 privé', 'Guide local expert', 'Rafraîchissements', 'En-cas énergétique', 'Taxes de parcs'],
@@ -394,7 +442,7 @@ const excursionsData: ExcursionData[] = [
   {
     id: 'nosy-iranja',
     key: 'nosyIranja',
-    images: [nosyIranjaImg, merEmeraudeImg, heroImage],
+    images: [nosyIranjaImg, nosyIranjaImg1, nosyIranjaImg2],
     location: 'Nosy Be',
     region: 'Nord-Ouest Madagascar',
     includedFr: ['Transport bateau rapide', 'Guide expert', 'Déjeuner de fruits de mer', 'Équipement snorkeling', 'Rafraîchissements', 'Taxes de parcs'],
@@ -441,7 +489,7 @@ const excursionsData: ExcursionData[] = [
   {
     id: 'nosy-tanikely',
     key: 'nosyTanikely',
-    images: [merEmeraudeImg, nosyIranjaImg, heroImage],
+    images: [kombaImg, kombaImg1, kombaImg2],
     location: 'Nosy Be',
     region: 'Nord-Ouest Madagascar',
     includedFr: ['Transport bateau', 'Guide expert', 'Droits d\'entrée réserve', 'Équipement snorkeling', 'Déjeuner', 'Rafraîchissements', 'Taxes de parcs'],
@@ -488,7 +536,7 @@ const excursionsData: ExcursionData[] = [
   {
     id: 'lokobe',
     key: 'lokobe',
-    images: [lokobeImg, montagneAmbreImg, heroImage],
+    images: [lokobeImg, lokobeImg1, lokobeImg2],
     location: 'Nosy Be',
     region: 'Nord-Ouest Madagascar',
     includedFr: ['Transport pirogue privée', 'Guide naturaliste certifié', 'Droits d\'entrée', 'Déjeuner royal au village', 'Rafraîchissements', 'Taxes de parcs'],
@@ -532,7 +580,7 @@ const excursionsData: ExcursionData[] = [
   {
     id: 'nosy-sakatia',
     key: 'nosySakatia',
-    images: [nosySakatiaImg, nosyIranjaImg, heroImage],
+    images: [nosySakatiaImg, nosySakatiaImg1, nosySakatiaImg2],
     location: 'Nosy Be',
     region: 'Nord-Ouest Madagascar',
     includedFr: ['Transport pirogue traditionnelle', 'Guide expert local', 'Déjeuner traditionnel sur la plage', 'Équipement snorkeling', 'Rafraîchissements', 'Taxes de parcs'],
@@ -619,7 +667,7 @@ export default function ExcursionDetail() {
 
   // FAQ data for SEO
   const faqs = getExcursionFAQs(excursion.key, language);
-  
+
   // Structured data for SEO
   const tourSchema = generateTourSchema({
     name: data.title,
@@ -657,46 +705,55 @@ export default function ExcursionDetail() {
 
   const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    const subject = encodeURIComponent(`Nouvelle demande de réservation : ${data.title}`);
-    const body = encodeURIComponent(`Bonjour Gentlemen Excursions,
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
 
-Je souhaite réserver l'excursion "${data.title}".
+  try {
+    const payload = {
+      excursionTitle: data.title,
+      ...formData,
+      language: "fr", // On l'ajoute explicitement
+    };
 
-═══════════════════════════════
-📋 DÉTAILS DE LA RÉSERVATION
-═══════════════════════════════
+    console.log("Envoi des données :", payload);
 
-👤 Nom: ${formData.name}
-📧 Email: ${formData.email}
-📞 Téléphone: ${formData.phone || 'Non renseigné'}
-📅 Date souhaitée: ${formData.date}
-👥 Nombre de participants: ${formData.participants}
-
-💬 Message:
-${formData.message || 'Aucun message additionnel'}
-
-═══════════════════════════════
-
-Merci de me recontacter pour confirmer la disponibilité.
-
-Cordialement`);
-    
-    const mailtoUrl = `mailto:gentlemenexcursions@gmail.com?subject=${subject}&body=${body}`;
-    window.location.href = mailtoUrl;
-    
-    toast({
-      title: language === 'en' ? "Request sent!" : language === 'mg' ? "Fangatahana nalefa!" : "Demande envoyée !",
-      description: language === 'en' 
-        ? "Thank you, your request has been sent. A Gentleman will respond within 24 hours." 
-        : language === 'mg'
-        ? "Misaotra, ny fangatahana dia nalefa. Hamaly anao ao anatin'ny 24 ora ny Gentleman."
-        : "Merci, votre demande a été transmise. Un Gentleman vous répondra par email sous 24h.",
+    const res = await fetch("http://localhost:5000/api/reservation", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
     });
-  };
 
+    // On récupère le JSON de réponse même en cas d'erreur
+    const result = await res.json();
+
+    if (!res.ok) {
+      console.error("Erreur Serveur :", result);
+      throw new Error(result.error || "Erreur inconnue");
+    }
+
+    console.log("Succès Resend :", result);
+
+    toast({
+      title: "Demande envoyée !",
+      description: "Nous vous répondrons sous 24h.",
+    });
+
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      date: '',
+      participants: '2',
+      message: '',
+    });
+  } catch (err: any) {
+    toast({
+      title: "Erreur",
+      description: err.message || "Impossible d’envoyer la demande.",
+      variant: "destructive",
+    });
+  }
+};
   return (
     <Layout>
       {/* SEO Meta Tags */}
@@ -740,7 +797,7 @@ Cordialement`);
         {/* Gradient de lisibilité pour le header */}
         <div className="absolute top-0 left-0 right-0 h-[30%] bg-gradient-to-b from-black/80 via-black/40 to-transparent z-10" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-black/30 to-transparent" />
-        
+
         {/* Navigation Arrows */}
         <button
           onClick={prevImage}
@@ -796,16 +853,17 @@ Cordialement`);
       <section className="py-20 lg:py-28 bg-[#050505]">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="grid lg:grid-cols-3 gap-12 lg:gap-20">
-            
+
             {/* Main Content */}
             <div className="lg:col-span-2 space-y-16">
-              
+
               {/* Description */}
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
               >
+                <h2 className="font-serif text-3xl text-white mb-6">L'Expérience</h2>
                 <h2 className="font-serif text-3xl text-white mb-6">{t.common.theExperience}</h2>
                 <p className="text-zinc-400 leading-relaxed text-lg">
                   {data.description}
@@ -871,6 +929,7 @@ Cordialement`);
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
               >
+                <h2 className="font-serif text-3xl text-white mb-8">Programme</h2>
                 <h2 className="font-serif text-3xl text-white mb-8">{t.common.program}</h2>
                 <div className="space-y-0">
                   {program.map((item, index) => (
@@ -903,12 +962,14 @@ Cordialement`);
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
               >
+                <h2 className="font-serif text-3xl text-white mb-8">Détails du Prix</h2>
                 <h2 className="font-serif text-3xl text-white mb-8">{t.common.priceDetails}</h2>
                 <div className="grid md:grid-cols-2 gap-8">
                   {/* Included */}
                   <div className="bg-[#0A0A0A] border border-gold/20 rounded-xl p-8">
                     <h3 className="text-gold font-medium uppercase tracking-wider text-sm mb-6 flex items-center gap-2">
                       <Check className="w-5 h-5" />
+                      Inclus dans le prix
                       {t.common.includedInPrice}
                     </h3>
                     <ul className="space-y-4">
@@ -921,12 +982,17 @@ Cordialement`);
                         </li>
                       ))}
                     </ul>
-                    
+
                     {/* Local Guide Certification Notice */}
                     <div className="mt-6 pt-6 border-t border-gold/10">
                       <div className="flex items-start gap-3">
                         <Award className="w-5 h-5 text-gold flex-shrink-0 mt-0.5" />
                         <p className="text-xs text-zinc-400 leading-relaxed">
+                          {language === 'en' 
+                            ? 'All our expeditions are guided exclusively by native guides from the region, experts in the fauna, flora and history of Madagascar.'
+                            : language === 'mg'
+                            ? 'Ny fitsangatsanganana rehetra dia tarihin\'ny mpitarika teratany ihany, manam-pahaizana momba ny biby, ny zavamaniry ary ny tantaran\'i Madagasikara.'
+                            : 'Toutes nos expéditions sont accompagnées exclusivement par des guides natifs de la région, experts de la faune, de la flore et de l\'histoire de Madagascar.'}
                           {t.common.localExpertise}
                         </p>
                       </div>
@@ -937,6 +1003,7 @@ Cordialement`);
                   <div className="bg-[#0A0A0A] border border-zinc-800 rounded-xl p-8">
                     <h3 className="text-zinc-400 font-medium uppercase tracking-wider text-sm mb-6 flex items-center gap-2">
                       <XCircle className="w-5 h-5" />
+                      Non inclus
                       {t.common.notIncluded}
                     </h3>
                     <ul className="space-y-4">
@@ -1039,7 +1106,8 @@ Cordialement`);
                       className="w-full bg-gold text-black font-semibold py-4 rounded-lg hover:bg-gold/90 transition-colors flex items-center justify-center gap-2"
                     >
                       <Mail className="w-5 h-5" />
-                      {t.common.requestQuote}
+                      {language === 'en' ? 'Request a Quote' : language === 'mg' ? 'Mangataka vidiny' : 'Demander un Devis'}
+                      {/* {t.common.requestQuote} */}
                     </button>
                   </form>
 
@@ -1047,10 +1115,16 @@ Cordialement`);
                     <div className="flex items-center gap-3 justify-center">
                       <Award className="w-5 h-5 text-gold" />
                       <p className="text-xs text-zinc-400">
-                        {t.common.localGuidesCertified}
+                        {language === 'en' 
+                          ? '100% certified local guides' 
+                          : language === 'mg'
+                          ? 'Mpitarika teratany voamarina 100%'
+                          : '100% guides locaux certifiés'}
+                        {/* {t.common.localGuidesCertified} */}
                       </p>
                     </div>
                     <p className="text-xs text-zinc-500 text-center mt-4">
+                      ✨ {language === 'en' ? 'Response guaranteed within 24h' : language === 'mg' ? 'Valiny antoka ao anatin\'ny 24 ora' : 'Réponse garantie sous 24h'}
                       ✨ {t.common.responseGuaranteed}
                     </p>
                   </div>

@@ -1,13 +1,16 @@
 // Centralized blog articles data
-import merEmeraudeImg from '@/assets/excursions/mer-emeraude.jpg';
-import lokobeImg from '@/assets/excursions/lokobe.jpg';
-import montagneAmbreImg from '@/assets/excursions/montagne-ambre.jpg';
+import troisBaiesImg19 from '@/assets/gallery/trois-baies19.jpg';
+import hotelImg from '@/assets/hotel.jpg';
+import teeshirtImg from '@/assets/teeshirt.png';
+import vanilleImg from '@/assets/vanille.jpeg';
+import vanilleImg2 from '@/assets/vanille2.jpeg';
+import painImg from '@/assets/pain-sucre.jpg';
 import ankarana from '@/assets/excursions/ankarana.jpg';
-import tsingyRougesImg from '@/assets/excursions/tsingy-rouges.jpg';
-import nosyIranjaImg from '@/assets/excursions/nosy-iranja.jpg';
-import troisBaiesImg from '@/assets/excursions/trois-baies.jpg';
-import routeCacaoImg from '@/assets/excursions/route-cacao.jpg';
+import troisBaiesImg20 from '@/assets/gallery/trois-baies20.jpg';
 
+import troisBaiesImg from '@/assets/excursions/trois-baies.jpg';
+
+import voayImg from '@/assets/voay.jpg';
 export interface BlogArticle {
   id: string;
   slug: string;
@@ -49,7 +52,7 @@ export const blogArticles: BlogArticle[] = [
   {
     id: '1',
     slug: 'mystere-lac-sacre',
-    image: lokobeImg,
+    image: voayImg,
     date: '2026-01-10',
     readTime: '8 min',
     author: 'Équipe Gentlemen',
@@ -125,7 +128,7 @@ Ity fitsangatsanganana ity dia tsy dia fizahan-tany tsotra fotsiny. Fandalinana 
   {
     id: '2',
     slug: 'guide-kitesurf-diego',
-    image: merEmeraudeImg,
+    image: troisBaiesImg19,
     date: '2026-01-05',
     readTime: '10 min',
     author: 'Équipe Gentlemen',
@@ -224,7 +227,7 @@ Tsy dia fantatra loatra amin'ny kitesurfers, ny Ranomasina Safira dia manome toe
   {
     id: '3',
     slug: 'or-vert-vanille-madagascar',
-    image: montagneAmbreImg,
+    image: vanilleImg,
     date: '2025-12-28',
     readTime: '7 min',
     author: 'Équipe Gentlemen',
@@ -316,7 +319,7 @@ Ny voninkazo lavanila tsirairay dia pollinated amin'ny tanana.
   {
     id: '4',
     slug: 'guide-luxe-diego-suarez',
-    image: nosyIranjaImg,
+    image: painImg,
     date: '2026-01-12',
     readTime: '12 min',
     author: 'Équipe Gentlemen',
@@ -454,7 +457,7 @@ Miakatra amin'ny catamaran ho an'ny andro iray any amin'ny Ranomasina Safira.
   {
     id: '5',
     slug: 'kitesurf-baie-sakalava-madagascar',
-    image: merEmeraudeImg,
+    image: troisBaiesImg20,
     date: '2026-01-08',
     readTime: '9 min',
     author: 'Équipe Gentlemen',
@@ -930,7 +933,7 @@ Fantatra eran-tany amin'ny kitesurfers, ny Helodrano Sakalava dia morontsiraka t
   {
     id: '8',
     slug: 'ecolodges-nord-madagascar',
-    image: lokobeImg,
+    image: hotelImg,
     date: '2026-01-02',
     readTime: '10 min',
     author: 'Équipe Gentlemen',
@@ -1096,7 +1099,7 @@ Miatrika ny zahatany Lokobe, ireo villas manokana ireo dia manolotra ny farany a
   {
     id: '9',
     slug: 'artisanat-malgache-savoir-faire',
-    image: routeCacaoImg,
+    image: teeshirtImg,
     date: '2025-12-30',
     readTime: '7 min',
     author: 'Équipe Gentlemen',
@@ -1260,7 +1263,7 @@ Madagasikara dia iray amin'ireo firenena manan-karena indrindra amin'ny vatosoa 
   {
     id: '10',
     slug: 'vanille-madagascar-or-vert-nord',
-    image: montagneAmbreImg,
+    image: vanilleImg2,
     date: '2025-12-26',
     readTime: '9 min',
     author: 'Équipe Gentlemen',

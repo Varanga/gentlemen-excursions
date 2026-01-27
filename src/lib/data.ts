@@ -7,7 +7,10 @@ import ankarana from '@/assets/excursions/ankarana.jpg';
 import nosyIranjaImg from '@/assets/excursions/nosy-iranja.jpg';
 import lokobeImg from '@/assets/excursions/lokobe.jpg';
 import nosySakatiaImg from '@/assets/excursions/nosy-sakatia.jpg';
-import heroImage from '@/assets/hero-madagascar.jpg';
+import montfraImg from '@/assets/excursions/franc.jpg';
+import anivorano from '@/assets/excursions/lac.jpeg';
+import haraImg from '@/assets/excursions/hara.jpg';
+import kombaImg from '@/assets/excursions/komba.jpg';
 
 export type Region = 'diego' | 'nosybe' | 'circuits';
 
@@ -102,7 +105,7 @@ export const tours: Tour[] = [
   { 
     id: 'nosy-hara', 
     slug: 'nosy-hara',
-    image: merEmeraudeImg,
+    image:haraImg,
     titleKey: 'nosyHara', 
     region: 'diego', 
     location: 'Diego-Suarez',
@@ -113,7 +116,7 @@ export const tours: Tour[] = [
   { 
     id: 'lac-sacre', 
     slug: 'lac-sacre',
-    image: lokobeImg,
+    image: anivorano,
     titleKey: 'lacSacre', 
     region: 'diego', 
     location: 'Anivorano',
@@ -124,7 +127,7 @@ export const tours: Tour[] = [
   { 
     id: 'montagne-francais', 
     slug: 'montagne-francais',
-    image: troisBaiesImg,
+    image: montfraImg,
     titleKey: 'montagneFrancais', 
     region: 'diego', 
     location: 'Diego-Suarez',
@@ -148,7 +151,7 @@ export const tours: Tour[] = [
   { 
     id: 'nosy-tanikely', 
     slug: 'nosy-tanikely',
-    image: merEmeraudeImg,
+    image: kombaImg,
     titleKey: 'nosyTanikely', 
     region: 'nosybe', 
     location: 'Nosy Be',
@@ -188,4 +191,4 @@ export const getTourBySlug = (slug: string) => tours.find(tour => tour.slug === 
 export const getTourById = (id: string) => tours.find(tour => tour.id === id);
 
 // Hero image for fallback
-export const heroBackgroundImage = heroImage;
+export const heroBackgroundImage = merEmeraudeImg;

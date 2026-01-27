@@ -56,21 +56,21 @@ export default function Footer() {
             {/* Social Links */}
             <div className="flex gap-3 pt-2">
               <a 
-                href="#" 
+                href="https://web.facebook.com/profile.php?id=100064142230041" 
                 className="w-10 h-10 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center hover:bg-gold hover:border-gold transition-all duration-300 group"
                 aria-label="Facebook"
               >
                 <Facebook className="w-4 h-4 text-gold group-hover:text-[#050505]" />
               </a>
               <a 
-                href="#" 
+                href="https://www.instagram.com/fabienbarthezgentleman?igsh=eGF0MGl0ajdmNXJu" 
                 className="w-10 h-10 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center hover:bg-gold hover:border-gold transition-all duration-300 group"
                 aria-label="Instagram"
               >
                 <Instagram className="w-4 h-4 text-gold group-hover:text-[#050505]" />
               </a>
               <a 
-                href="#" 
+                href="https://youtube.com/@gentlemenexcursion?si=Oy-cTgJb5w_76kg0 " 
                 className="w-10 h-10 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center hover:bg-gold hover:border-gold transition-all duration-300 group"
                 aria-label="YouTube"
               >

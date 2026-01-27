@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 import { useLanguage } from '@/i18n/LanguageContext';
 import Layout from '@/components/Layout';
 import { SEO } from '@/lib/seo';
-import heroImage from '@/assets/hero-madagascar.jpg';
-
+import troisBaiesImg5 from '@/assets/gallery/trois-baies5.jpg';
+import troisBaiesImg7 from '@/assets/gallery/trois-baies7.jpg';
 export default function About() {
   const { language } = useLanguage();
   const heroRef = useRef<HTMLDivElement>(null);
@@ -177,7 +177,7 @@ export default function About() {
           className="absolute inset-0"
         >
           <img
-            src={heroImage}
+            src={troisBaiesImg7}
             alt="L'Aventure Gentlemen"
             className="w-full h-full object-cover grayscale contrast-110"
             style={{ filter: 'grayscale(100%) contrast(1.1) brightness(0.9)' }}
@@ -277,7 +277,7 @@ export default function About() {
             >
               <div className="aspect-[4/5] overflow-hidden">
                 <img
-                  src={heroImage}
+                  src={troisBaiesImg5}
                   alt="Terroir Madagascar"
                   className="w-full h-full object-cover"
                 />

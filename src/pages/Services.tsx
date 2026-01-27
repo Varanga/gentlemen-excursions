@@ -7,31 +7,32 @@ import { SEO } from '@/lib/seo';
 import { Link, useLocation } from 'react-router-dom';
 
 // Import images
-import routeCacaoImg from '@/assets/excursions/route-cacao.jpg';
-import merEmeraudeImg from '@/assets/excursions/mer-emeraude.jpg';
-import lokobeImg from '@/assets/excursions/lokobe.jpg';
-import montagneAmbreImg from '@/assets/excursions/montagne-ambre.jpg';
+import troisBaiesImg24 from '@/assets/gallery/trois-baies24.jpg';
+import troisBaiesImg15 from '@/assets/gallery/trois-baies15.jpg';
+import teeshirtImg1 from '@/assets/teeshirt1.png';
+import vanilleImg1 from '@/assets/vanille1.jpg';
+import voitureImg from '@/assets/voiture.jpg';
 
 const services = [
   {
     key: 'vanilla' as const,
     icon: Leaf,
-    image: routeCacaoImg,
+    image: vanilleImg1,
   },
   {
     key: 'teeshirts' as const,
     icon: Shirt,
-    image: lokobeImg,
+    image: teeshirtImg1,
   },
   {
     key: 'kitesurf' as const,
     icon: Wind,
-    image: merEmeraudeImg,
+    image: troisBaiesImg15,
   },
   {
     key: 'logistics' as const,
     icon: Truck,
-    image: montagneAmbreImg,
+    image: voitureImg ,
   },
 ];
 
@@ -74,7 +75,7 @@ export default function Services() {
       <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center bg-navy">
         <div className="absolute inset-0 z-0">
           <img 
-            src={routeCacaoImg} 
+            src={troisBaiesImg24} 
             alt="Services" 
             className="w-full h-full object-cover opacity-40"
             style={{ animation: 'kenburns 20s ease-in-out infinite alternate' }}
