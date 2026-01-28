@@ -5,10 +5,10 @@
   
   <!-- Homepage - Excursion Luxe Madagascar -->
   <url>
-    <loc>https://gentlemen-excursions.mg/</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://gentlemen-excursions.mg/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://gentlemen-excursions.mg/"/>
-    <xhtml:link rel="alternate" hreflang="mg" href="https://gentlemen-excursions.mg/"/>
+    <loc>https://gentlemenexcursions.com/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gentlemenexcursions.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gentlemenexcursions.com/"/>
+    <xhtml:link rel="alternate" hreflang="mg" href="https://gentlemenexcursions.com/"/>
     <lastmod>2025-01-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -16,7 +16,7 @@
 
   <!-- Expeditions Listing - Tour Opérateur Nosy Be -->
   <url>
-    <loc>https://gentlemen-excursions.mg/expeditions</loc>
+    <loc>https://gentlemenexcursions.com/expeditions</loc>
     <lastmod>2025-01-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -24,49 +24,49 @@
 
   <!-- Diego-Suarez Excursions -->
   <url>
-    <loc>https://gentlemen-excursions.mg/expeditions/mer-emeraude</loc>
+    <loc>https://gentlemenexcursions.com/expeditions/mer-emeraude</loc>
     <lastmod>2025-01-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://gentlemen-excursions.mg/expeditions/trois-baies</loc>
+    <loc>https://gentlemenexcursions.com/expeditions/trois-baies</loc>
     <lastmod>2025-01-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://gentlemen-excursions.mg/expeditions/montagne-ambre</loc>
+    <loc>https://gentlemenexcursions.com/expeditions/montagne-ambre</loc>
     <lastmod>2025-01-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://gentlemen-excursions.mg/expeditions/tsingy-rouges</loc>
+    <loc>https://gentlemenexcursions.com/expeditions/tsingy-rouges</loc>
     <lastmod>2025-01-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://gentlemen-excursions.mg/expeditions/ankarana</loc>
+    <loc>https://gentlemenexcursions.com/expeditions/ankarana</loc>
     <lastmod>2025-01-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://gentlemen-excursions.mg/expeditions/nosy-hara</loc>
+    <loc>https://gentlemenexcursions.com/expeditions/nosy-hara</loc>
     <lastmod>2025-01-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://gentlemen-excursions.mg/expeditions/lac-sacre</loc>
+    <loc>https://gentlemenexcursions.com/expeditions/lac-sacre</loc>
     <lastmod>2025-01-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://gentlemen-excursions.mg/expeditions/montagne-francais</loc>
+    <loc>https://gentlemenexcursions.com/expeditions/montagne-francais</loc>
     <lastmod>2025-01-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -74,25 +74,25 @@
 
   <!-- Nosy Be Excursions -->
   <url>
-    <loc>https://gentlemen-excursions.mg/expeditions/nosy-iranja</loc>
+    <loc>https://gentlemenexcursions.com/expeditions/nosy-iranja</loc>
     <lastmod>2025-01-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://gentlemen-excursions.mg/expeditions/nosy-tanikely</loc>
+    <loc>https://gentlemenexcursions.com/expeditions/nosy-tanikely</loc>
     <lastmod>2025-01-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://gentlemen-excursions.mg/expeditions/lokobe</loc>
+    <loc>https://gentlemenexcursions.com/expeditions/lokobe</loc>
     <lastmod>2025-01-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://gentlemen-excursions.mg/expeditions/nosy-sakatia</loc>
+    <loc>https://gentlemenexcursions.com/expeditions/nosy-sakatia</loc>
     <lastmod>2025-01-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -100,25 +100,25 @@
 
   <!-- Other Pages -->
   <url>
-    <loc>https://gentlemen-excursions.mg/services</loc>
+    <loc>https://gentlemenexcursions.com/services</loc>
     <lastmod>2025-01-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://gentlemen-excursions.mg/gallery</loc>
+    <loc>https://gentlemenexcursions.com/gallery</loc>
     <lastmod>2025-01-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://gentlemen-excursions.mg/about</loc>
+    <loc>https://gentlemenexcursions.com/about</loc>
     <lastmod>2025-01-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://gentlemen-excursions.mg/contact</loc>
+    <loc>https://gentlemenexcursions.com/contact</loc>
     <lastmod>2025-01-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -126,7 +126,7 @@
 
   <!-- Blog Section -->
   <url>
-    <loc>https://gentlemen-excursions.mg/blog</loc>
+    <loc>https://gentlemenexcursions.com/blog</loc>
     <lastmod>2025-01-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -134,61 +134,61 @@
   
   <!-- SEO-Optimized Blog Articles -->
   <url>
-    <loc>https://gentlemen-excursions.mg/blog/guide-luxe-diego-suarez</loc>
+    <loc>hhttps://gentlemenexcursions.com/blog/guide-luxe-diego-suarez</loc>
     <lastmod>2025-01-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://gentlemen-excursions.mg/blog/kitesurf-baie-sakalava</loc>
+    <loc>https://gentlemenexcursions.com/blog/kitesurf-baie-sakalava</loc>
     <lastmod>2025-01-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://gentlemen-excursions.mg/blog/tsingy-ankarana-guide</loc>
+    <loc>https://gentlemenexcursions.com/blog/tsingy-ankarana-guide</loc>
     <lastmod>2025-01-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://gentlemen-excursions.mg/blog/trois-baies-diego-suarez</loc>
+    <loc>https://gentlemenexcursions.com/blog/trois-baies-diego-suarez</loc>
     <lastmod>2025-01-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://gentlemen-excursions.mg/blog/ecolodges-nord-madagascar</loc>
+    <loc>https://gentlemenexcursions.com/blog/ecolodges-nord-madagascar</loc>
     <lastmod>2025-01-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://gentlemen-excursions.mg/blog/artisanat-malgache</loc>
+    <loc>https://gentlemenexcursions.com/blog/artisanat-malgache</loc>
     <lastmod>2025-01-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://gentlemen-excursions.mg/blog/vanille-madagascar-or-vert</loc>
+    <loc>https://gentlemenexcursions.com/blog/vanille-madagascar-or-vert</loc>
     <lastmod>2025-01-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://gentlemen-excursions.mg/blog/lac-sacre-anivorano</loc>
+    <loc>https://gentlemenexcursions.com/blog/lac-sacre-anivorano</loc>
     <lastmod>2025-01-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://gentlemen-excursions.mg/blog/kitesurf-diego-suarez</loc>
+    <loc>https://gentlemenexcursions.com/blog/kitesurf-diego-suarez</loc>
     <lastmod>2025-01-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://gentlemen-excursions.mg/blog/vanille-madagascar</loc>
+    <loc>https://gentlemenexcursions.com/blog/vanille-madagascar</loc>
     <lastmod>2025-01-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

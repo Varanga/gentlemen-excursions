@@ -32,7 +32,7 @@ export function SEO({
   structuredData,
 }: SEOProps) {
   const siteName = 'Gentlemen Excursions';
-  const baseUrl = 'https://gentlemen-excursions.mg';
+  const baseUrl = 'https://gentlemenexcursions.com/';
   const fullTitle = `${title} | ${siteName}`;
   const fullCanonical = canonical ? `${baseUrl}${canonical}` : baseUrl;
   const fullImage = image.startsWith('http') ? image : `${baseUrl}${image}`;
@@ -123,17 +123,17 @@ export function generateOrganizationSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'TravelAgency',
-    '@id': 'https://gentlemen-excursions.mg/#organization',
+    '@id': 'https://gentlemenexcursions.com/#organization',
     name: 'Gentlemen Excursions',
     alternateName: 'Gentlemen Excursions Madagascar',
-    url: 'https://gentlemen-excursions.mg',
+    url: 'https://gentlemenexcursions.com/',
     logo: {
       '@type': 'ImageObject',
-      url: 'https://gentlemen-excursions.mg/logo.png',
+      url: 'https://gentlemenexcursions.com/logo.png',
       width: 300,
       height: 100,
     },
-    image: 'https://gentlemen-excursions.mg/og-image.jpg',
+    image: 'https://https://gentlemenexcursions.com//og-image.jpg',
     description: 'Agence de voyage haut de gamme spécialisée dans les excursions privées au Nord de Madagascar. Guides locaux certifiés, 4x4 privatisés, expériences authentiques à Diego-Suarez et Nosy Be.',
     slogan: 'L\'Excellence du Voyage à Madagascar',
     foundingDate: '2018',
@@ -168,9 +168,9 @@ export function generateOrganizationSchema() {
       },
     ],
     sameAs: [
-      'https://www.facebook.com/gentlemenexcursions',
-      'https://www.instagram.com/gentlemenexcursions',
-      'https://www.tripadvisor.com/gentlemenexcursions',
+      'https://web.facebook.com/profile.php?id=100064142230041',
+      'https://www.instagram.com/fabienbarthezgentleman?igsh=eGF0MGl0ajdmNXJu',
+      'https://youtube.com/@gentlemenexcursion?si=Oy-cTgJb5w_76kg0',
     ],
     priceRange: '€€€',
     currenciesAccepted: 'EUR, MGA',
@@ -267,8 +267,8 @@ export function generateTourSchema({
     '@type': 'TouristTrip',
     name,
     description,
-    image: image.startsWith('http') ? image : `https://gentlemen-excursions.mg${image}`,
-    url: `https://gentlemen-excursions.mg/expeditions/${slug}`,
+    image: image.startsWith('http') ? image : `https://gentlemenexcursions.com${image}`,
+    url: `https://gentlemenexcursions.com/expeditions/${slug}`,
     touristType: ['Adventure travelers', 'Eco tourists', 'Luxury travelers'],
     itinerary: {
       '@type': 'ItemList',
@@ -289,7 +289,7 @@ export function generateTourSchema({
     provider: {
       '@type': 'TravelAgency',
       name: 'Gentlemen Excursions',
-      url: 'https://gentlemen-excursions.mg',
+      url: 'https://gentlemenexcursions.com/',
     },
     contentLocation: {
       '@type': 'Place',
@@ -347,8 +347,8 @@ export function generateArticleSchema({
     '@type': 'Article',
     headline: title,
     description,
-    image: image.startsWith('http') ? image : `https://gentlemen-excursions.mg${image}`,
-    url: `https://gentlemen-excursions.mg/blog/${slug}`,
+    image: image.startsWith('http') ? image : `https://gentlemenexcursions.com${image}`,
+    url: `https://gentlemenexcursions.com/blog/${slug}`,
     datePublished,
     dateModified: dateModified || datePublished,
     author: {
@@ -360,12 +360,12 @@ export function generateArticleSchema({
       name: 'Gentlemen Excursions',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://gentlemen-excursions.mg/logo.png',
+        url: 'https://gentlemenexcursions.com/logo.png',
       },
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://gentlemen-excursions.mg/blog/${slug}`,
+      '@id': `https://gentlemenexcursions.com/blog/${slug}`,
     },
     articleSection: category,
     inLanguage: 'fr-FR',
@@ -407,7 +407,7 @@ export function generateBreadcrumbSchema(items: BreadcrumbItem[]) {
       '@type': 'ListItem',
       position: index + 1,
       name: item.name,
-      item: `https://gentlemen-excursions.mg${item.url}`,
+      item: `https://gentlemenexcursions.com${item.url}`,
     })),
   };
 }
