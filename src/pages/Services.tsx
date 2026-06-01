@@ -7,11 +7,11 @@ import { SEO } from '@/lib/seo';
 import { Link, useLocation } from 'react-router-dom';
 
 // Import images
-import troisBaiesImg24 from '@/assets/gallery/trois-baies24.jpg';
-import troisBaiesImg15 from '@/assets/gallery/trois-baies15.jpg';
-import teeshirtImg1 from '@/assets/teeshirt1.png';
-import vanilleImg1 from '@/assets/vanille1.jpg';
-import voitureImg from '@/assets/voiture.jpg';
+import troisBaiesImg24 from '@/assets/gallery/trois-baies24.webp';
+import troisBaiesImg15 from '@/assets/gallery/trois-baies15.webp';
+import teeshirtImg1 from '@/assets/teeshirt1.webp';
+import vanilleImg1 from '@/assets/vanille1.webp';
+import voitureImg from '@/assets/voiture.webp';
 
 const services = [
   {

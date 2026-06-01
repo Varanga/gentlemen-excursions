@@ -8,7 +8,7 @@ import { tours, getToursByRegion, Region } from '@/lib/data';
 import { SEO, generateBreadcrumbSchema } from '@/lib/seo';
 
 // Use first tour image for hero
-import merEmeraudeImg from '@/assets/excursions/mer-emeraude.jpg';
+import merEmeraudeImg from '@/assets/excursions/mer-emeraude.webp';
 type FilterKey = 'all' | Region;
 
 // SEO content per language

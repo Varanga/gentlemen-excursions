@@ -7,7 +7,7 @@ import { SEO } from '@/lib/seo';
 import { tours } from '@/lib/data';
 import { useToast } from '@/hooks/use-toast';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import merEmeraudeImg3 from '@/assets/gallery/mer-emeraude3.jpg';
+import merEmeraudeImg3 from '@/assets/gallery/mer-emeraude3.webp';
 export default function Contact() {
   const {
     t,

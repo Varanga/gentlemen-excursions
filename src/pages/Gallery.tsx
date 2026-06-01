@@ -6,127 +6,127 @@ import Layout from '@/components/Layout';
 import { useLocation } from 'react-router-dom';
 
 // Import images
-import merEmeraudeImg from '@/assets/excursions/mer-emeraude.jpg';
-import merEmeraudeImg1 from '@/assets/excursions/mer-emeraude1.jpg';
-import merEmeraudeImg2 from '@/assets/excursions/mer-emeraude2.png';
-import merEmeraudeImg3 from '@/assets/gallery/mer-emeraude3.jpg';
-import merEmeraudeImg4 from '@/assets/gallery/mer-emeraude4.jpg';
-import merEmeraudeImg5 from '@/assets/gallery/mer-emeraude5.jpg';
-import merEmeraudeImg6 from '@/assets/gallery/mer-emeraude6.jpg';
-import merEmeraudeImg7 from '@/assets/gallery/mer-emeraude7.jpeg';
-import merEmeraudeImg8 from '@/assets/gallery/mer-emeraude8.jpg';
-import merEmeraudeImg9 from '@/assets/gallery/mer-emeraude9.jpg';
-import merEmeraudeImg10 from '@/assets/gallery/mer-emeraude10.jpg';
-import merEmeraudeImg11 from '@/assets/gallery/mer-emeraude11.jpg';
-import merEmeraudeImg12 from '@/assets/gallery/mer-emeraude12.jpg';
+import merEmeraudeImg from '@/assets/excursions/mer-emeraude.webp';
+import merEmeraudeImg1 from '@/assets/excursions/mer-emeraude1.webp';
+import merEmeraudeImg2 from '@/assets/excursions/mer-emeraude2.webp';
+import merEmeraudeImg3 from '@/assets/gallery/mer-emeraude3.webp';
+import merEmeraudeImg4 from '@/assets/gallery/mer-emeraude4.webp';
+import merEmeraudeImg5 from '@/assets/gallery/mer-emeraude5.webp';
+import merEmeraudeImg6 from '@/assets/gallery/mer-emeraude6.webp';
+import merEmeraudeImg7 from '@/assets/gallery/mer-emeraude7.webp';
+import merEmeraudeImg8 from '@/assets/gallery/mer-emeraude8.webp';
+import merEmeraudeImg9 from '@/assets/gallery/mer-emeraude9.webp';
+import merEmeraudeImg10 from '@/assets/gallery/mer-emeraude10.webp';
+import merEmeraudeImg11 from '@/assets/gallery/mer-emeraude11.webp';
+import merEmeraudeImg12 from '@/assets/gallery/mer-emeraude12.webp';
 
 
-import troisBaiesImg from '@/assets/excursions/trois-baies.jpg';
-import troisBaiesImg1 from '@/assets/excursions/trois-baies1.jpg';
-import troisBaiesImg2 from '@/assets/excursions/trois-baies2.jpg';
-import troisBaiesImg3 from '@/assets/gallery/trois-baies3.jpg';
-import troisBaiesImg4 from '@/assets/gallery/trois-baies4.jpg';
-import troisBaiesImg5 from '@/assets/gallery/trois-baies5.jpg';
-import troisBaiesImg6 from '@/assets/gallery/trois-baies6.jpg';
-import troisBaiesImg7 from '@/assets/gallery/trois-baies7.jpg';
-import troisBaiesImg8 from '@/assets/gallery/trois-baies8.jpg';
-import troisBaiesImg9 from '@/assets/gallery/trois-baies9.jpg';
-import troisBaiesImg10 from '@/assets/gallery/trois-baies10.jpg';
-import troisBaiesImg11 from '@/assets/gallery/trois-baies11.jpg';
-import troisBaiesImg12 from '@/assets/gallery/trois-baies12.jpg';
-import troisBaiesImg13 from '@/assets/gallery/trois-baies13.jpg';
-import troisBaiesImg14 from '@/assets/gallery/trois-baies14.jpg';
-import troisBaiesImg15 from '@/assets/gallery/trois-baies15.jpg';
-import troisBaiesImg16 from '@/assets/gallery/trois-baies16.jpg';
-import troisBaiesImg17 from '@/assets/gallery/trois-baies17.jpg';
-import troisBaiesImg18 from '@/assets/gallery/trois-baies18.jpg';
-import troisBaiesImg19 from '@/assets/gallery/trois-baies19.jpg';
-import troisBaiesImg20 from '@/assets/gallery/trois-baies20.jpg';
-import troisBaiesImg21 from '@/assets/gallery/trois-baies21.jpg';
-import troisBaiesImg22 from '@/assets/gallery/trois-baies22.jpg';
-import troisBaiesImg23 from '@/assets/gallery/trois-baies23.jpg';
-import troisBaiesImg24 from '@/assets/gallery/trois-baies24.jpg';
-import troisBaiesImg25 from '@/assets/gallery/trois-baies25.jpg';
-import troisBaiesImg26 from '@/assets/gallery/trois-baies26.jpg';
-import troisBaiesImg27 from '@/assets/gallery/trois-baies27.jpg';
+import troisBaiesImg from '@/assets/excursions/trois-baies.webp';
+import troisBaiesImg1 from '@/assets/excursions/trois-baies1.webp';
+import troisBaiesImg2 from '@/assets/excursions/trois-baies2.webp';
+import troisBaiesImg3 from '@/assets/gallery/trois-baies3.webp';
+import troisBaiesImg4 from '@/assets/gallery/trois-baies4.webp';
+import troisBaiesImg5 from '@/assets/gallery/trois-baies5.webp';
+import troisBaiesImg6 from '@/assets/gallery/trois-baies6.webp';
+import troisBaiesImg7 from '@/assets/gallery/trois-baies7.webp';
+import troisBaiesImg8 from '@/assets/gallery/trois-baies8.webp';
+import troisBaiesImg9 from '@/assets/gallery/trois-baies9.webp';
+import troisBaiesImg10 from '@/assets/gallery/trois-baies10.webp';
+import troisBaiesImg11 from '@/assets/gallery/trois-baies11.webp';
+import troisBaiesImg12 from '@/assets/gallery/trois-baies12.webp';
+import troisBaiesImg13 from '@/assets/gallery/trois-baies13.webp';
+import troisBaiesImg14 from '@/assets/gallery/trois-baies14.webp';
+import troisBaiesImg15 from '@/assets/gallery/trois-baies15.webp';
+import troisBaiesImg16 from '@/assets/gallery/trois-baies16.webp';
+import troisBaiesImg17 from '@/assets/gallery/trois-baies17.webp';
+import troisBaiesImg18 from '@/assets/gallery/trois-baies18.webp';
+import troisBaiesImg19 from '@/assets/gallery/trois-baies19.webp';
+import troisBaiesImg20 from '@/assets/gallery/trois-baies20.webp';
+import troisBaiesImg21 from '@/assets/gallery/trois-baies21.webp';
+import troisBaiesImg22 from '@/assets/gallery/trois-baies22.webp';
+import troisBaiesImg23 from '@/assets/gallery/trois-baies23.webp';
+import troisBaiesImg24 from '@/assets/gallery/trois-baies24.webp';
+import troisBaiesImg25 from '@/assets/gallery/trois-baies25.webp';
+import troisBaiesImg26 from '@/assets/gallery/trois-baies26.webp';
+import troisBaiesImg27 from '@/assets/gallery/trois-baies27.webp';
 
 
-import montfraImg from '@/assets/excursions/franc.jpg';
-import montfraImg1 from '@/assets/excursions/franc1.jpg';
-import montfraImg2 from '@/assets/excursions/franc2.jpg';
-import montfraImg3 from '@/assets/gallery/franc3.jpg';
+import montfraImg from '@/assets/excursions/franc.webp';
+import montfraImg1 from '@/assets/excursions/franc1.webp';
+import montfraImg2 from '@/assets/excursions/franc2.webp';
+import montfraImg3 from '@/assets/gallery/franc3.webp';
 
 
-import montagneAmbreImg from '@/assets/excursions/montagne-ambre.jpg';
-import montagneAmbreImg1 from '@/assets/excursions/montagne-ambre1.jpg';
-import montagneAmbreImg2 from '@/assets/excursions/montagne-ambre2.jpg';
-import montagneAmbreImg3 from '@/assets/gallery/montagne-ambre3.jpg';
-import montagneAmbreImg4 from '@/assets/gallery/montagne-ambre4.jpg';
-import montagneAmbreImg5 from '@/assets/gallery/montagne-ambre5.jpg';
+import montagneAmbreImg from '@/assets/excursions/montagne-ambre.webp';
+import montagneAmbreImg1 from '@/assets/excursions/montagne-ambre1.webp';
+import montagneAmbreImg2 from '@/assets/excursions/montagne-ambre2.webp';
+import montagneAmbreImg3 from '@/assets/gallery/montagne-ambre3.webp';
+import montagneAmbreImg4 from '@/assets/gallery/montagne-ambre4.webp';
+import montagneAmbreImg5 from '@/assets/gallery/montagne-ambre5.webp';
 
 
-import tsingyRougesImg from '@/assets/excursions/tsingy-rouges.jpg';
-import tsingyRougesImg1 from '@/assets/excursions/tsingy-rouges1.jpg';
-import tsingyRougesImg2 from '@/assets/excursions/tsingy-rouges2.jpg';
-import tsingyRougesImg3 from '@/assets/gallery/tsingy-rouges3.jpg';
-import tsingyRougesImg4 from '@/assets/gallery/tsingy-rouges4.jpg';
-import tsingyRougesImg5 from '@/assets/gallery/tsingy-rouges5.jpg';
+import tsingyRougesImg from '@/assets/excursions/tsingy-rouges.webp';
+import tsingyRougesImg1 from '@/assets/excursions/tsingy-rouges1.webp';
+import tsingyRougesImg2 from '@/assets/excursions/tsingy-rouges2.webp';
+import tsingyRougesImg3 from '@/assets/gallery/tsingy-rouges3.webp';
+import tsingyRougesImg4 from '@/assets/gallery/tsingy-rouges4.webp';
+import tsingyRougesImg5 from '@/assets/gallery/tsingy-rouges5.webp';
 
 
 
-import ankarana from '@/assets/excursions/ankarana.jpg';
-import ankarana1 from '@/assets/excursions/ankarana1.jpg';
-import ankarana2 from '@/assets/excursions/ankarana2.jpg';
-import ankarana3 from '@/assets/gallery/ankarana3.jpg';
+import ankarana from '@/assets/excursions/ankarana.webp';
+import ankarana1 from '@/assets/excursions/ankarana1.webp';
+import ankarana2 from '@/assets/excursions/ankarana2.webp';
+import ankarana3 from '@/assets/gallery/ankarana3.webp';
 
 
-import nosyIranjaImg from '@/assets/excursions/nosy-iranja.jpg';
-import nosyIranjaImg1 from '@/assets/excursions/nosy-iranja1.jpg';
-import nosyIranjaImg2 from '@/assets/excursions/nosy-iranja2.jpg';
+import nosyIranjaImg from '@/assets/excursions/nosy-iranja.webp';
+import nosyIranjaImg1 from '@/assets/excursions/nosy-iranja1.webp';
+import nosyIranjaImg2 from '@/assets/excursions/nosy-iranja2.webp';
 
 
-import lokobeImg from '@/assets/excursions/lokobe.jpg';
-import lokobeImg1 from '@/assets/excursions/lokobe1.jpg';
-import lokobeImg2 from '@/assets/excursions/lokobe2.jpg';
+import lokobeImg from '@/assets/excursions/lokobe.webp';
+import lokobeImg1 from '@/assets/excursions/lokobe1.webp';
+import lokobeImg2 from '@/assets/excursions/lokobe2.webp';
 
 
-import nosySakatiaImg from '@/assets/excursions/nosy-sakatia.jpg';
-import nosySakatiaImg1 from '@/assets/excursions/nosy-sakatia1.jpg';
-import nosySakatiaImg2 from '@/assets/excursions/nosy-sakatia2.jpg';
+import nosySakatiaImg from '@/assets/excursions/nosy-sakatia.webp';
+import nosySakatiaImg1 from '@/assets/excursions/nosy-sakatia1.webp';
+import nosySakatiaImg2 from '@/assets/excursions/nosy-sakatia2.webp';
 
 
-import haraImg from '@/assets/excursions/hara.jpg';
-import haraImg1 from '@/assets/excursions/hara1.jpg';
-import haraImg2 from '@/assets/excursions/hara2.jpg';
+import haraImg from '@/assets/excursions/hara.webp';
+import haraImg1 from '@/assets/excursions/hara1.webp';
+import haraImg2 from '@/assets/excursions/hara2.webp';
 
 
-import anivorano from '@/assets/excursions/lac.jpeg';
-import anivorano1 from '@/assets/excursions/lac1.jpg';
-import anivorano2 from'@/assets/excursions/lac2.jpg';
-import anivorano3 from '@/assets/gallery/lac3.jpg';
-import anivorano4 from '@/assets/gallery/lac4.jpg';
-import anivorano5 from'@/assets/gallery/lac5.jpg';
+import anivorano from '@/assets/excursions/lac.webp';
+import anivorano1 from '@/assets/excursions/lac1.webp';
+import anivorano2 from'@/assets/excursions/lac2.webp';
+import anivorano3 from '@/assets/gallery/lac3.webp';
+import anivorano4 from '@/assets/gallery/lac4.webp';
+import anivorano5 from'@/assets/gallery/lac5.webp';
 
 
-import kombaImg from '@/assets/excursions/komba.jpg';
-import kombaImg1 from '@/assets/excursions/komba1.jpg';
-import kombaImg2 from '@/assets/excursions/komba2.jpg';
+import kombaImg from '@/assets/excursions/komba.webp';
+import kombaImg1 from '@/assets/excursions/komba1.webp';
+import kombaImg2 from '@/assets/excursions/komba2.webp';
 
 
-import pecheImg from '@/assets/gallery/peche-ramena.jpg';
-import pecheImg1 from '@/assets/gallery/peche-ramena1.jpg';
-import pecheImg2 from '@/assets/gallery/peche-ramena2.jpg';
-import pecheImg3 from '@/assets/gallery/peche-ramena3.jpg';
-import pecheImg4 from '@/assets/gallery/peche-ramena4.jpg';
-import pecheImg5 from '@/assets/gallery/peche-ramena5.jpg';
+import pecheImg from '@/assets/gallery/peche-ramena.webp';
+import pecheImg1 from '@/assets/gallery/peche-ramena1.webp';
+import pecheImg2 from '@/assets/gallery/peche-ramena2.webp';
+import pecheImg3 from '@/assets/gallery/peche-ramena3.webp';
+import pecheImg4 from '@/assets/gallery/peche-ramena4.webp';
+import pecheImg5 from '@/assets/gallery/peche-ramena5.webp';
 
 
-import teesImg from '@/assets/gallery/teeshirt.jpg';
-import teesImg1 from '@/assets/gallery/teeshirt1.jpg';
-import teesImg2 from '@/assets/gallery/teeshirt2.jpg';
-import teesImg3 from '@/assets/gallery/teeshirt3.jpg';
-import teesImg4 from '@/assets/gallery/teeshirt4.jpg';
-import teesImg5 from '@/assets/gallery/teeshirt5.jpg';
+import teesImg from '@/assets/gallery/teeshirt.webp';
+import teesImg1 from '@/assets/gallery/teeshirt1.webp';
+import teesImg2 from '@/assets/gallery/teeshirt2.webp';
+import teesImg3 from '@/assets/gallery/teeshirt3.webp';
+import teesImg4 from '@/assets/gallery/teeshirt4.webp';
+import teesImg5 from '@/assets/gallery/teeshirt5.webp';
 
 const images = [
   

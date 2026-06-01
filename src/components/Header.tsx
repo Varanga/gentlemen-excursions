@@ -4,7 +4,7 @@ import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import { Menu, X } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { Language } from '@/i18n/translations';
-import logo from '@/assets/logo.png';
+import logo from '@/assets/logo.webp';
 const languages: {
   code: Language;
   label: string;

@@ -1,16 +1,16 @@
 // Centralized blog articles data
-import troisBaiesImg19 from '@/assets/gallery/trois-baies19.jpg';
-import hotelImg from '@/assets/hotel.jpg';
-import teeshirtImg from '@/assets/teeshirt.png';
-import vanilleImg from '@/assets/vanille.jpeg';
-import vanilleImg2 from '@/assets/vanille2.jpeg';
-import painImg from '@/assets/pain-sucre.jpg';
-import ankarana from '@/assets/excursions/ankarana.jpg';
-import troisBaiesImg20 from '@/assets/gallery/trois-baies20.jpg';
+import troisBaiesImg19 from '@/assets/gallery/trois-baies19.webp';
+import hotelImg from '@/assets/hotel.webp';
+import teeshirtImg from '@/assets/teeshirt.webp';
+import vanilleImg from '@/assets/vanille.webp';
+import vanilleImg2 from '@/assets/vanille2.webp';
+import painImg from '@/assets/pain-sucre.webp';
+import ankarana from '@/assets/excursions/ankarana.webp';
+import troisBaiesImg20 from '@/assets/gallery/trois-baies20.webp';
 
-import troisBaiesImg from '@/assets/excursions/trois-baies.jpg';
+import troisBaiesImg from '@/assets/excursions/trois-baies.webp';
 
-import voayImg from '@/assets/voay.jpg';
+import voayImg from '@/assets/voay.webp';
 export interface BlogArticle {
   id: string;
   slug: string;

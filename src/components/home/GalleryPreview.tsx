@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import { useLanguage } from '@/i18n/LanguageContext';
 
 // Import images
-import merEmeraudeImg from '@/assets/excursions/mer-emeraude.jpg';
-import tsingyRougesImg from '@/assets/excursions/tsingy-rouges.jpg';
-import nosyIranjaImg from '@/assets/excursions/nosy-iranja.jpg';
-import lokobeImg from '@/assets/excursions/lokobe.jpg';
-import montagneAmbreImg from '@/assets/excursions/montagne-ambre.jpg';
+import merEmeraudeImg from '@/assets/excursions/mer-emeraude.webp';
+import tsingyRougesImg from '@/assets/excursions/tsingy-rouges.webp';
+import nosyIranjaImg from '@/assets/excursions/nosy-iranja.webp';
+import lokobeImg from '@/assets/excursions/lokobe.webp';
+import montagneAmbreImg from '@/assets/excursions/montagne-ambre.webp';
 
 const galleryImages = [
   { src: merEmeraudeImg, alt: 'Mer d\'Émeraude turquoise Diego-Suarez', span: 'col-span-2 row-span-2' },

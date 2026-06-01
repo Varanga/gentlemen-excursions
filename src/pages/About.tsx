@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 import { useLanguage } from '@/i18n/LanguageContext';
 import Layout from '@/components/Layout';
 import { SEO } from '@/lib/seo';
-import troisBaiesImg5 from '@/assets/gallery/trois-baies5.jpg';
-import troisBaiesImg7 from '@/assets/gallery/trois-baies7.jpg';
+import troisBaiesImg5 from '@/assets/gallery/trois-baies5.webp';
+import troisBaiesImg7 from '@/assets/gallery/trois-baies7.webp';
 export default function About() {
   const { language } = useLanguage();
   const heroRef = useRef<HTMLDivElement>(null);

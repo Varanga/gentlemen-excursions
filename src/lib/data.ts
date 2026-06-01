@@ -1,16 +1,16 @@
 // Centralized tours/expeditions data
-import merEmeraudeImg from '@/assets/excursions/mer-emeraude.jpg';
-import troisBaiesImg from '@/assets/excursions/trois-baies.jpg';
-import montagneAmbreImg from '@/assets/excursions/montagne-ambre.jpg';
-import tsingyRougesImg from '@/assets/excursions/tsingy-rouges.jpg';
-import ankarana from '@/assets/excursions/ankarana.jpg';
-import nosyIranjaImg from '@/assets/excursions/nosy-iranja.jpg';
-import lokobeImg from '@/assets/excursions/lokobe.jpg';
-import nosySakatiaImg from '@/assets/excursions/nosy-sakatia.jpg';
-import montfraImg from '@/assets/excursions/franc.jpg';
-import anivorano from '@/assets/excursions/lac.jpeg';
-import haraImg from '@/assets/excursions/hara.jpg';
-import kombaImg from '@/assets/excursions/komba.jpg';
+import merEmeraudeImg from '@/assets/excursions/mer-emeraude.webp';
+import troisBaiesImg from '@/assets/excursions/trois-baies.webp';
+import montagneAmbreImg from '@/assets/excursions/montagne-ambre.webp';
+import tsingyRougesImg from '@/assets/excursions/tsingy-rouges.webp';
+import ankarana from '@/assets/excursions/ankarana.webp';
+import nosyIranjaImg from '@/assets/excursions/nosy-iranja.webp';
+import lokobeImg from '@/assets/excursions/lokobe.webp';
+import nosySakatiaImg from '@/assets/excursions/nosy-sakatia.webp';
+import montfraImg from '@/assets/excursions/franc.webp';
+import anivorano from '@/assets/excursions/lac.webp';
+import haraImg from '@/assets/excursions/hara.webp';
+import kombaImg from '@/assets/excursions/komba.webp';
 
 export type Region = 'diego' | 'nosybe' | 'circuits';
 

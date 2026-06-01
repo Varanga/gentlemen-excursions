@@ -15,62 +15,62 @@ import { getExcursionFAQs } from '@/lib/faqData';
 
 // Importer des images
 
-import merEmeraudeImg from '@/assets/excursions/mer-emeraude.jpg';
+import merEmeraudeImg from '@/assets/excursions/mer-emeraude.webp';
 
-import merEmeraudeImg1 from '@/assets/excursions/mer-emeraude1.jpg';
+import merEmeraudeImg1 from '@/assets/excursions/mer-emeraude1.webp';
 
-import merEmeraudeImg2 from '@/assets/excursions/mer-emeraude2.png';
+import merEmeraudeImg2 from '@/assets/excursions/mer-emeraude2.webp';
 
-import troisBaiesImg from '@/assets/excursions/trois-baies.jpg';
+import troisBaiesImg from '@/assets/excursions/trois-baies.webp';
 
-import troisBaiesImg1 from '@/assets/excursions/trois-baies1.jpg';
+import troisBaiesImg1 from '@/assets/excursions/trois-baies1.webp';
 
-import troisBaiesImg2 from '@/assets/excursions/trois-baies2.jpg';
+import troisBaiesImg2 from '@/assets/excursions/trois-baies2.webp';
 
-import montfraImg from '@/assets/excursions/franc.jpg';
-import montfraImg1 from '@/assets/excursions/franc1.jpg';
-import montfraImg2 from '@/assets/excursions/franc2.jpg';
+import montfraImg from '@/assets/excursions/franc.webp';
+import montfraImg1 from '@/assets/excursions/franc1.webp';
+import montfraImg2 from '@/assets/excursions/franc2.webp';
 
-import montagneAmbreImg from '@/assets/excursions/montagne-ambre.jpg';
+import montagneAmbreImg from '@/assets/excursions/montagne-ambre.webp';
 
-import montagneAmbreImg1 from '@/assets/excursions/montagne-ambre1.jpg';
+import montagneAmbreImg1 from '@/assets/excursions/montagne-ambre1.webp';
 
-import montagneAmbreImg2 from '@/assets/excursions/montagne-ambre2.jpg';
+import montagneAmbreImg2 from '@/assets/excursions/montagne-ambre2.webp';
 
-import tsingyRougesImg from '@/assets/excursions/tsingy-rouges.jpg';
+import tsingyRougesImg from '@/assets/excursions/tsingy-rouges.webp';
 
-import tsingyRougesImg1 from '@/assets/excursions/tsingy-rouges1.jpg';
+import tsingyRougesImg1 from '@/assets/excursions/tsingy-rouges1.webp';
 
-import tsingyRougesImg2 from '@/assets/excursions/tsingy-rouges2.jpg';
+import tsingyRougesImg2 from '@/assets/excursions/tsingy-rouges2.webp';
 
-import ankarana from '@/assets/excursions/ankarana.jpg';
+import ankarana from '@/assets/excursions/ankarana.webp';
 
-import ankarana1 from '@/assets/excursions/ankarana1.jpg';
+import ankarana1 from '@/assets/excursions/ankarana1.webp';
 
-import ankarana2 from '@/assets/excursions/ankarana2.jpg';
+import ankarana2 from '@/assets/excursions/ankarana2.webp';
 
-import nosyIranjaImg from '@/assets/excursions/nosy-iranja.jpg';
-import nosyIranjaImg1 from '@/assets/excursions/nosy-iranja1.jpg';
-import nosyIranjaImg2 from '@/assets/excursions/nosy-iranja2.jpg';
+import nosyIranjaImg from '@/assets/excursions/nosy-iranja.webp';
+import nosyIranjaImg1 from '@/assets/excursions/nosy-iranja1.webp';
+import nosyIranjaImg2 from '@/assets/excursions/nosy-iranja2.webp';
 
-import lokobeImg from '@/assets/excursions/lokobe.jpg';
-import lokobeImg1 from '@/assets/excursions/lokobe1.jpg';
-import lokobeImg2 from '@/assets/excursions/lokobe2.jpg';
+import lokobeImg from '@/assets/excursions/lokobe.webp';
+import lokobeImg1 from '@/assets/excursions/lokobe1.webp';
+import lokobeImg2 from '@/assets/excursions/lokobe2.webp';
 
-import nosySakatiaImg from '@/assets/excursions/nosy-sakatia.jpg';
-import nosySakatiaImg1 from '@/assets/excursions/nosy-sakatia1.jpg';
-import nosySakatiaImg2 from '@/assets/excursions/nosy-sakatia2.jpg';
-import haraImg from '@/assets/excursions/hara.jpg';
-import haraImg1 from '@/assets/excursions/hara1.jpg';
-import haraImg2 from '@/assets/excursions/hara2.jpg';
-import anivorano from '@/assets/excursions/lac.jpeg';
+import nosySakatiaImg from '@/assets/excursions/nosy-sakatia.webp';
+import nosySakatiaImg1 from '@/assets/excursions/nosy-sakatia1.webp';
+import nosySakatiaImg2 from '@/assets/excursions/nosy-sakatia2.webp';
+import haraImg from '@/assets/excursions/hara.webp';
+import haraImg1 from '@/assets/excursions/hara1.webp';
+import haraImg2 from '@/assets/excursions/hara2.webp';
+import anivorano from '@/assets/excursions/lac.webp';
 
-import anivorano1 from '@/assets/excursions/lac1.jpg';
+import anivorano1 from '@/assets/excursions/lac1.webp';
 
-import anivorano2 from'@/assets/excursions/lac2.jpg';
-import kombaImg from '@/assets/excursions/komba.jpg';
-import kombaImg1 from '@/assets/excursions/komba1.jpg';
-import kombaImg2 from '@/assets/excursions/komba2.jpg';
+import anivorano2 from'@/assets/excursions/lac2.webp';
+import kombaImg from '@/assets/excursions/komba.webp';
+import kombaImg1 from '@/assets/excursions/komba1.webp';
+import kombaImg2 from '@/assets/excursions/komba2.webp';
 
 type ExcursionKey = 'merEmeraude' | 'troisBaies' | 'montagneAmbre' | 'tsingyRouges' | 'ankarana' | 'nosyHara' | 'lacSacre' | 'montagneFrancais' | 'nosyIranja' | 'nosyTanikely' | 'lokobe' | 'nosySakatia';
 

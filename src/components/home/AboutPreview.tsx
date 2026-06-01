@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
-import troisBaiesImg5 from '@/assets/gallery/trois-baies5.jpg';
+import troisBaiesImg5 from '@/assets/gallery/trois-baies5.webp';
 
 export default function AboutPreview() {
   const { language } = useLanguage();
