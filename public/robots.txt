@@ -1,9 +1,14 @@
 # Robots.txt for Gentlemen Excursions Madagascar
-# https://gentlemen-excursions.mg
+# https://gentlemenexcursions.com
 
 User-agent: Googlebot
 Allow: /
 Crawl-delay: 1
+# Robots.txt for Gentlemen Excursions Madagascar
+# https://gentlemenexcursions.com
+
+User-agent: Googlebot
+Allow: /
 
 User-agent: Bingbot
 Allow: /
@@ -23,7 +28,7 @@ Allow: /
 Crawl-delay: 2
 
 # Sitemap location
-Sitemap: https://gentlemen-excursions.mg/sitemap.xml
+Sitemap: https://gentlemenexcursions.com/sitemap.xml
 
 # Disallow crawling of internal paths
 Disallow: /api/
@@ -31,4 +36,4 @@ Disallow: /_next/
 Disallow: /admin/
 
 # Host
-Host: https://gentlemen-excursions.mg
+Host: https://gentlemenexcursions.com
